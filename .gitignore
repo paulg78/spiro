@@ -1,0 +1,34 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+bin/
+obj/
+
+# ClickOnce publish and installers
+app.publish/
+*.application
+setup.exe
+spiro2-release-install.zip
+
+# Rider
+.idea/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# NuGet
+*.nupkg
+
+# Resharper
+_ReSharper*/
+*.ReSharper
+
+# Others
+*.log
+*.pdb
