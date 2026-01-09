@@ -1,4 +1,11 @@
 using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
+
+csharp MainForm.cs
+using System;
 //using System.Collections.Generic;
 using System.Collections;
 using System.ComponentModel;
@@ -7,6 +14,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace SpiroGraph
 {
@@ -103,13 +111,36 @@ namespace SpiroGraph
             this.cboColor.SelectedIndexChanged += new System.EventHandler(this.cboColor_SelectedIndexChanged);
         }
 
+        /// <summary>
+        /// Returns the fixed "drawings" directory located alongside the application executable.
+        /// Ensures the directory exists; if creation fails, falls back to the user's Documents folder.
+        /// </summary>
+        private string GetDrawingsDirectory()
+        {
+            string dir = Path.Combine(Application.StartupPath, "drawings");
+            try
+            {
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+            }
+            catch
+            {
+                // If creation fails (e.g. running from a protected Program Files without admin),
+                // fall back to user's Documents folder so Open/Save still works.
+                dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            }
+            return dir;
+        }
+
         private void setCenter()
         {
             int width = pictureBox1.ClientRectangle.Width;
             int height = pictureBox1.ClientRectangle.Height;
             drawingSpec.Center = new Point(
-                (int) Math.Round((double)(width / 2)),
-                (int) Math.Round((double)(height / 2)));
+                (int)Math.Round((double)(width / 2)),
+                (int)Math.Round((double)(height / 2)));
             if (drawing != null)
                 drawing.Dispose();
             drawing = new Bitmap(Math.Max(1, width), Math.Max(1, height));
@@ -271,7 +302,7 @@ namespace SpiroGraph
             }
             if (cbShowWheels.Checked)
             {
-                Spiro.ShowCircles(g, PointF.Add(drawingSpec.Center, di.offset), di.aRadius, di.bRadius, 
+                Spiro.ShowCircles(g, PointF.Add(drawingSpec.Center, di.offset), di.aRadius, di.bRadius,
                     di.distance, di.startAngle, di.pointsPerCurve, di.roll, this.lblColor.ForeColor,
                     di.penWidth);
             }
@@ -339,8 +370,7 @@ namespace SpiroGraph
 
         private void loadScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //openFileDialog1.InitialDirectory = "F:\\Visual Studio Projects\\spiro2\\spiro2\\bin\\Debug";
-            openFileDialog1.InitialDirectory = System.IO.Directory.GetCurrentDirectory();
+            openFileDialog1.InitialDirectory = GetDrawingsDirectory();
             //openFileDialog1.Filter = "drawing files (*.xml)|*.xml";
             openFileDialog1.Filter = "drawing scripts (*.xml)|*.xml|drawings (*.bmp)|*.bmp";
             openFileDialog1.FilterIndex = 2;
@@ -367,7 +397,7 @@ namespace SpiroGraph
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.InitialDirectory = System.IO.Directory.GetCurrentDirectory();
+            saveFileDialog1.InitialDirectory = GetDrawingsDirectory();
             saveFileDialog1.Filter = "drawing scripts (*.xml)|*.xml|drawings (*.bmp)|*.bmp";
             saveFileDialog1.FilterIndex = 2;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -455,6 +485,6 @@ namespace SpiroGraph
             this.Close();
         }
 
-  }
+    }
 
 }
