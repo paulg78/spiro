@@ -1,0 +1,16 @@
+c:\Users\paulg\spiro\obj\Debug\spiro.csproj.AssemblyReference.cache
+c:\Users\paulg\spiro\obj\Debug\SpiroGraph.frmControl.resources
+c:\Users\paulg\spiro\obj\Debug\SpiroGraph.ScriptForm.resources
+c:\Users\paulg\spiro\obj\Debug\SpiroGraph.MainForm.resources
+c:\Users\paulg\spiro\obj\Debug\SpiroGraph.Properties.Resources.resources
+c:\Users\paulg\spiro\obj\Debug\spiro.csproj.GenerateResource.cache
+c:\Users\paulg\spiro\bin\Debug\spiro2.exe.config
+c:\Users\paulg\spiro\bin\Debug\spiro2.exe.manifest
+c:\Users\paulg\spiro\bin\Debug\spiro2.application
+c:\Users\paulg\spiro\bin\Debug\spiro2.exe
+c:\Users\paulg\spiro\bin\Debug\spiro2.pdb
+c:\Users\paulg\spiro\obj\Debug\spiro.csproj.CoreCompileInputs.cache
+c:\Users\paulg\spiro\obj\Debug\spiro2.exe.manifest
+c:\Users\paulg\spiro\obj\Debug\spiro2.application
+c:\Users\paulg\spiro\obj\Debug\spiro2.exe
+c:\Users\paulg\spiro\obj\Debug\spiro2.pdb
