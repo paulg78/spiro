@@ -4,17 +4,10 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-csharp MainForm.cs
-using System;
-//using System.Collections.Generic;
 using System.Collections;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Text;
-using System.Windows.Forms;
-using System.IO;
 
 namespace SpiroGraph
 {
