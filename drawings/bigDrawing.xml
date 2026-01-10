@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<DrawingSpec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DrawingName>drawing1</DrawingName>
+  <BackgroundColor>White</BackgroundColor>
+  <Center>
+    <X>294</X>
+    <Y>282</Y>
+  </Center>
+  <Curves>
+    <anyType xsi:type="DrawingInputType">
+      <roll>inside</roll>
+      <offset>
+        <Width>0</Width>
+        <Height>0</Height>
+      </offset>
+      <aRadius>300</aRadius>
+      <bRadius>200</bRadius>
+      <distance>40</distance>
+      <startAngle>0</startAngle>
+      <pointsPerCurve>100</pointsPerCurve>
+      <color>Red</color>
+      <penWidth>1</penWidth>
+      <penStyle>Solid</penStyle>
+    </anyType>
+    <anyType xsi:type="DrawingInputType">
+      <roll>inside</roll>
+      <offset>
+        <Width>0</Width>
+        <Height>0</Height>
+      </offset>
+      <aRadius>300</aRadius>
+      <bRadius>200</bRadius>
+      <distance>40</distance>
+      <startAngle>5</startAngle>
+      <pointsPerCurve>100</pointsPerCurve>
+      <color>Purple</color>
+      <penWidth>1</penWidth>
+      <penStyle>Solid</penStyle>
+    </anyType>
+    <anyType xsi:type="DrawingInputType">
+      <roll>inside</roll>
+      <offset>
+        <Width>0</Width>
+        <Height>0</Height>
+      </offset>
+      <aRadius>300</aRadius>
+      <bRadius>200</bRadius>
+      <distance>40</distance>
+      <startAngle>10</startAngle>
+      <pointsPerCurve>100</pointsPerCurve>
+      <color>Orange</color>
+      <penWidth>1</penWidth>
+      <penStyle>Solid</penStyle>
+    </anyType>
+    <anyType xsi:type="DrawingInputType">
+      <roll>inside</roll>
+      <offset>
+        <Width>0</Width>
+        <Height>0</Height>
+      </offset>
+      <aRadius>300</aRadius>
+      <bRadius>110</bRadius>
+      <distance>40</distance>
+      <startAngle>10</startAngle>
+      <pointsPerCurve>100</pointsPerCurve>
+      <color>YellowGreen</color>
+      <penWidth>1</penWidth>
+      <penStyle>Solid</penStyle>
+    </anyType>
+    <anyType xsi:type="DrawingInputType">
+      <roll>inside</roll>
+      <offset>
+        <Width>0</Width>
+        <Height>0</Height>
+      </offset>
+      <aRadius>300</aRadius>
+      <bRadius>40</bRadius>
+      <distance>40</distance>
+      <startAngle>10</startAngle>
+      <pointsPerCurve>100</pointsPerCurve>
+      <color>Chocolate</color>
+      <penWidth>1</penWidth>
+      <penStyle>Solid</penStyle>
+    </anyType>
+  </Curves>
+</DrawingSpec>

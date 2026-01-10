@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<DrawingSpec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DrawingName>drawing1</DrawingName>
+  <BackgroundColor>White</BackgroundColor>
+  <Center>
+    <X>1632</X>
+    <Y>707</Y>
+  </Center>
+  <Curves>
+    <anyType xsi:type="DrawingInputType">
+      <roll>inside</roll>
+      <offset>
+        <Width>0</Width>
+        <Height>0</Height>
+      </offset>
+      <aRadius>500</aRadius>
+      <bRadius>24</bRadius>
+      <distance>135</distance>
+      <startAngle>0</startAngle>
+      <pointsPerCurve>1000</pointsPerCurve>
+      <color>Purple</color>
+      <penWidth>0</penWidth>
+      <penStyle>Solid</penStyle>
+    </anyType>
+    <anyType xsi:type="DrawingInputType">
+      <roll>inside</roll>
+      <offset>
+        <Width>0</Width>
+        <Height>0</Height>
+      </offset>
+      <aRadius>124</aRadius>
+      <bRadius>24</bRadius>
+      <distance>135</distance>
+      <startAngle>6</startAngle>
+      <pointsPerCurve>1000</pointsPerCurve>
+      <color>Pink</color>
+      <penWidth>0</penWidth>
+      <penStyle>Solid</penStyle>
+    </anyType>
+  </Curves>
+</DrawingSpec>
