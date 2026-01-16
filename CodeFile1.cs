@@ -182,6 +182,7 @@ namespace SpiroGraph
             Graphics gErase = Graphics.FromImage(imageForErase);
             Graphics g = Graphics.FromImage(pb.Image);
             Pen rollingCirclePen = new Pen(Color.Gray, 1);
+            Pen penHolder = new Pen(pen.Color, 1.5F);  // pen for drawing pen holder line
             SolidBrush penBrush = new SolidBrush(pen.Color);
             Double angleStep = radiansPerCircle / pointsPerCurve;
             PointF point1 = new PointF();
@@ -224,7 +225,7 @@ namespace SpiroGraph
                 // draw pen holder
                 penConnect.X = (float)(center.X + aMinusb * Math.Cos(angle) + bRadius * Math.Cos(angle * aMinusbOverb));
                 penConnect.Y = (float)(center.Y + aMinusb * Math.Sin(angle) - bRadius * Math.Sin(angle * aMinusbOverb));
-                g.DrawLine(rollingCirclePen, penConnect.X, penConnect.Y, point2.X, point2.Y);
+                g.DrawLine(penHolder, penConnect.X, penConnect.Y, point2.X, point2.Y);
                 // draw pen (i.e. point)
                 g.FillEllipse(penBrush, point2.X - 2, point2.Y - 2, 4, 4);
 
@@ -278,6 +279,7 @@ namespace SpiroGraph
             Graphics gErase = Graphics.FromImage(imageForErase);
             Graphics g = Graphics.FromImage(pb.Image);
             Pen rollingCirclePen = new Pen(Color.Gray, 1);
+            Pen penHolder = new Pen(pen.Color, 1.5F);  // pen for drawing pen holder line
             SolidBrush penBrush = new SolidBrush(pen.Color);
             Double angleStep = radiansPerCircle / pointsPerCurve;
             PointF point1 = new PointF();
@@ -321,7 +323,7 @@ namespace SpiroGraph
                 // draw pen holder
                 penConnect.X = (float)(center.X + aPlusb * Math.Cos(angle) - bRadius * Math.Cos(angle * aPlusbOverb));
                 penConnect.Y = (float)(center.Y + aPlusb * Math.Sin(angle) - bRadius * Math.Sin(angle * aPlusbOverb));
-                g.DrawLine(rollingCirclePen, penConnect.X, penConnect.Y, point2.X, point2.Y);
+                g.DrawLine(penHolder, penConnect.X, penConnect.Y, point2.X, point2.Y);
                 // draw pen (i.e. point)
                 g.FillEllipse(penBrush, point2.X - 2, point2.Y - 2, 4, 4);
 
@@ -477,7 +479,8 @@ namespace SpiroGraph
             // (i.e., to all the Graphics items drawn on the Graphics object)
             g.Transform = transformMatrix;
 
-            Pen pen = new Pen(Color.Gray, 1.0F);
+            Pen pen = new Pen(Color.Gray, 1.5F);  // pen for drawing wheels and boundary circles
+            Pen penHolder = new Pen(penColor, 1.5F);  // pen for drawing pen holder line
             // draw fixed circle
             g.DrawEllipse(pen, ptOrigin.X - aRadius, ptOrigin.Y - aRadius, 2 * aRadius, 2 * aRadius);
             // draw rolling circle and show pen, inside or outside of fixed circle
@@ -486,7 +489,7 @@ namespace SpiroGraph
                 // draw rolling circle
                 g.DrawEllipse(pen, ptOrigin.X + aRadius - 2 * bRadius, ptOrigin.Y - bRadius, 2 * bRadius, 2 * bRadius);
                 // draw pen holder
-                g.DrawLine(pen, ptOrigin.X + aRadius - bRadius + distance, ptOrigin.Y, ptOrigin.X + aRadius, ptOrigin.Y);
+                g.DrawLine(penHolder, ptOrigin.X + aRadius - bRadius + distance, ptOrigin.Y, ptOrigin.X + aRadius, ptOrigin.Y);
                 // draw "boundary circles"
                 pen.DashStyle = DashStyle.Dot;
                 g.DrawEllipse(pen, ptOrigin.X - aRadius + bRadius - distance,
@@ -504,7 +507,7 @@ namespace SpiroGraph
                 // draw rolling circle
                 g.DrawEllipse(pen, ptOrigin.X + aRadius, ptOrigin.Y - bRadius, 2 * bRadius, 2 * bRadius);
                 // draw pen holder
-                g.DrawLine(pen, ptOrigin.X + aRadius, ptOrigin.Y, ptOrigin.X + aRadius + bRadius - distance, ptOrigin.Y);
+                g.DrawLine(penHolder, ptOrigin.X + aRadius, ptOrigin.Y, ptOrigin.X + aRadius + bRadius - distance, ptOrigin.Y);
                 // draw "boundary circles"
                 pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
                 g.DrawEllipse(pen, ptOrigin.X - aRadius - bRadius - distance,
