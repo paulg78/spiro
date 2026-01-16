@@ -32,30 +32,22 @@ namespace SpiroGraph
             this.cboPenStyle = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.lblPenWidth = new System.Windows.Forms.Label();
-            this.txtPenWidth = new SpiroGraph.customTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbOutside = new System.Windows.Forms.RadioButton();
             this.rbInside = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtOffsetY = new SpiroGraph.customTextBox();
-            this.txtOffsetX = new SpiroGraph.customTextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btnAnimate = new System.Windows.Forms.Button();
             this.lblColor = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.cboColor = new System.Windows.Forms.ComboBox();
-            this.txtStartAngle = new SpiroGraph.customTextBox();
             this.cbShowWheels = new System.Windows.Forms.CheckBox();
             this.btnGo = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtPointsPerCurve = new SpiroGraph.customTextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtPenDistance = new SpiroGraph.customTextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtRadiusB = new SpiroGraph.customTextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtRadiusA = new SpiroGraph.customTextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.loadScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,6 +61,14 @@ namespace SpiroGraph
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.txtPenWidth = new SpiroGraph.customTextBox();
+            this.txtOffsetY = new SpiroGraph.customTextBox();
+            this.txtOffsetX = new SpiroGraph.customTextBox();
+            this.txtStartAngle = new SpiroGraph.customTextBox();
+            this.txtPointsPerCurve = new SpiroGraph.customTextBox();
+            this.txtPenDistance = new SpiroGraph.customTextBox();
+            this.txtRadiusB = new SpiroGraph.customTextBox();
+            this.txtRadiusA = new SpiroGraph.customTextBox();
             this.pnlControl.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -78,8 +78,8 @@ namespace SpiroGraph
             // 
             // pnlControl
             // 
-            this.pnlControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnlControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlControl.BackColor = System.Drawing.Color.Transparent;
             this.pnlControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlControl.Controls.Add(this.cboPenStyle);
@@ -106,7 +106,7 @@ namespace SpiroGraph
             this.pnlControl.Controls.Add(this.menuStrip1);
             this.pnlControl.Location = new System.Drawing.Point(0, 0);
             this.pnlControl.Name = "pnlControl";
-            this.pnlControl.Size = new System.Drawing.Size(174, 495);
+            this.pnlControl.Size = new System.Drawing.Size(260, 649);
             this.pnlControl.TabIndex = 0;
             // 
             // cboPenStyle
@@ -141,15 +141,6 @@ namespace SpiroGraph
             this.lblPenWidth.TabIndex = 49;
             this.lblPenWidth.Text = "Pen Width";
             this.lblPenWidth.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtPenWidth
-            // 
-            this.txtPenWidth.Location = new System.Drawing.Point(71, 380);
-            this.txtPenWidth.MaxLength = 3;
-            this.txtPenWidth.Name = "txtPenWidth";
-            this.txtPenWidth.Size = new System.Drawing.Size(38, 20);
-            this.txtPenWidth.TabIndex = 47;
-            this.txtPenWidth.Validating += new System.ComponentModel.CancelEventHandler(this.txtPenWidth_Validating);
             // 
             // groupBox1
             // 
@@ -197,24 +188,6 @@ namespace SpiroGraph
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "fixed circle offset";
-            // 
-            // txtOffsetY
-            // 
-            this.txtOffsetY.Location = new System.Drawing.Point(74, 32);
-            this.txtOffsetY.MaxLength = 3;
-            this.txtOffsetY.Name = "txtOffsetY";
-            this.txtOffsetY.Size = new System.Drawing.Size(38, 20);
-            this.txtOffsetY.TabIndex = 1;
-            this.txtOffsetY.Validating += new System.ComponentModel.CancelEventHandler(this.txtY_Validating);
-            // 
-            // txtOffsetX
-            // 
-            this.txtOffsetX.Location = new System.Drawing.Point(13, 32);
-            this.txtOffsetX.MaxLength = 3;
-            this.txtOffsetX.Name = "txtOffsetX";
-            this.txtOffsetX.Size = new System.Drawing.Size(38, 20);
-            this.txtOffsetX.TabIndex = 0;
-            this.txtOffsetX.Validating += new System.ComponentModel.CancelEventHandler(this.txtX_Validating);
             // 
             // label7
             // 
@@ -275,15 +248,6 @@ namespace SpiroGraph
             this.cboColor.Size = new System.Drawing.Size(126, 21);
             this.cboColor.TabIndex = 7;
             // 
-            // txtStartAngle
-            // 
-            this.txtStartAngle.Location = new System.Drawing.Point(131, 96);
-            this.txtStartAngle.MaxLength = 3;
-            this.txtStartAngle.Name = "txtStartAngle";
-            this.txtStartAngle.Size = new System.Drawing.Size(38, 20);
-            this.txtStartAngle.TabIndex = 3;
-            this.txtStartAngle.Validating += new System.ComponentModel.CancelEventHandler(this.txtStartAngle_Validating);
-            // 
             // cbShowWheels
             // 
             this.cbShowWheels.AutoSize = true;
@@ -315,15 +279,6 @@ namespace SpiroGraph
             this.label3.TabIndex = 7;
             this.label3.Text = "Points per curve";
             // 
-            // txtPointsPerCurve
-            // 
-            this.txtPointsPerCurve.Location = new System.Drawing.Point(103, 434);
-            this.txtPointsPerCurve.MaxLength = 3;
-            this.txtPointsPerCurve.Name = "txtPointsPerCurve";
-            this.txtPointsPerCurve.Size = new System.Drawing.Size(40, 20);
-            this.txtPointsPerCurve.TabIndex = 11;
-            this.txtPointsPerCurve.Validating += new System.ComponentModel.CancelEventHandler(this.txtPointsPerCurve_Validating);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -333,15 +288,6 @@ namespace SpiroGraph
             this.label4.TabIndex = 5;
             this.label4.Text = "Pen distance from center";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtPenDistance
-            // 
-            this.txtPenDistance.Location = new System.Drawing.Point(131, 74);
-            this.txtPenDistance.MaxLength = 3;
-            this.txtPenDistance.Name = "txtPenDistance";
-            this.txtPenDistance.Size = new System.Drawing.Size(38, 20);
-            this.txtPenDistance.TabIndex = 2;
-            this.txtPenDistance.Validating += new System.ComponentModel.CancelEventHandler(this.txtPenDistance_Validating);
             // 
             // label2
             // 
@@ -353,15 +299,6 @@ namespace SpiroGraph
             this.label2.Text = "Rolling circle radius";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtRadiusB
-            // 
-            this.txtRadiusB.Location = new System.Drawing.Point(131, 52);
-            this.txtRadiusB.MaxLength = 3;
-            this.txtRadiusB.Name = "txtRadiusB";
-            this.txtRadiusB.Size = new System.Drawing.Size(38, 20);
-            this.txtRadiusB.TabIndex = 1;
-            this.txtRadiusB.Validating += new System.ComponentModel.CancelEventHandler(this.txtRadiusB_Validating);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -371,6 +308,162 @@ namespace SpiroGraph
             this.label1.TabIndex = 0;
             this.label1.Text = "Fixed circle radius";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.drawingToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(258, 24);
+            this.menuStrip1.TabIndex = 36;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadScriptToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(37, 20);
+            this.toolStripMenuItem1.Text = "File";
+            // 
+            // loadScriptToolStripMenuItem
+            // 
+            this.loadScriptToolStripMenuItem.Name = "loadScriptToolStripMenuItem";
+            this.loadScriptToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadScriptToolStripMenuItem.Text = "Load Drawing Script";
+            this.loadScriptToolStripMenuItem.Click += new System.EventHandler(this.loadScriptToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // drawingToolStripMenuItem
+            // 
+            this.drawingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearToolStripMenuItem,
+            this.editScriptToolStripMenuItem,
+            this.backgroundColorToolStripMenuItem});
+            this.drawingToolStripMenuItem.Name = "drawingToolStripMenuItem";
+            this.drawingToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.drawingToolStripMenuItem.Text = "Drawing";
+            // 
+            // clearToolStripMenuItem
+            // 
+            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.clearToolStripMenuItem.Text = "Clear drawing";
+            this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
+            // 
+            // editScriptToolStripMenuItem
+            // 
+            this.editScriptToolStripMenuItem.Name = "editScriptToolStripMenuItem";
+            this.editScriptToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.editScriptToolStripMenuItem.Text = "Edit Drawing Script";
+            this.editScriptToolStripMenuItem.Click += new System.EventHandler(this.editScriptToolStripMenuItem_Click);
+            // 
+            // backgroundColorToolStripMenuItem
+            // 
+            this.backgroundColorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cboBackgroundColor});
+            this.backgroundColorToolStripMenuItem.Name = "backgroundColorToolStripMenuItem";
+            this.backgroundColorToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.backgroundColorToolStripMenuItem.Text = "Background color";
+            // 
+            // cboBackgroundColor
+            // 
+            this.cboBackgroundColor.Name = "cboBackgroundColor";
+            this.cboBackgroundColor.Size = new System.Drawing.Size(121, 23);
+            this.cboBackgroundColor.SelectedIndexChanged += new System.EventHandler(this.cboBackgroundColor_SelectedIndexChanged);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Location = new System.Drawing.Point(255, 1);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(753, 648);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // txtPenWidth
+            // 
+            this.txtPenWidth.Location = new System.Drawing.Point(71, 380);
+            this.txtPenWidth.MaxLength = 3;
+            this.txtPenWidth.Name = "txtPenWidth";
+            this.txtPenWidth.Size = new System.Drawing.Size(38, 20);
+            this.txtPenWidth.TabIndex = 47;
+            this.txtPenWidth.Validating += new System.ComponentModel.CancelEventHandler(this.txtPenWidth_Validating);
+            // 
+            // txtOffsetY
+            // 
+            this.txtOffsetY.Location = new System.Drawing.Point(74, 32);
+            this.txtOffsetY.MaxLength = 3;
+            this.txtOffsetY.Name = "txtOffsetY";
+            this.txtOffsetY.Size = new System.Drawing.Size(38, 20);
+            this.txtOffsetY.TabIndex = 1;
+            this.txtOffsetY.Validating += new System.ComponentModel.CancelEventHandler(this.txtY_Validating);
+            // 
+            // txtOffsetX
+            // 
+            this.txtOffsetX.Location = new System.Drawing.Point(13, 32);
+            this.txtOffsetX.MaxLength = 3;
+            this.txtOffsetX.Name = "txtOffsetX";
+            this.txtOffsetX.Size = new System.Drawing.Size(38, 20);
+            this.txtOffsetX.TabIndex = 0;
+            this.txtOffsetX.Validating += new System.ComponentModel.CancelEventHandler(this.txtX_Validating);
+            // 
+            // txtStartAngle
+            // 
+            this.txtStartAngle.Location = new System.Drawing.Point(131, 96);
+            this.txtStartAngle.MaxLength = 3;
+            this.txtStartAngle.Name = "txtStartAngle";
+            this.txtStartAngle.Size = new System.Drawing.Size(38, 20);
+            this.txtStartAngle.TabIndex = 3;
+            this.txtStartAngle.Validating += new System.ComponentModel.CancelEventHandler(this.txtStartAngle_Validating);
+            // 
+            // txtPointsPerCurve
+            // 
+            this.txtPointsPerCurve.Location = new System.Drawing.Point(103, 434);
+            this.txtPointsPerCurve.MaxLength = 3;
+            this.txtPointsPerCurve.Name = "txtPointsPerCurve";
+            this.txtPointsPerCurve.Size = new System.Drawing.Size(40, 20);
+            this.txtPointsPerCurve.TabIndex = 11;
+            this.txtPointsPerCurve.Validating += new System.ComponentModel.CancelEventHandler(this.txtPointsPerCurve_Validating);
+            // 
+            // txtPenDistance
+            // 
+            this.txtPenDistance.Location = new System.Drawing.Point(131, 74);
+            this.txtPenDistance.MaxLength = 3;
+            this.txtPenDistance.Name = "txtPenDistance";
+            this.txtPenDistance.Size = new System.Drawing.Size(38, 20);
+            this.txtPenDistance.TabIndex = 2;
+            this.txtPenDistance.Validating += new System.ComponentModel.CancelEventHandler(this.txtPenDistance_Validating);
+            // 
+            // txtRadiusB
+            // 
+            this.txtRadiusB.Location = new System.Drawing.Point(131, 52);
+            this.txtRadiusB.MaxLength = 3;
+            this.txtRadiusB.Name = "txtRadiusB";
+            this.txtRadiusB.Size = new System.Drawing.Size(38, 20);
+            this.txtRadiusB.TabIndex = 1;
+            this.txtRadiusB.Validating += new System.ComponentModel.CancelEventHandler(this.txtRadiusB_Validating);
             // 
             // txtRadiusA
             // 
@@ -383,103 +476,11 @@ namespace SpiroGraph
             this.txtRadiusA.TabIndex = 0;
             this.txtRadiusA.Validating += new System.ComponentModel.CancelEventHandler(this.txtRadiusA_Validating);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.drawingToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(172, 24);
-            this.menuStrip1.TabIndex = 36;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loadScriptToolStripMenuItem,
-            this.saveToolStripMenuItem,
-            this.exitToolStripMenuItem});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(40, 20);
-            this.toolStripMenuItem1.Text = "File";
-            // 
-            // loadScriptToolStripMenuItem
-            // 
-            this.loadScriptToolStripMenuItem.Name = "loadScriptToolStripMenuItem";
-            this.loadScriptToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.loadScriptToolStripMenuItem.Text = "Load Drawing Script";
-            this.loadScriptToolStripMenuItem.Click += new System.EventHandler(this.loadScriptToolStripMenuItem_Click);
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.saveToolStripMenuItem.Text = "Save";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // drawingToolStripMenuItem
-            // 
-            this.drawingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearToolStripMenuItem,
-            this.editScriptToolStripMenuItem,
-            this.backgroundColorToolStripMenuItem});
-            this.drawingToolStripMenuItem.Name = "drawingToolStripMenuItem";
-            this.drawingToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
-            this.drawingToolStripMenuItem.Text = "Drawing";
-            // 
-            // clearToolStripMenuItem
-            // 
-            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.clearToolStripMenuItem.Text = "Clear drawing";
-            this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
-            // 
-            // editScriptToolStripMenuItem
-            // 
-            this.editScriptToolStripMenuItem.Name = "editScriptToolStripMenuItem";
-            this.editScriptToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.editScriptToolStripMenuItem.Text = "Edit Drawing Script";
-            this.editScriptToolStripMenuItem.Click += new System.EventHandler(this.editScriptToolStripMenuItem_Click);
-            // 
-            // backgroundColorToolStripMenuItem
-            // 
-            this.backgroundColorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cboBackgroundColor});
-            this.backgroundColorToolStripMenuItem.Name = "backgroundColorToolStripMenuItem";
-            this.backgroundColorToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.backgroundColorToolStripMenuItem.Text = "Background color";
-            // 
-            // cboBackgroundColor
-            // 
-            this.cboBackgroundColor.Name = "cboBackgroundColor";
-            this.cboBackgroundColor.Size = new System.Drawing.Size(121, 24);
-            this.cboBackgroundColor.SelectedIndexChanged += new System.EventHandler(this.cboBackgroundColor_SelectedIndexChanged);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Location = new System.Drawing.Point(176, 1);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(494, 494);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(670, 496);
+            this.ClientSize = new System.Drawing.Size(1002, 650);
             this.Controls.Add(this.pnlControl);
             this.Controls.Add(this.pictureBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -488,6 +489,7 @@ namespace SpiroGraph
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SpiroGraph (version 1.4)";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.pnlControl.ResumeLayout(false);
             this.pnlControl.PerformLayout();
