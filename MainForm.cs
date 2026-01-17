@@ -1,13 +1,13 @@
 using System;
-using System.ComponentModel;
-using System.Drawing;
-using System.IO;
-using System.Windows.Forms;
-
 using System.Collections;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Text;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SpiroGraph
 {
@@ -89,6 +89,7 @@ namespace SpiroGraph
 
             // initialize drawing inputs
             di.aRadius = 210;
+            di.aRadiusDelta = 0;
             di.bRadius = 90;
             di.distance = 110;
             di.pointsPerCurve = 100;
@@ -148,10 +149,14 @@ namespace SpiroGraph
             this.txtOffsetX.Text = di.offset.Width.ToString();
             this.txtOffsetY.Text = di.offset.Height.ToString();
             txtRadiusA.Text = di.aRadius.ToString();
+            txtRadiusADelta.Text = (di.aRadiusDelta == 0) ? "" : di.aRadiusDelta.ToString();
             txtRadiusB.Text = di.bRadius.ToString();
+            txtRadiusBDelta.Text = (di.bRadiusDelta == 0) ? "" : di.bRadiusDelta.ToString();
             this.txtPenDistance.Text = di.distance.ToString();
+            this.txtPenDistanceDelta.Text = (di.distanceDelta == 0) ? "" : di.distanceDelta.ToString();
             this.txtPointsPerCurve.Text = di.pointsPerCurve.ToString();
             txtStartAngle.Text = di.startAngle.ToString();
+            txtStartAngleDelta.Text = (di.startAngleDelta == 0) ? "" : di.startAngleDelta.ToString();
             cboColor.Text = di.color;
             lblColor.ForeColor = Color.FromName(di.color);
             txtPenWidth.Text = di.penWidth.ToString();
@@ -168,6 +173,19 @@ namespace SpiroGraph
             Graphics g = Graphics.FromImage(drawing);
             Spiro.DrawCurve(g, di, PointF.Add(drawingSpec.Center, di.offset));
             g.Dispose();
+            di.aRadius += di.aRadiusDelta;
+            txtRadiusA.Text = di.aRadius.ToString();
+            di.bRadius += di.bRadiusDelta;
+            txtRadiusB.Text = di.bRadius.ToString();
+            di.distance += di.distanceDelta;
+            txtPenDistance.Text = di.distance.ToString();
+            di.startAngle += di.startAngleDelta;
+            txtStartAngle.Text = di.startAngle.ToString();
+            if (cbShowWheels.Checked && 
+                (di.aRadiusDelta != 0 || di.bRadiusDelta != 0 || di.distanceDelta != 0 || di.startAngleDelta != 0))
+            {
+                this.drawSpiro(); // shows wheels and data with updated values (not yet drawn)
+            }
             pictureBox1.Refresh();
         }
 
@@ -224,7 +242,7 @@ namespace SpiroGraph
             }
             catch
             {
-                DialogResult r = MessageBox.Show
+                MessageBox.Show
                     ("distance from center must be integer");
                 this.txtPenDistance.Focus();
             }
@@ -232,18 +250,19 @@ namespace SpiroGraph
 
         private void txtPointsPerCurve_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                di.pointsPerCurve = int.Parse(this.txtPointsPerCurve.Text);
-                if (cbShowWheels.Checked)
+                int i;
+                if (int.TryParse(txtPointsPerCurve.Text, out i) && (i > 0))
                 {
-                    this.drawSpiro();
+                    di.pointsPerCurve = i;
+                    if (cbShowWheels.Checked)
+                    {
+                        this.drawSpiro();
+                    }
                 }
-            }
-            catch
+            else
             {
-                DialogResult r = MessageBox.Show
-                    ("Points per curve must be integer");
+                MessageBox.Show
+                    ("Points per curve must be greater than 0");
                 this.txtPointsPerCurve.Focus();
             }
         }
@@ -478,14 +497,68 @@ namespace SpiroGraph
             this.Close();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void txtRadiusADelta_Validating(object sender, CancelEventArgs e)
         {
-
+            if (String.IsNullOrWhiteSpace(this.txtRadiusADelta.Text))
+              di.aRadiusDelta = 0;
+            else
+              try
+                {
+                    di.aRadiusDelta = int.Parse(this.txtRadiusADelta.Text);
+                }
+                catch
+                {
+                    DialogResult r = MessageBox.Show("delta must be integer");
+                    this.txtRadiusADelta.Focus();
+                }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void txtRadiusBDelta_Validating(object sender, CancelEventArgs e)
         {
+            if (String.IsNullOrWhiteSpace(this.txtRadiusBDelta.Text))
+                di.bRadiusDelta = 0;
+            else
+                try
+                {
+                    di.bRadiusDelta = int.Parse(this.txtRadiusBDelta.Text);
+                }
+                catch
+                {
+                    DialogResult r = MessageBox.Show("delta must be integer");
+                    this.txtRadiusBDelta.Focus();
+                }
+        }
 
+        private void txtPenDistanceDelta_Validating(object sender, CancelEventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(this.txtPenDistanceDelta.Text))
+                di.distanceDelta = 0;
+            else
+                try
+                {
+                    di.distanceDelta = int.Parse(this.txtPenDistanceDelta.Text);
+                }
+                catch
+                {
+                    DialogResult r = MessageBox.Show("delta must be integer");
+                    this.txtPenDistanceDelta.Focus();
+                }
+        }
+
+        private void txtStartAngleDelta_Validating(object sender, CancelEventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(this.txtStartAngleDelta.Text))
+                di.startAngleDelta = 0;
+            else
+                try
+                {
+                    di.startAngleDelta = int.Parse(this.txtStartAngleDelta.Text);
+                }
+                catch
+                {
+                    DialogResult r = MessageBox.Show("delta must be integer");
+                    this.txtStartAngleDelta.Focus();
+                }
         }
     }
 

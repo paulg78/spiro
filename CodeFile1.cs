@@ -12,23 +12,31 @@ namespace SpiroGraph
         public RollSide roll;
         public Size offset; // center of curve relative to center of drawing
         public int aRadius;
+        public int aRadiusDelta;
         public int bRadius;
+        public int bRadiusDelta;
         public int distance;
+        public int distanceDelta;
         public int startAngle;
+        public int startAngleDelta;
         public int pointsPerCurve;
         public string color;
         public float penWidth;
         public DashStyle penStyle;
 
-        public DrawingInputType(RollSide _ct, Size _offset, int _aRadius, int _bRadius, int _distance, 
-            int _startAngle, int _PointsPerCurve, string _colorName, float _penWidth, DashStyle _penStyle)
+        public DrawingInputType(RollSide _ct, Size _offset, int _aRadius, int _aRadiusDelta, int _bRadius, int _distance, 
+            int _startAngle, int _bRadiusDelta, int _distanceDelta, int _startAngleDelta, int _PointsPerCurve, string _colorName, float _penWidth, DashStyle _penStyle)
         {
             roll = _ct;
             offset = _offset;
             aRadius = _aRadius;
+            aRadiusDelta = _aRadiusDelta;
             bRadius = _bRadius;
+            bRadiusDelta = _bRadiusDelta;
             distance = _distance;
+            distanceDelta = _distanceDelta;
             startAngle = _startAngle;
+            startAngleDelta = _startAngleDelta;
             pointsPerCurve = _PointsPerCurve;
             color = _colorName;
             penWidth = _penWidth;
