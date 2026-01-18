@@ -22,13 +22,13 @@ namespace SpiroGraph
         public ScriptForm(DrawingSpec drawingSpec, object[] colorNames)
         {
             InitializeComponent();
-            this.cboColor.Items.AddRange(colorNames);
-            this.color.Items.AddRange(colorNames);
-            this.drawingSpec = drawingSpec;
-            this.txtName.Text = drawingSpec.DrawingName;
-            this.centerX.Text = drawingSpec.Center.X.ToString();
-            this.centerY.Text = drawingSpec.Center.Y.ToString();
-            this.cboColor.Text = drawingSpec.BackgroundColor;
+            cboColor.Items.AddRange(colorNames);
+            color.Items.AddRange(colorNames);
+            drawingSpec = drawingSpec;
+            txtName.Text = drawingSpec.DrawingName;
+            centerX.Text = drawingSpec.Center.X.ToString();
+            centerY.Text = drawingSpec.Center.Y.ToString();
+            cboColor.Text = drawingSpec.BackgroundColor;
             foreach (object o in drawingSpec.Curves)
             {
                 DrawingInputType di = (DrawingInputType)o;
@@ -38,7 +38,7 @@ namespace SpiroGraph
                     di.penStyle.ToString()};
                 if (di.roll == RollSide.outside)
                     row[4] = "outside";
-                this.dgvScript.Rows.Add(row);
+                dgvScript.Rows.Add(row);
             }
         }
 
@@ -46,11 +46,11 @@ namespace SpiroGraph
         {
             bool allRowsComplete = true;
             drawingSpec = new DrawingSpec();
-            this.drawingSpec.DrawingName = this.txtName.Text;
-            this.drawingSpec.Center = new Point(
-                int.Parse(this.centerX.Text), int.Parse(this.centerY.Text));
-            this.drawingSpec.BackgroundColor = this.cboColor.Text;
-            foreach (DataGridViewRow row in this.dgvScript.Rows)
+            drawingSpec.DrawingName = txtName.Text;
+            drawingSpec.Center = new Point(
+                int.Parse(centerX.Text), int.Parse(centerY.Text));
+            drawingSpec.BackgroundColor = cboColor.Text;
+            foreach (DataGridViewRow row in dgvScript.Rows)
             {
                 bool rowComplete = true;
                 bool rowEmpty = true;
@@ -97,15 +97,10 @@ namespace SpiroGraph
             }
             if (allRowsComplete)
             {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                DialogResult = DialogResult.OK;
+                Close();
             }
         }
-
-        //private void btnCancel_Click(object sender, EventArgs e)
-        //{
-        //    this.Close();
-        //}
 
         private void dgvScript_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {

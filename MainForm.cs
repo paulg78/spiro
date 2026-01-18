@@ -81,11 +81,11 @@ namespace SpiroGraph
         public MainForm()
         {
             InitializeComponent();
-            this.cboColor.Items.AddRange(colorNames);
-            this.cboBackgroundColor.Items.AddRange(colorNames);
+            cboColor.Items.AddRange(colorNames);
+            cboBackgroundColor.Items.AddRange(colorNames);
             drawingSpec.DrawingName = "";
             drawingSpec.BackgroundColor = Color.White.Name;
-            this.setCenter();
+            setCenter();
 
             // initialize drawing inputs
             di.aRadius = 210;
@@ -100,9 +100,9 @@ namespace SpiroGraph
             di.offset.Width = 0;
             di.offset.Height = 0;
             // initialize form
-            this.initFormParams(di);
-            this.cboBackgroundColor.Text = drawingSpec.BackgroundColor;
-            this.cboColor.SelectedIndexChanged += new System.EventHandler(this.cboColor_SelectedIndexChanged);
+            initFormParams(di);
+            cboBackgroundColor.Text = drawingSpec.BackgroundColor;
+            cboColor.SelectedIndexChanged += new System.EventHandler(cboColor_SelectedIndexChanged);
         }
 
         /// <summary>
@@ -146,15 +146,15 @@ namespace SpiroGraph
 
         private void initFormParams(DrawingInputType di)
         {
-            this.txtOffsetX.Text = di.offset.Width.ToString();
-            this.txtOffsetY.Text = di.offset.Height.ToString();
+            txtOffsetX.Text = di.offset.Width.ToString();
+            txtOffsetY.Text = di.offset.Height.ToString();
             txtRadiusA.Text = di.aRadius.ToString();
             txtRadiusADelta.Text = (di.aRadiusDelta == 0) ? "" : di.aRadiusDelta.ToString();
             txtRadiusB.Text = di.bRadius.ToString();
             txtRadiusBDelta.Text = (di.bRadiusDelta == 0) ? "" : di.bRadiusDelta.ToString();
-            this.txtPenDistance.Text = di.distance.ToString();
-            this.txtPenDistanceDelta.Text = (di.distanceDelta == 0) ? "" : di.distanceDelta.ToString();
-            this.txtPointsPerCurve.Text = di.pointsPerCurve.ToString();
+            txtPenDistance.Text = di.distance.ToString();
+            txtPenDistanceDelta.Text = (di.distanceDelta == 0) ? "" : di.distanceDelta.ToString();
+            txtPointsPerCurve.Text = di.pointsPerCurve.ToString();
             txtStartAngle.Text = di.startAngle.ToString();
             txtStartAngleDelta.Text = (di.startAngleDelta == 0) ? "" : di.startAngleDelta.ToString();
             cboColor.Text = di.color;
@@ -162,14 +162,14 @@ namespace SpiroGraph
             txtPenWidth.Text = di.penWidth.ToString();
             cboPenStyle.Text = di.penStyle.ToString();
             if (di.roll == RollSide.inside)
-                this.rbInside.Checked = true;
+                rbInside.Checked = true;
             else
-                this.rbOutside.Checked = true;
+                rbOutside.Checked = true;
         }
 
         private void btnGo_Click(object sender, System.EventArgs e)
         {
-            this.drawingSpec.Curves.Add(di);
+            drawingSpec.Curves.Add(di);
             Graphics g = Graphics.FromImage(drawing);
             Spiro.DrawCurve(g, di, PointF.Add(drawingSpec.Center, di.offset));
             g.Dispose();
@@ -184,7 +184,7 @@ namespace SpiroGraph
             if (cbShowWheels.Checked && 
                 (di.aRadiusDelta != 0 || di.bRadiusDelta != 0 || di.distanceDelta != 0 || di.startAngleDelta != 0))
             {
-                this.drawSpiro(); // shows wheels and data with updated values (not yet drawn)
+                drawSpiro(); // shows wheels and data with updated values (not yet drawn)
             }
             pictureBox1.Refresh();
             btnUndo.Enabled = true;
@@ -192,7 +192,7 @@ namespace SpiroGraph
 
         private void cbShowWheels_CheckedChanged(object sender, EventArgs e)
         {
-            this.drawSpiro();
+            drawSpiro();
         }
 
         private void txtRadiusA_Validating(object sender, CancelEventArgs e)
@@ -203,7 +203,7 @@ namespace SpiroGraph
                 di.aRadius = i;
                 if (cbShowWheels.Checked)
                 {
-                    this.drawSpiro();
+                    drawSpiro();
                 }
             }
             else
@@ -221,7 +221,7 @@ namespace SpiroGraph
                 di.bRadius = i;
                 if (cbShowWheels.Checked)
                 {
-                    this.drawSpiro();
+                    drawSpiro();
                 }
             }
             else
@@ -235,17 +235,17 @@ namespace SpiroGraph
         {
             try
             {
-                di.distance = int.Parse(this.txtPenDistance.Text);
+                di.distance = int.Parse(txtPenDistance.Text);
                 if (cbShowWheels.Checked)
                 {
-                    this.drawSpiro();
+                    drawSpiro();
                 }
             }
             catch
             {
                 MessageBox.Show
                     ("distance from center must be integer");
-                this.txtPenDistance.Focus();
+                txtPenDistance.Focus();
             }
         }
 
@@ -257,14 +257,14 @@ namespace SpiroGraph
                     di.pointsPerCurve = i;
                     if (cbShowWheels.Checked)
                     {
-                        this.drawSpiro();
+                        drawSpiro();
                     }
                 }
             else
             {
                 MessageBox.Show
                     ("Points per curve must be greater than 0");
-                this.txtPointsPerCurve.Focus();
+                txtPointsPerCurve.Focus();
             }
         }
 
@@ -276,7 +276,7 @@ namespace SpiroGraph
                 di.roll = RollSide.inside;
             if (cbShowWheels.Checked)
             {
-                this.drawSpiro();
+                drawSpiro();
             }
         }
 
@@ -284,25 +284,25 @@ namespace SpiroGraph
         {
             try
             {
-                di.startAngle = int.Parse(this.txtStartAngle.Text);
+                di.startAngle = int.Parse(txtStartAngle.Text);
                 if (cbShowWheels.Checked)
                 {
-                    this.drawSpiro();
+                    drawSpiro();
                 }
             }
             catch
             {
                 DialogResult r = MessageBox.Show
                     ("Start angle must be integer");
-                this.txtStartAngle.Focus();
+                txtStartAngle.Focus();
             }
         }
 
         private void cboColor_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.lblColor.ForeColor = Color.FromName(cboColor.Text);
-            di.color = this.lblColor.ForeColor.Name;
-            this.drawSpiro();
+            lblColor.ForeColor = Color.FromName(cboColor.Text);
+            di.color = lblColor.ForeColor.Name;
+            drawSpiro();
         }
 
         private void drawSpiro()
@@ -316,7 +316,7 @@ namespace SpiroGraph
             if (cbShowWheels.Checked)
             {
                 Spiro.ShowCircles(g, PointF.Add(drawingSpec.Center, di.offset), di.aRadius, di.bRadius,
-                    di.distance, di.startAngle, di.pointsPerCurve, di.roll, this.lblColor.ForeColor,
+                    di.distance, di.startAngle, di.pointsPerCurve, di.roll, lblColor.ForeColor,
                     di.penWidth);
             }
             g.Dispose();
@@ -326,24 +326,24 @@ namespace SpiroGraph
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
-            this.setCenter();
-            this.drawSpiro();
+            setCenter();
+            drawSpiro();
         }
 
         private void txtX_Validating(object sender, CancelEventArgs e)
         {
             try
             {
-                di.offset.Width = int.Parse(this.txtOffsetX.Text);
+                di.offset.Width = int.Parse(txtOffsetX.Text);
                 if (cbShowWheels.Checked)
                 {
-                    this.drawSpiro();
+                    drawSpiro();
                 }
             }
             catch
             {
                 MessageBox.Show("Offsets from center must be integer");
-                this.txtOffsetX.Focus();
+                txtOffsetX.Focus();
             }
         }
 
@@ -351,16 +351,16 @@ namespace SpiroGraph
         {
             try
             {
-                di.offset.Height = int.Parse(this.txtOffsetY.Text);
+                di.offset.Height = int.Parse(txtOffsetY.Text);
                 if (cbShowWheels.Checked)
                 {
-                    this.drawSpiro();
+                    drawSpiro();
                 }
             }
             catch
             {
                 MessageBox.Show("Offsets from center must be integer");
-                this.txtOffsetY.Focus();
+                txtOffsetY.Focus();
             }
         }
 
@@ -371,13 +371,13 @@ namespace SpiroGraph
                 di.penWidth = float.Parse(txtPenWidth.Text);
                 if (cbShowWheels.Checked)
                 {
-                    this.drawSpiro();
+                    drawSpiro();
                 }
             }
             catch
             {
                 MessageBox.Show("Pen width must be a number (e.g. 1.0 to 3.5");
-                this.txtPenWidth.Focus();
+                txtPenWidth.Focus();
             }
         }
 
@@ -395,17 +395,17 @@ namespace SpiroGraph
                 {
                     fName = fName.Substring(0, fName.Length - 3) + "xml";
                 }
-                this.drawingSpec = DrawingSpec.retrieveDrawing(fName);
-                this.cboBackgroundColor.Text = drawingSpec.BackgroundColor;
+                drawingSpec = DrawingSpec.retrieveDrawing(fName);
+                cboBackgroundColor.Text = drawingSpec.BackgroundColor;
                 // populate form with last curve
                 if (drawingSpec.Curves.Count > 0)
                 {
                     di = (DrawingInputType)drawingSpec.Curves[drawingSpec.Curves.Count - 1];
-                    this.initFormParams(di);
+                    initFormParams(di);
                     btnUndo.Enabled = true;
                 }
                 txtFileName.Text = fName;
-                this.drawSpiro();
+                drawSpiro();
                 btnRedo.Enabled = false;
             }
         }
@@ -421,22 +421,22 @@ namespace SpiroGraph
                 string fName = saveFileDialog1.FileName;
                 if (fName.ToLower().EndsWith("bmp"))
                 {
-                    this.pictureBox1.Image.Save(fName);
+                    pictureBox1.Image.Save(fName);
                     fName = fName.Substring(0, fName.Length - 3) + "xml";
                 }
-                this.drawingSpec.saveDrawing(fName);
+                drawingSpec.saveDrawing(fName);
                 txtFileName.Text = fName;
             }
         }
 
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.drawingSpec.Curves.Clear();
+            drawingSpec.Curves.Clear();
             drawingSpec.ClearRedoStack();
             btnUndo.Enabled = false;
             btnRedo.Enabled = false;
             txtFileName.Text = "";
-            this.drawSpiro();
+            drawSpiro();
         }
 
         private void editScriptToolStripMenuItem_Click(object sender, EventArgs e)
@@ -450,9 +450,9 @@ namespace SpiroGraph
                 if (drawingSpec.Curves.Count > 0)
                 {
                     di = (DrawingInputType)drawingSpec.Curves[drawingSpec.Curves.Count - 1];
-                    this.initFormParams(di);
+                    initFormParams(di);
                 }
-                this.drawSpiro();
+                drawSpiro();
             }
         }
 
@@ -502,75 +502,75 @@ namespace SpiroGraph
             Graphics g = Graphics.FromImage(drawing);
             g.Clear(Color.FromName(drawingSpec.BackgroundColor));
             g.Dispose();
-            this.drawSpiro();
+            drawSpiro();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void txtRadiusADelta_Validating(object sender, CancelEventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(this.txtRadiusADelta.Text))
+            if (String.IsNullOrWhiteSpace(txtRadiusADelta.Text))
               di.aRadiusDelta = 0;
             else
               try
                 {
-                    di.aRadiusDelta = int.Parse(this.txtRadiusADelta.Text);
+                    di.aRadiusDelta = int.Parse(txtRadiusADelta.Text);
                 }
                 catch
                 {
                     DialogResult r = MessageBox.Show("delta must be integer");
-                    this.txtRadiusADelta.Focus();
+                    txtRadiusADelta.Focus();
                 }
         }
 
         private void txtRadiusBDelta_Validating(object sender, CancelEventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(this.txtRadiusBDelta.Text))
+            if (String.IsNullOrWhiteSpace(txtRadiusBDelta.Text))
                 di.bRadiusDelta = 0;
             else
                 try
                 {
-                    di.bRadiusDelta = int.Parse(this.txtRadiusBDelta.Text);
+                    di.bRadiusDelta = int.Parse(txtRadiusBDelta.Text);
                 }
                 catch
                 {
                     DialogResult r = MessageBox.Show("delta must be integer");
-                    this.txtRadiusBDelta.Focus();
+                    txtRadiusBDelta.Focus();
                 }
         }
 
         private void txtPenDistanceDelta_Validating(object sender, CancelEventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(this.txtPenDistanceDelta.Text))
+            if (String.IsNullOrWhiteSpace(txtPenDistanceDelta.Text))
                 di.distanceDelta = 0;
             else
                 try
                 {
-                    di.distanceDelta = int.Parse(this.txtPenDistanceDelta.Text);
+                    di.distanceDelta = int.Parse(txtPenDistanceDelta.Text);
                 }
                 catch
                 {
                     DialogResult r = MessageBox.Show("delta must be integer");
-                    this.txtPenDistanceDelta.Focus();
+                    txtPenDistanceDelta.Focus();
                 }
         }
 
         private void txtStartAngleDelta_Validating(object sender, CancelEventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(this.txtStartAngleDelta.Text))
+            if (String.IsNullOrWhiteSpace(txtStartAngleDelta.Text))
                 di.startAngleDelta = 0;
             else
                 try
                 {
-                    di.startAngleDelta = int.Parse(this.txtStartAngleDelta.Text);
+                    di.startAngleDelta = int.Parse(txtStartAngleDelta.Text);
                 }
                 catch
                 {
                     DialogResult r = MessageBox.Show("delta must be integer");
-                    this.txtStartAngleDelta.Focus();
+                    txtStartAngleDelta.Focus();
                 }
         }
 
@@ -581,9 +581,9 @@ namespace SpiroGraph
             if (drawingSpec.Curves.Count > 0)
             {
                 di = (DrawingInputType)drawingSpec.Curves[drawingSpec.Curves.Count - 1];
-                this.initFormParams(di);
+                initFormParams(di);
             }
-            this.drawSpiro();
+            drawSpiro();
             btnRedo.Enabled = true;
         }
         private void btnRedo_Click(object sender, EventArgs e)
@@ -591,7 +591,7 @@ namespace SpiroGraph
             btnRedo.Enabled = drawingSpec.RedoLastPattern() > 0;
             // populate form with last curve
             di = (DrawingInputType)drawingSpec.Curves[drawingSpec.Curves.Count - 1];
-            this.initFormParams(di);
+            initFormParams(di);
             drawSpiro();
         }
     }
