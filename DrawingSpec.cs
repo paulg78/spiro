@@ -107,7 +107,5 @@ namespace SpiroGraph
         {
             undone.Clear();
         }
-
     }
-
 }

@@ -577,13 +577,21 @@ namespace SpiroGraph
         private void btnUndo_Click(object sender, EventArgs e)
         {
             drawingSpec.UndoLastPattern();
+            // populate form with last curve
+            if (drawingSpec.Curves.Count > 0)
+            {
+                di = (DrawingInputType)drawingSpec.Curves[drawingSpec.Curves.Count - 1];
+                this.initFormParams(di);
+            }
             this.drawSpiro();
             btnRedo.Enabled = true;
         }
-
         private void btnRedo_Click(object sender, EventArgs e)
         {
             btnRedo.Enabled = drawingSpec.RedoLastPattern() > 0;
+            // populate form with last curve
+            di = (DrawingInputType)drawingSpec.Curves[drawingSpec.Curves.Count - 1];
+            this.initFormParams(di);
             drawSpiro();
         }
     }
