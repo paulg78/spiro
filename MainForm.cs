@@ -83,7 +83,7 @@ namespace SpiroGraph
             InitializeComponent();
             this.cboColor.Items.AddRange(colorNames);
             this.cboBackgroundColor.Items.AddRange(colorNames);
-            drawingSpec.DrawingName = "drawing1";
+            drawingSpec.DrawingName = "";
             drawingSpec.BackgroundColor = Color.White.Name;
             this.setCenter();
 
@@ -402,10 +402,12 @@ namespace SpiroGraph
                 {
                     di = (DrawingInputType)drawingSpec.Curves[drawingSpec.Curves.Count - 1];
                     this.initFormParams(di);
+                    btnUndo.Enabled = true;
                 }
+                txtFileName.Text = fName;
                 this.drawSpiro();
+                btnRedo.Enabled = false;
             }
-            //this.drawSpiro();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -413,6 +415,7 @@ namespace SpiroGraph
             saveFileDialog1.InitialDirectory = GetDrawingsDirectory();
             saveFileDialog1.Filter = "drawing scripts (*.xml)|*.xml|drawings (*.bmp)|*.bmp";
             saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.FileName = drawingSpec.DrawingName;
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string fName = saveFileDialog1.FileName;
@@ -422,12 +425,17 @@ namespace SpiroGraph
                     fName = fName.Substring(0, fName.Length - 3) + "xml";
                 }
                 this.drawingSpec.saveDrawing(fName);
+                txtFileName.Text = fName;
             }
         }
 
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.drawingSpec.Curves.Clear();
+            drawingSpec.ClearRedoStack();
+            btnUndo.Enabled = false;
+            btnRedo.Enabled = false;
+            txtFileName.Text = "";
             this.drawSpiro();
         }
 
@@ -438,8 +446,12 @@ namespace SpiroGraph
             if (frmScript.DialogResult == DialogResult.OK)
             {
                 drawingSpec = frmScript.script;
-                di = (DrawingInputType)drawingSpec.Curves[drawingSpec.Curves.Count - 1];
-                this.initFormParams(di);
+                // load mainform with the last curve (pattern), if any, in the script
+                if (drawingSpec.Curves.Count > 0)
+                {
+                    di = (DrawingInputType)drawingSpec.Curves[drawingSpec.Curves.Count - 1];
+                    this.initFormParams(di);
+                }
                 this.drawSpiro();
             }
         }
@@ -564,8 +576,15 @@ namespace SpiroGraph
 
         private void btnUndo_Click(object sender, EventArgs e)
         {
-            if (drawingSpec.UndoLastPattern() >= 0)
-                this.drawSpiro();
+            drawingSpec.UndoLastPattern();
+            this.drawSpiro();
+            btnRedo.Enabled = true;
+        }
+
+        private void btnRedo_Click(object sender, EventArgs e)
+        {
+            btnRedo.Enabled = drawingSpec.RedoLastPattern() > 0;
+            drawSpiro();
         }
     }
 }

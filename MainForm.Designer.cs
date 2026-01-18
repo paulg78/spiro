@@ -75,6 +75,8 @@ namespace SpiroGraph
             this.txtPenDistance = new SpiroGraph.customTextBox();
             this.txtRadiusB = new SpiroGraph.customTextBox();
             this.txtRadiusA = new SpiroGraph.customTextBox();
+            this.btnRedo = new System.Windows.Forms.Button();
+            this.txtFileName = new System.Windows.Forms.TextBox();
             this.pnlControl.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -88,6 +90,7 @@ namespace SpiroGraph
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlControl.BackColor = System.Drawing.Color.Transparent;
             this.pnlControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlControl.Controls.Add(this.btnRedo);
             this.pnlControl.Controls.Add(this.btnUndo);
             this.pnlControl.Controls.Add(this.txtRadiusBDelta);
             this.pnlControl.Controls.Add(this.txtPenDistanceDelta);
@@ -552,11 +555,32 @@ namespace SpiroGraph
             this.txtRadiusA.TabIndex = 0;
             this.txtRadiusA.Validating += new System.ComponentModel.CancelEventHandler(this.txtRadiusA_Validating);
             // 
+            // btnRedo
+            // 
+            this.btnRedo.Enabled = false;
+            this.btnRedo.Location = new System.Drawing.Point(82, 511);
+            this.btnRedo.Name = "btnRedo";
+            this.btnRedo.Size = new System.Drawing.Size(46, 23);
+            this.btnRedo.TabIndex = 37;
+            this.btnRedo.Text = "Redo";
+            this.btnRedo.UseVisualStyleBackColor = true;
+            this.btnRedo.Click += new System.EventHandler(this.btnRedo_Click);
+            // 
+            // txtFileName
+            // 
+            this.txtFileName.CausesValidation = false;
+            this.txtFileName.Enabled = false;
+            this.txtFileName.Location = new System.Drawing.Point(249, 629);
+            this.txtFileName.Name = "txtFileName";
+            this.txtFileName.Size = new System.Drawing.Size(331, 20);
+            this.txtFileName.TabIndex = 1;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1002, 650);
+            this.Controls.Add(this.txtFileName);
             this.Controls.Add(this.pnlControl);
             this.Controls.Add(this.pictureBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -576,6 +600,7 @@ namespace SpiroGraph
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -628,6 +653,8 @@ namespace SpiroGraph
         private customTextBox txtPenDistanceDelta;
         private customTextBox txtStartAngleDelta;
         private System.Windows.Forms.Button btnUndo;
+        private System.Windows.Forms.Button btnRedo;
+        private System.Windows.Forms.TextBox txtFileName;
     }
 }
 

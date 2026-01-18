@@ -21,7 +21,8 @@ namespace SpiroGraph
         private string backgroundColor;
 
         // curves is a list of DrawingInputType structures
-        private ArrayList curves = new ArrayList(20);
+        private ArrayList curves = new ArrayList();
+        private ArrayList undone = new ArrayList();
 
         public string DrawingName
         {
@@ -48,6 +49,7 @@ namespace SpiroGraph
         
         public void saveDrawing(string fileName)
         {
+            drawingName = Path.GetFileNameWithoutExtension(fileName);
             XmlSerializer x = new XmlSerializer(typeof(DrawingSpec), new Type[1] { typeof(DrawingInputType) });
             Stream s;
             try
@@ -84,16 +86,27 @@ namespace SpiroGraph
                 System.Windows.Forms.MessageBox.Show("Error loading drawing specification ... make sure the selected file was created by this program.");
                 drawingSpec = new DrawingSpec();
             }
+            drawingSpec.drawingName = Path.GetFileNameWithoutExtension(fileName);
             s.Close();
             return drawingSpec;
         }
 
         public int UndoLastPattern()
         {
+            undone.Add(curves[curves.Count - 1]);
             curves.RemoveAt(curves.Count - 1);
             return curves.Count;
         }
-
+        public int RedoLastPattern()
+        {
+            curves.Add(undone[undone.Count - 1]);
+            undone.RemoveAt(undone.Count - 1);
+            return undone.Count;
+        }
+        public void ClearRedoStack()
+        {
+            undone.Clear();
+        }
 
     }
 

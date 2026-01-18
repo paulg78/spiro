@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<DrawingSpec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DrawingName>drawing1</DrawingName>
+  <BackgroundColor>White</BackgroundColor>
+  <Center>
+    <X>379</X>
+    <Y>324</Y>
+  </Center>
+  <Curves>
+    <anyType xsi:type="DrawingInputType">
+      <roll>inside</roll>
+      <offset>
+        <Width>0</Width>
+        <Height>0</Height>
+      </offset>
+      <aRadius>210</aRadius>
+      <aRadiusDelta>0</aRadiusDelta>
+      <bRadius>90</bRadius>
+      <distance>110</distance>
+      <startAngle>4</startAngle>
+      <pointsPerCurve>100</pointsPerCurve>
+      <color>Blue</color>
+      <penWidth>1.5</penWidth>
+      <penStyle>Solid</penStyle>
+    </anyType>
+    <anyType xsi:type="DrawingInputType">
+      <roll>inside</roll>
+      <offset>
+        <Width>0</Width>
+        <Height>0</Height>
+      </offset>
+      <aRadius>240</aRadius>
+      <aRadiusDelta>0</aRadiusDelta>
+      <bRadius>90</bRadius>
+      <distance>110</distance>
+      <startAngle>4</startAngle>
+      <pointsPerCurve>100</pointsPerCurve>
+      <color>DarkRed</color>
+      <penWidth>1.5</penWidth>
+      <penStyle>Solid</penStyle>
+    </anyType>
+    <anyType xsi:type="DrawingInputType">
+      <roll>inside</roll>
+      <offset>
+        <Width>0</Width>
+        <Height>0</Height>
+      </offset>
+      <aRadius>270</aRadius>
+      <aRadiusDelta>0</aRadiusDelta>
+      <bRadius>90</bRadius>
+      <distance>110</distance>
+      <startAngle>4</startAngle>
+      <pointsPerCurve>100</pointsPerCurve>
+      <color>Green</color>
+      <penWidth>1.5</penWidth>
+      <penStyle>Solid</penStyle>
+    </anyType>
+    <anyType xsi:type="DrawingInputType">
+      <roll>inside</roll>
+      <offset>
+        <Width>0</Width>
+        <Height>0</Height>
+      </offset>
+      <aRadius>300</aRadius>
+      <aRadiusDelta>0</aRadiusDelta>
+      <bRadius>90</bRadius>
+      <distance>110</distance>
+      <startAngle>4</startAngle>
+      <pointsPerCurve>100</pointsPerCurve>
+      <color>Orange</color>
+      <penWidth>1.5</penWidth>
+      <penStyle>Solid</penStyle>
+    </anyType>
+  </Curves>
+</DrawingSpec>
