@@ -5,6 +5,8 @@ using System.Text;
 using System.Xml.Serialization;
 using System.IO;
 using System.Drawing;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 
 namespace SpiroGraph
 {
@@ -42,7 +44,6 @@ namespace SpiroGraph
         public ArrayList Curves
         {
             get { return curves; }
-            //set { curves = value; }
         }
         
         public void saveDrawing(string fileName)
@@ -85,6 +86,12 @@ namespace SpiroGraph
             }
             s.Close();
             return drawingSpec;
+        }
+
+        public int UndoLastPattern()
+        {
+            curves.RemoveAt(curves.Count - 1);
+            return curves.Count;
         }
 
 

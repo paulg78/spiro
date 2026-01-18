@@ -29,6 +29,7 @@ namespace SpiroGraph
         private void InitializeComponent()
         {
             this.pnlControl = new System.Windows.Forms.Panel();
+            this.btnUndo = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.cboPenStyle = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -87,6 +88,7 @@ namespace SpiroGraph
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlControl.BackColor = System.Drawing.Color.Transparent;
             this.pnlControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlControl.Controls.Add(this.btnUndo);
             this.pnlControl.Controls.Add(this.txtRadiusBDelta);
             this.pnlControl.Controls.Add(this.txtPenDistanceDelta);
             this.pnlControl.Controls.Add(this.txtStartAngleDelta);
@@ -119,6 +121,17 @@ namespace SpiroGraph
             this.pnlControl.Size = new System.Drawing.Size(243, 649);
             this.pnlControl.TabIndex = 0;
             // 
+            // btnUndo
+            // 
+            this.btnUndo.Enabled = false;
+            this.btnUndo.Location = new System.Drawing.Point(12, 511);
+            this.btnUndo.Name = "btnUndo";
+            this.btnUndo.Size = new System.Drawing.Size(46, 23);
+            this.btnUndo.TabIndex = 1;
+            this.btnUndo.Text = "Undo";
+            this.btnUndo.UseVisualStyleBackColor = true;
+            this.btnUndo.Click += new System.EventHandler(this.btnUndo_Click);
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -136,7 +149,7 @@ namespace SpiroGraph
             "Dash",
             "Dot",
             "Solid"});
-            this.cboPenStyle.Location = new System.Drawing.Point(71, 423);
+            this.cboPenStyle.Location = new System.Drawing.Point(82, 392);
             this.cboPenStyle.Name = "cboPenStyle";
             this.cboPenStyle.Size = new System.Drawing.Size(83, 21);
             this.cboPenStyle.TabIndex = 13;
@@ -145,7 +158,7 @@ namespace SpiroGraph
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 426);
+            this.label6.Location = new System.Drawing.Point(24, 395);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 13);
             this.label6.TabIndex = 12;
@@ -155,7 +168,7 @@ namespace SpiroGraph
             // lblPenWidth
             // 
             this.lblPenWidth.AutoSize = true;
-            this.lblPenWidth.Location = new System.Drawing.Point(9, 404);
+            this.lblPenWidth.Location = new System.Drawing.Point(25, 369);
             this.lblPenWidth.Name = "lblPenWidth";
             this.lblPenWidth.Size = new System.Drawing.Size(57, 13);
             this.lblPenWidth.TabIndex = 10;
@@ -231,7 +244,7 @@ namespace SpiroGraph
             // btnAnimate
             // 
             this.btnAnimate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAnimate.Location = new System.Drawing.Point(27, 483);
+            this.btnAnimate.Location = new System.Drawing.Point(114, 274);
             this.btnAnimate.Name = "btnAnimate";
             this.btnAnimate.Size = new System.Drawing.Size(92, 23);
             this.btnAnimate.TabIndex = 16;
@@ -282,7 +295,7 @@ namespace SpiroGraph
             // btnGo
             // 
             this.btnGo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGo.Location = new System.Drawing.Point(12, 359);
+            this.btnGo.Location = new System.Drawing.Point(12, 469);
             this.btnGo.Name = "btnGo";
             this.btnGo.Size = new System.Drawing.Size(126, 33);
             this.btnGo.TabIndex = 9;
@@ -293,7 +306,7 @@ namespace SpiroGraph
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 458);
+            this.label3.Location = new System.Drawing.Point(24, 434);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(84, 13);
             this.label3.TabIndex = 14;
@@ -467,7 +480,7 @@ namespace SpiroGraph
             // 
             // txtPenWidth
             // 
-            this.txtPenWidth.Location = new System.Drawing.Point(71, 401);
+            this.txtPenWidth.Location = new System.Drawing.Point(87, 366);
             this.txtPenWidth.MaxLength = 3;
             this.txtPenWidth.Name = "txtPenWidth";
             this.txtPenWidth.Size = new System.Drawing.Size(38, 20);
@@ -503,7 +516,7 @@ namespace SpiroGraph
             // 
             // txtPointsPerCurve
             // 
-            this.txtPointsPerCurve.Location = new System.Drawing.Point(103, 455);
+            this.txtPointsPerCurve.Location = new System.Drawing.Point(114, 431);
             this.txtPointsPerCurve.MaxLength = 3;
             this.txtPointsPerCurve.Name = "txtPointsPerCurve";
             this.txtPointsPerCurve.Size = new System.Drawing.Size(40, 20);
@@ -551,7 +564,7 @@ namespace SpiroGraph
             this.MinimumSize = new System.Drawing.Size(678, 526);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SpiroGraph (version 1.4)";
+            this.Text = "SpiroGraph (version 1.5)";
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.pnlControl.ResumeLayout(false);
             this.pnlControl.PerformLayout();
@@ -614,6 +627,7 @@ namespace SpiroGraph
         private customTextBox txtRadiusBDelta;
         private customTextBox txtPenDistanceDelta;
         private customTextBox txtStartAngleDelta;
+        private System.Windows.Forms.Button btnUndo;
     }
 }
 

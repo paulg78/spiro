@@ -187,6 +187,7 @@ namespace SpiroGraph
                 this.drawSpiro(); // shows wheels and data with updated values (not yet drawn)
             }
             pictureBox1.Refresh();
+            btnUndo.Enabled = true;
         }
 
         private void cbShowWheels_CheckedChanged(object sender, EventArgs e)
@@ -320,7 +321,7 @@ namespace SpiroGraph
             }
             g.Dispose();
             pictureBox1.Refresh();
-
+            btnUndo.Enabled = drawingSpec.Curves.Count > 0;
         }
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
@@ -560,6 +561,11 @@ namespace SpiroGraph
                     this.txtStartAngleDelta.Focus();
                 }
         }
-    }
 
+        private void btnUndo_Click(object sender, EventArgs e)
+        {
+            if (drawingSpec.UndoLastPattern() >= 0)
+                this.drawSpiro();
+        }
+    }
 }
