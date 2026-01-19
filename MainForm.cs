@@ -297,7 +297,10 @@ namespace SpiroGraph
         {
             lblColor.ForeColor = Color.FromName(cboColor.Text);
             di.color = lblColor.ForeColor.Name;
-            drawSpiro();
+            if (cbShowWheels.Checked)
+            {
+                drawSpiro();
+            }
         }
 
         private void drawSpiro()

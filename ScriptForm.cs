@@ -21,7 +21,6 @@ namespace SpiroGraph
             InitializeComponent();
             cboColor.Items.AddRange(colorNames);
             color.Items.AddRange(colorNames);
-            drawingSpec = drawingSpec;
             txtName.Text = drawingSpec.DrawingName;
             centerX.Text = drawingSpec.Center.X.ToString();
             centerY.Text = drawingSpec.Center.Y.ToString();
