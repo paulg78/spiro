@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using SpiroGraph.Utils;
 
 namespace SpiroGraph
 {
@@ -134,7 +135,7 @@ namespace SpiroGraph
                 drawing.Dispose();
             drawing = new Bitmap(Math.Max(1, width), Math.Max(1, height));
             Graphics g = Graphics.FromImage(drawing);
-            g.Clear(Color.FromName(drawingSpec.BackgroundColor));
+            g.Clear(ColorUtils.ActualColor(drawingSpec.BackgroundColor));
             pictureBox1.Image = drawing;
             g.Dispose();
         }
@@ -153,7 +154,7 @@ namespace SpiroGraph
             txtStartAngle.Text = di.startAngle.ToString();
             txtStartAngleDelta.Text = (di.startAngleDelta == 0) ? "" : di.startAngleDelta.ToString();
             cboColor.Text = di.color;
-            lblColor.ForeColor = Color.FromName(di.color);
+            lblColor.ForeColor = ColorUtils.ActualColor(di.color);
             txtPenWidth.Text = di.penWidth.ToString();
             cboPenStyle.Text = di.penStyle.ToString();
             if (di.roll == RollSide.inside)
@@ -295,15 +296,33 @@ namespace SpiroGraph
 
         private void cboColor_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lblColor.ForeColor = Color.FromName(cboColor.Text);
+            lblColor.ForeColor = ColorUtils.ActualColor(cboColor.Text);
             di.color = lblColor.ForeColor.Name;
-            drawSpiro();
+            if (cbShowWheels.Checked)
+            {  
+                drawSpiro();
+            }    
+        }
+        private void btnColor_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Color chosen = colorDialog1.Color;
+                lblColor.ForeColor = chosen;
+                di.color = lblColor.ForeColor.Name;
+                if (cbShowWheels.Checked)
+                {
+                    drawSpiro();
+                }
+
+            }
+
         }
 
         private void drawSpiro()
         {
             Graphics g = Graphics.FromImage(drawing);
-            g.Clear(Color.FromName(drawingSpec.BackgroundColor));
+            g.Clear(ColorUtils.ActualColor(drawingSpec.BackgroundColor));
             foreach (DrawingInputType d in drawingSpec.Curves)
             {
                 Spiro.DrawCurve(g, d, PointF.Add(drawingSpec.Center, d.offset));
@@ -495,7 +514,7 @@ namespace SpiroGraph
         {
             drawingSpec.BackgroundColor = cboBackgroundColor.Text;
             Graphics g = Graphics.FromImage(drawing);
-            g.Clear(Color.FromName(drawingSpec.BackgroundColor));
+            g.Clear(ColorUtils.ActualColor(drawingSpec.BackgroundColor));
             g.Dispose();
             drawSpiro();
         }

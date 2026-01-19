@@ -34,7 +34,7 @@ namespace SpiroGraph
             this.distance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.startAngle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.roll = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.color = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.color = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pointsPerCurve = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.offsetX = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.offsetY = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,7 +47,7 @@ namespace SpiroGraph
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.cboColor = new System.Windows.Forms.ComboBox();
+            this.cboBGColor = new System.Windows.Forms.ComboBox();
             this.centerY = new SpiroGraph.customTextBox();
             this.centerX = new SpiroGraph.customTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvScript)).BeginInit();
@@ -55,8 +55,9 @@ namespace SpiroGraph
             // 
             // dgvScript
             // 
-            this.dgvScript.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.dgvScript.AllowUserToOrderColumns = true;
+            this.dgvScript.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvScript.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dgvScript.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvScript.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -115,8 +116,9 @@ namespace SpiroGraph
             // color
             // 
             this.color.HeaderText = "color";
-            this.color.MaxDropDownItems = 40;
             this.color.Name = "color";
+            this.color.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.color.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // pointsPerCurve
             // 
@@ -221,13 +223,13 @@ namespace SpiroGraph
             this.label3.TabIndex = 12;
             this.label3.Text = "background color";
             // 
-            // cboColor
+            // cboBGColor
             // 
-            this.cboColor.FormattingEnabled = true;
-            this.cboColor.Location = new System.Drawing.Point(682, 3);
-            this.cboColor.Name = "cboColor";
-            this.cboColor.Size = new System.Drawing.Size(107, 21);
-            this.cboColor.TabIndex = 13;
+            this.cboBGColor.FormattingEnabled = true;
+            this.cboBGColor.Location = new System.Drawing.Point(682, 3);
+            this.cboBGColor.Name = "cboBGColor";
+            this.cboBGColor.Size = new System.Drawing.Size(107, 21);
+            this.cboBGColor.TabIndex = 13;
             // 
             // centerY
             // 
@@ -252,7 +254,7 @@ namespace SpiroGraph
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(993, 451);
-            this.Controls.Add(this.cboColor);
+            this.Controls.Add(this.cboBGColor);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.centerY);
             this.Controls.Add(this.centerX);
@@ -283,13 +285,13 @@ namespace SpiroGraph
         private customTextBox centerX;
         private customTextBox centerY;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cboColor;
+        private System.Windows.Forms.ComboBox cboBGColor;
         private System.Windows.Forms.DataGridViewTextBoxColumn aRadius;
         private System.Windows.Forms.DataGridViewTextBoxColumn bRadius;
         private System.Windows.Forms.DataGridViewTextBoxColumn distance;
         private System.Windows.Forms.DataGridViewTextBoxColumn startAngle;
         private System.Windows.Forms.DataGridViewComboBoxColumn roll;
-        private System.Windows.Forms.DataGridViewComboBoxColumn color;
+        private System.Windows.Forms.DataGridViewTextBoxColumn color;
         private System.Windows.Forms.DataGridViewTextBoxColumn pointsPerCurve;
         private System.Windows.Forms.DataGridViewTextBoxColumn offsetX;
         private System.Windows.Forms.DataGridViewTextBoxColumn offsetY;

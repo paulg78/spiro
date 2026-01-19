@@ -19,13 +19,13 @@ namespace SpiroGraph
         public ScriptForm(DrawingSpec drawingSpec, object[] colorNames)
         {
             InitializeComponent();
-            cboColor.Items.AddRange(colorNames);
-            color.Items.AddRange(colorNames);
-            drawingSpec = drawingSpec;
+            cboBGColor.Items.AddRange(colorNames);
+          //  color.Items.AddRange(colorNames);
+         //   drawingSpec = drawingSpec;
             txtName.Text = drawingSpec.DrawingName;
             centerX.Text = drawingSpec.Center.X.ToString();
             centerY.Text = drawingSpec.Center.Y.ToString();
-            cboColor.Text = drawingSpec.BackgroundColor;
+            cboBGColor.Text = drawingSpec.BackgroundColor;
             foreach (object o in drawingSpec.Curves)
             {
                 DrawingInputType di = (DrawingInputType)o;
@@ -46,7 +46,7 @@ namespace SpiroGraph
             drawingSpec.DrawingName = txtName.Text;
             drawingSpec.Center = new Point(
                 int.Parse(centerX.Text), int.Parse(centerY.Text));
-            drawingSpec.BackgroundColor = cboColor.Text;
+            drawingSpec.BackgroundColor = cboBGColor.Text;
             foreach (DataGridViewRow row in dgvScript.Rows)
             {
                 bool rowComplete = true;
