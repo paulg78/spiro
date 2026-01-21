@@ -5,6 +5,8 @@ using System.Threading;
 
 namespace SpiroGraph
 {
+    using ColorUtils = SpiroGraph.Utils.ColorUtils;
+
     public struct DrawingInputType
     {
         public RollSide roll;
@@ -122,7 +124,8 @@ namespace SpiroGraph
         {
             stopAnimation = false;
             pauseAnimation = false;
-            pen.Color = Color.FromName(di.color);
+            pen.Color = ColorUtils.ActualColor(di.color);
+
             center = _center;
             aRadius = di.aRadius;
             bRadius = di.bRadius;
@@ -376,7 +379,7 @@ namespace SpiroGraph
 
         public static void DrawCurve(Graphics g, DrawingInputType di, PointF center)
         {
-            pen.Color = Color.FromName(di.color);
+            pen.Color = ColorUtils.ActualColor(di.color);
             pen.Width = di.penWidth;
             pen.DashStyle = di.penStyle;
             if (di.roll == RollSide.outside)

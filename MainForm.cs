@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using SpiroGraph.Utils;
 
 namespace SpiroGraph
 {
@@ -12,72 +13,74 @@ namespace SpiroGraph
         DrawingInputType di; // set of drawing inputs
         DrawingSpec drawingSpec = new DrawingSpec();
         Bitmap drawing;
-        object[] colorNames = new object[] {
-            "Aqua",
-            "Beige",
-            "Bisque",
+        public static readonly string[] colorNames = {
             "Black",
-            "Blue",
-            "BlueViolet",
-            "Brown",
-            "Chocolate",
-            "Coral",
-            "Crimson",
-            "DarkBlue",
-            "DarkCyan",
-            "DarkGoldenrod",
-            "DarkGray",
             "DarkGreen",
-            "DarkMagenta",
-            "DarkOrange",
-            "DarkOrchid",
-            "DarkRed",
-            "DarkSalmon",
-            "DeepPink",
-            "ForestGreen",
-            "Fuchsia",
-            "Gray",
             "Green",
-            "GreenYellow",
-            "HotPink",
-            "LightBlue",
-            "LightCoral",
-            "LightCyan",
-            "LightGoldenrodYellow",
-            "LightGray",
-            "LightGreen",
-            "LightPink",
-            "LightSalmon",
-            "LightSeaGreen",
-            "LightSkyBlue",
-            "LightSlateGray",
-            "LightSteelBlue",
-            "LightYellow",
+            "ForestGreen",
             "Lime",
-            "Magenta",
-            "Maroon",
-            "MediumBlue",
-            "MistyRose",
-            "Navy",
-            "Orange",
-            "OrangeRed",
-            "Pink",
-            "PowderBlue",
-            "Purple",
-            "Red",
-            "Silver",
-            "Tomato",
-            "Turquoise",
-            "Violet",
-            "White",
+            "MediumSpringGreen",
+            "LightGreen",
+            "YellowGreen",
+            "GreenYellow",
+            "Beige",
+            "LightGoldenrodYellow",
+            "LightYellow",
             "Yellow",
-            "YellowGreen"};
+            "DarkGoldenrod",
+            "Orange",
+            "DarkOrange",
+            "OrangeRed",
+            "Tomato",
+            "Coral",
+            "LightCoral",
+            "DarkSalmon",
+            "LightSalmon",
+            "Red",
+            "Crimson",
+            "DarkRed",
+            "Maroon",
+            "Pink",
+            "LightPink",
+            "HotPink",
+            "DeepPink",
+            "Fuchsia",
+            "Magenta",
+            "Purple",
+            "DarkMagenta",
+            "DarkOrchid",
+            "Violet",
+            "BlueViolet",
+            "MediumBlue",
+            "DarkBlue",
+            "Navy",
+            "Blue",
+            "LightBlue",
+            "PowderBlue",
+            "LightSkyBlue",
+            "LightSteelBlue",
+            "LightSlateGray",
+            "LightSeaGreen",
+            "DarkCyan",
+            "Aqua",
+            "LightCyan",
+            "Turquoise",
+            "Chocolate",
+            "Brown",
+            "Gray",
+            "DarkGray",
+            "LightGray",
+            "Silver",
+            "Bisque",
+            "MistyRose",
+            "White"
+            };
 
         public MainForm()
         {
             InitializeComponent();
             cboColor.Items.AddRange(colorNames);
-            cboBackgroundColor.Items.AddRange(colorNames);
+            //cboBackgroundColor.Items.AddRange(colorNames);
             drawingSpec.DrawingName = "";
             drawingSpec.BackgroundColor = Color.White.Name;
             setCenter();
@@ -96,7 +99,7 @@ namespace SpiroGraph
             di.offset.Height = 0;
             // initialize form
             initFormParams(di);
-            cboBackgroundColor.Text = drawingSpec.BackgroundColor;
+            //cboBackgroundColor.Text = drawingSpec.BackgroundColor;
             cboColor.SelectedIndexChanged += new System.EventHandler(cboColor_SelectedIndexChanged);
         }
 
@@ -134,7 +137,7 @@ namespace SpiroGraph
                 drawing.Dispose();
             drawing = new Bitmap(Math.Max(1, width), Math.Max(1, height));
             Graphics g = Graphics.FromImage(drawing);
-            g.Clear(Color.FromName(drawingSpec.BackgroundColor));
+            g.Clear(ColorUtils.ActualColor(drawingSpec.BackgroundColor));
             pictureBox1.Image = drawing;
             g.Dispose();
         }
@@ -153,7 +156,7 @@ namespace SpiroGraph
             txtStartAngle.Text = di.startAngle.ToString();
             txtStartAngleDelta.Text = (di.startAngleDelta == 0) ? "" : di.startAngleDelta.ToString();
             cboColor.Text = di.color;
-            lblColor.ForeColor = Color.FromName(di.color);
+            lblColor.ForeColor = ColorUtils.ActualColor(di.color);
             txtPenWidth.Text = di.penWidth.ToString();
             cboPenStyle.Text = di.penStyle.ToString();
             if (di.roll == RollSide.inside)
@@ -295,18 +298,49 @@ namespace SpiroGraph
 
         private void cboColor_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lblColor.ForeColor = Color.FromName(cboColor.Text);
+            lblColor.ForeColor = ColorUtils.ActualColor(cboColor.Text);
             di.color = lblColor.ForeColor.Name;
             if (cbShowWheels.Checked)
-            {
+            {  
                 drawSpiro();
+            }    
+        }
+        //private void btnColor_Click(object sender, EventArgs e)
+        //{
+        //    if (colorDialog1.ShowDialog() == DialogResult.OK)
+        //    {
+        //        Color chosen = colorDialog1.Color;
+        //        lblColor.ForeColor = chosen;
+        //        di.color = lblColor.ForeColor.Name;
+        //        if (cbShowWheels.Checked)
+        //        {
+        //            drawSpiro();
+        //        }
+
+        //    }
+
+        //}
+        private void btnColor_Click(object sender, EventArgs e)
+        {
+            using (var dlg = new CustomNamedColorDialog())
+            {
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    Color chosen = dlg.SelectedColor;
+                    lblColor.ForeColor = chosen;
+                    di.color = lblColor.ForeColor.Name;
+                    if (cbShowWheels.Checked)
+                    {
+                        drawSpiro();
+                    }
+                }
             }
         }
 
         private void drawSpiro()
         {
             Graphics g = Graphics.FromImage(drawing);
-            g.Clear(Color.FromName(drawingSpec.BackgroundColor));
+            g.Clear(ColorUtils.ActualColor(drawingSpec.BackgroundColor));
             foreach (DrawingInputType d in drawingSpec.Curves)
             {
                 Spiro.DrawCurve(g, d, PointF.Add(drawingSpec.Center, d.offset));
@@ -394,7 +428,7 @@ namespace SpiroGraph
                     fName = fName.Substring(0, fName.Length - 3) + "xml";
                 }
                 drawingSpec = DrawingSpec.retrieveDrawing(fName);
-                cboBackgroundColor.Text = drawingSpec.BackgroundColor;
+                //cboBackgroundColor.Text = drawingSpec.BackgroundColor;
                 // populate form with last curve
                 if (drawingSpec.Curves.Count > 0)
                 {
@@ -494,14 +528,14 @@ namespace SpiroGraph
             Enum.Parse(typeof(System.Drawing.Drawing2D.DashStyle), cboPenStyle.Text);
         }
 
-        private void cboBackgroundColor_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            drawingSpec.BackgroundColor = cboBackgroundColor.Text;
-            Graphics g = Graphics.FromImage(drawing);
-            g.Clear(Color.FromName(drawingSpec.BackgroundColor));
-            g.Dispose();
-            drawSpiro();
-        }
+        //private void cboBackgroundColor_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        // //   drawingSpec.BackgroundColor = cboBackgroundColor.Text;
+        //    Graphics g = Graphics.FromImage(drawing);
+        //    g.Clear(ColorUtils.ActualColor(drawingSpec.BackgroundColor));
+        //    g.Dispose();
+        //    drawSpiro();
+        //}
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -591,6 +625,23 @@ namespace SpiroGraph
             di = (DrawingInputType)drawingSpec.Curves[drawingSpec.Curves.Count - 1];
             initFormParams(di);
             drawSpiro();
+        }
+
+        private void backgroundColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dlg = new CustomNamedColorDialog())
+            {
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    Color chosen = dlg.SelectedColor;
+                    drawingSpec.BackgroundColor = chosen.Name;
+                    Graphics g = Graphics.FromImage(drawing);
+         //           g.Clear(ColorUtils.ActualColor(drawingSpec.BackgroundColor));
+                    g.Clear(chosen);
+                    g.Dispose();
+                    drawSpiro();
+                }
+            }
         }
     }
 }
