@@ -1,3 +1,5 @@
+using System;
+
 namespace SpiroGraph
 {
     partial class MainForm
@@ -168,7 +170,8 @@ namespace SpiroGraph
             this.txtRadiusBDelta.Name = "txtRadiusBDelta";
             this.txtRadiusBDelta.Size = new System.Drawing.Size(38, 20);
             this.txtRadiusBDelta.TabIndex = 19;
-            this.txtRadiusBDelta.Validating += new System.ComponentModel.CancelEventHandler(this.txtRadiusBDelta_Validating);
+            this.txtRadiusBDelta.Validating += NumericTextBox_Validating;
+            this.txtRadiusBDelta.Tag = new Action<int>(v => di.bRadiusDelta = v);
             // 
             // txtPenDistanceDelta
             // 
@@ -179,7 +182,9 @@ namespace SpiroGraph
             this.txtPenDistanceDelta.Name = "txtPenDistanceDelta";
             this.txtPenDistanceDelta.Size = new System.Drawing.Size(38, 20);
             this.txtPenDistanceDelta.TabIndex = 20;
-            this.txtPenDistanceDelta.Validating += new System.ComponentModel.CancelEventHandler(this.txtPenDistanceDelta_Validating);
+            this.txtPenDistanceDelta.Validating += NumericTextBox_Validating;
+            txtPenDistanceDelta.Tag = new Action<int>(v => di.distanceDelta = v);
+
             // 
             // txtStartAngleDelta
             // 
@@ -190,7 +195,8 @@ namespace SpiroGraph
             this.txtStartAngleDelta.Name = "txtStartAngleDelta";
             this.txtStartAngleDelta.Size = new System.Drawing.Size(38, 20);
             this.txtStartAngleDelta.TabIndex = 21;
-            this.txtStartAngleDelta.Validating += new System.ComponentModel.CancelEventHandler(this.txtStartAngleDelta_Validating);
+            this.txtStartAngleDelta.Validating += NumericTextBox_Validating;
+            txtStartAngleDelta.Tag = new Action<int>(v => di.startAngleDelta = v);
             // 
             // label9
             // 
@@ -211,7 +217,8 @@ namespace SpiroGraph
             this.txtRadiusADelta.Name = "txtRadiusADelta";
             this.txtRadiusADelta.Size = new System.Drawing.Size(38, 20);
             this.txtRadiusADelta.TabIndex = 18;
-            this.txtRadiusADelta.Validating += new System.ComponentModel.CancelEventHandler(this.txtRadiusADelta_Validating);
+            this.txtRadiusADelta.Validating += NumericTextBox_Validating;
+            txtRadiusADelta.Tag = new Action<int>(v => di.aRadiusDelta = v);
             // 
             // cboPenStyle
             // 

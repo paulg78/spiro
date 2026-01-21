@@ -589,6 +589,27 @@ namespace SpiroGraph
                     txtPenDistanceDelta.Focus();
                 }
         }
+        private void NumericTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            var tb = sender as TextBox;
+            var setter = tb.Tag as Action<int>;
+
+            if (string.IsNullOrWhiteSpace(tb.Text))
+            {
+                setter(0);
+                return;
+            }
+
+            if (int.TryParse(tb.Text, out int value))
+            {
+                setter(value);
+            }
+            else
+            {
+                MessageBox.Show("Delta value must be an integer or empty");
+                e.Cancel = true;
+            }
+        }
 
         private void txtStartAngleDelta_Validating(object sender, CancelEventArgs e)
         {
