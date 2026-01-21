@@ -10,7 +10,16 @@ namespace SpiroGraph
 
     public partial class MainForm : Form
     {
+        public struct DeltaType
+        {
+            public int aRadius;
+            public int bRadius;
+            public int penDistance;
+            public int startAngle;
+        }
         DrawingInputType di; // set of drawing inputs
+        DeltaType delta; // delta values (not used as drawing inputs)
+        
         DrawingSpec drawingSpec = new DrawingSpec();
         Bitmap drawing;
         public static readonly string[] colorNames = {
@@ -79,6 +88,14 @@ namespace SpiroGraph
         public MainForm()
         {
             InitializeComponent();
+            txtRadiusADelta.Tag = new Action<int>(v => delta.aRadius = v);
+            this.txtRadiusADelta.Validating += NumericTextBox_Validating;
+            txtStartAngleDelta.Tag = new Action<int>(v => delta.startAngle = v);
+            this.txtStartAngleDelta.Validating += NumericTextBox_Validating;
+            txtRadiusBDelta.Tag = new Action<int>(v =>delta.bRadius = v);
+            this.txtRadiusBDelta.Validating += NumericTextBox_Validating;
+            txtPenDistanceDelta.Tag = new Action<int>(v => delta.penDistance = v);
+            this.txtPenDistanceDelta.Validating += NumericTextBox_Validating;
             cboColor.Items.AddRange(colorNames);
             //cboBackgroundColor.Items.AddRange(colorNames);
             drawingSpec.DrawingName = "";
@@ -87,7 +104,7 @@ namespace SpiroGraph
 
             // initialize drawing inputs
             di.aRadius = 210;
-            di.aRadiusDelta = 0;
+            delta.aRadius = 0;
             di.bRadius = 90;
             di.distance = 110;
             di.pointsPerCurve = 100;
@@ -98,7 +115,7 @@ namespace SpiroGraph
             di.offset.Width = 0;
             di.offset.Height = 0;
             // initialize form
-            initFormParams(di);
+            initFormParams(di, delta);
             //cboBackgroundColor.Text = drawingSpec.BackgroundColor;
             cboColor.SelectedIndexChanged += new System.EventHandler(cboColor_SelectedIndexChanged);
         }
@@ -142,19 +159,19 @@ namespace SpiroGraph
             g.Dispose();
         }
 
-        private void initFormParams(DrawingInputType di)
+        private void initFormParams(DrawingInputType di, DeltaType delta)
         {
             txtOffsetX.Text = di.offset.Width.ToString();
             txtOffsetY.Text = di.offset.Height.ToString();
             txtRadiusA.Text = di.aRadius.ToString();
-            txtRadiusADelta.Text = (di.aRadiusDelta == 0) ? "" : di.aRadiusDelta.ToString();
+            txtRadiusADelta.Text = (delta.aRadius == 0) ? "" : delta.aRadius.ToString();
             txtRadiusB.Text = di.bRadius.ToString();
-            txtRadiusBDelta.Text = (di.bRadiusDelta == 0) ? "" : di.bRadiusDelta.ToString();
+            txtRadiusBDelta.Text = (delta.bRadius == 0) ? "" :delta.bRadius.ToString();
             txtPenDistance.Text = di.distance.ToString();
-            txtPenDistanceDelta.Text = (di.distanceDelta == 0) ? "" : di.distanceDelta.ToString();
+            txtPenDistanceDelta.Text = (delta.penDistance == 0) ? "" : delta.penDistance.ToString();
             txtPointsPerCurve.Text = di.pointsPerCurve.ToString();
             txtStartAngle.Text = di.startAngle.ToString();
-            txtStartAngleDelta.Text = (di.startAngleDelta == 0) ? "" : di.startAngleDelta.ToString();
+            txtStartAngleDelta.Text = (delta.startAngle == 0) ? "" : delta.startAngle.ToString();
             cboColor.Text = di.color;
             lblColor.ForeColor = ColorUtils.ActualColor(di.color);
             txtPenWidth.Text = di.penWidth.ToString();
@@ -171,16 +188,16 @@ namespace SpiroGraph
             Graphics g = Graphics.FromImage(drawing);
             Spiro.DrawCurve(g, di, PointF.Add(drawingSpec.Center, di.offset));
             g.Dispose();
-            di.aRadius += di.aRadiusDelta;
+            di.aRadius += delta.aRadius;
             txtRadiusA.Text = di.aRadius.ToString();
-            di.bRadius += di.bRadiusDelta;
+            di.bRadius +=delta.bRadius;
             txtRadiusB.Text = di.bRadius.ToString();
-            di.distance += di.distanceDelta;
+            di.distance += delta.penDistance;
             txtPenDistance.Text = di.distance.ToString();
-            di.startAngle += di.startAngleDelta;
+            di.startAngle += delta.startAngle;
             txtStartAngle.Text = di.startAngle.ToString();
             if (cbShowWheels.Checked && 
-                (di.aRadiusDelta != 0 || di.bRadiusDelta != 0 || di.distanceDelta != 0 || di.startAngleDelta != 0))
+                (delta.aRadius != 0 ||delta.bRadius != 0 || delta.penDistance != 0 || delta.startAngle != 0))
             {
                 drawSpiro(); // shows wheels and data with updated values (not yet drawn)
             }
@@ -433,7 +450,7 @@ namespace SpiroGraph
                 if (drawingSpec.Curves.Count > 0)
                 {
                     di = (DrawingInputType)drawingSpec.Curves[drawingSpec.Curves.Count - 1];
-                    initFormParams(di);
+                    initFormParams(di,delta);
                     btnUndo.Enabled = true;
                 }
                 txtFileName.Text = fName;
@@ -482,7 +499,7 @@ namespace SpiroGraph
                 if (drawingSpec.Curves.Count > 0)
                 {
                     di = (DrawingInputType)drawingSpec.Curves[drawingSpec.Curves.Count - 1];
-                    initFormParams(di);
+                    initFormParams(di, delta);
                 }
                 drawSpiro();
             }
@@ -545,11 +562,11 @@ namespace SpiroGraph
         private void txtRadiusADelta_Validating(object sender, CancelEventArgs e)
         {
             if (String.IsNullOrWhiteSpace(txtRadiusADelta.Text))
-              di.aRadiusDelta = 0;
+              delta.aRadius = 0;
             else
               try
                 {
-                    di.aRadiusDelta = int.Parse(txtRadiusADelta.Text);
+                    delta.aRadius = int.Parse(txtRadiusADelta.Text);
                 }
                 catch
                 {
@@ -561,11 +578,11 @@ namespace SpiroGraph
         private void txtRadiusBDelta_Validating(object sender, CancelEventArgs e)
         {
             if (String.IsNullOrWhiteSpace(txtRadiusBDelta.Text))
-                di.bRadiusDelta = 0;
+               delta.bRadius = 0;
             else
                 try
                 {
-                    di.bRadiusDelta = int.Parse(txtRadiusBDelta.Text);
+                   delta.bRadius = int.Parse(txtRadiusBDelta.Text);
                 }
                 catch
                 {
@@ -577,11 +594,11 @@ namespace SpiroGraph
         private void txtPenDistanceDelta_Validating(object sender, CancelEventArgs e)
         {
             if (String.IsNullOrWhiteSpace(txtPenDistanceDelta.Text))
-                di.distanceDelta = 0;
+                delta.penDistance = 0;
             else
                 try
                 {
-                    di.distanceDelta = int.Parse(txtPenDistanceDelta.Text);
+                    delta.penDistance = int.Parse(txtPenDistanceDelta.Text);
                 }
                 catch
                 {
@@ -614,11 +631,11 @@ namespace SpiroGraph
         private void txtStartAngleDelta_Validating(object sender, CancelEventArgs e)
         {
             if (String.IsNullOrWhiteSpace(txtStartAngleDelta.Text))
-                di.startAngleDelta = 0;
+                delta.startAngle = 0;
             else
                 try
                 {
-                    di.startAngleDelta = int.Parse(txtStartAngleDelta.Text);
+                    delta.startAngle = int.Parse(txtStartAngleDelta.Text);
                 }
                 catch
                 {
@@ -634,7 +651,7 @@ namespace SpiroGraph
             if (drawingSpec.Curves.Count > 0)
             {
                 di = (DrawingInputType)drawingSpec.Curves[drawingSpec.Curves.Count - 1];
-                initFormParams(di);
+                initFormParams(di, delta);
             }
             drawSpiro();
             btnRedo.Enabled = true;
@@ -644,7 +661,7 @@ namespace SpiroGraph
             btnRedo.Enabled = drawingSpec.RedoLastPattern() > 0;
             // populate form with last curve
             di = (DrawingInputType)drawingSpec.Curves[drawingSpec.Curves.Count - 1];
-            initFormParams(di);
+            initFormParams(di, delta);
             drawSpiro();
         }
 
