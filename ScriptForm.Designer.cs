@@ -29,17 +29,6 @@ namespace SpiroGraph
         private void InitializeComponent()
         {
             this.dgvScript = new System.Windows.Forms.DataGridView();
-            this.aRadius = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bRadius = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.distance = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.startAngle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.roll = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.color = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pointsPerCurve = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.offsetX = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.offsetY = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.penWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.penStyle = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.lblName = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.btnOk = new System.Windows.Forms.Button();
@@ -50,6 +39,17 @@ namespace SpiroGraph
             this.cboBGColor = new System.Windows.Forms.ComboBox();
             this.centerY = new SpiroGraph.customTextBox();
             this.centerX = new SpiroGraph.customTextBox();
+            this.aRadius = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bRadius = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.distance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startAngle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.roll = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.color = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.pointsPerCurve = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.offsetX = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.offsetY = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.penWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.penStyle = new System.Windows.Forms.DataGridViewComboBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvScript)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,86 +77,6 @@ namespace SpiroGraph
             this.dgvScript.Size = new System.Drawing.Size(943, 372);
             this.dgvScript.TabIndex = 0;
             this.dgvScript.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvScript_CellValidating);
-            // 
-            // aRadius
-            // 
-            this.aRadius.HeaderText = "fixed circle radius";
-            this.aRadius.MaxInputLength = 3;
-            this.aRadius.Name = "aRadius";
-            this.aRadius.Width = 85;
-            // 
-            // bRadius
-            // 
-            this.bRadius.HeaderText = "rolling circle radius";
-            this.bRadius.MaxInputLength = 3;
-            this.bRadius.Name = "bRadius";
-            this.bRadius.Width = 90;
-            // 
-            // distance
-            // 
-            this.distance.HeaderText = "pen distance from center";
-            this.distance.MaxInputLength = 3;
-            this.distance.Name = "distance";
-            // 
-            // startAngle
-            // 
-            this.startAngle.HeaderText = "start angle (deg.)";
-            this.startAngle.MaxInputLength = 3;
-            this.startAngle.Name = "startAngle";
-            this.startAngle.Width = 85;
-            // 
-            // roll
-            // 
-            this.roll.HeaderText = "roll side";
-            this.roll.Items.AddRange(new object[] {
-            "inside",
-            "outside"});
-            this.roll.Name = "roll";
-            // 
-            // color
-            // 
-            this.color.HeaderText = "color";
-            this.color.Name = "color";
-            this.color.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.color.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // pointsPerCurve
-            // 
-            this.pointsPerCurve.HeaderText = "# points";
-            this.pointsPerCurve.MaxInputLength = 3;
-            this.pointsPerCurve.Name = "pointsPerCurve";
-            this.pointsPerCurve.Width = 50;
-            // 
-            // offsetX
-            // 
-            this.offsetX.HeaderText = "X offset";
-            this.offsetX.MaxInputLength = 3;
-            this.offsetX.Name = "offsetX";
-            this.offsetX.Width = 60;
-            // 
-            // offsetY
-            // 
-            this.offsetY.HeaderText = "Y offset";
-            this.offsetY.MaxInputLength = 3;
-            this.offsetY.Name = "offsetY";
-            this.offsetY.Width = 60;
-            // 
-            // penWidth
-            // 
-            this.penWidth.HeaderText = "pen width";
-            this.penWidth.Name = "penWidth";
-            this.penWidth.Width = 60;
-            // 
-            // penStyle
-            // 
-            this.penStyle.HeaderText = "pen style";
-            this.penStyle.Items.AddRange(new object[] {
-            "Dash",
-            "Dot",
-            "Solid"});
-            this.penStyle.Name = "penStyle";
-            this.penStyle.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.penStyle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // lblName
             // 
@@ -249,6 +169,85 @@ namespace SpiroGraph
             this.centerX.TabIndex = 9;
             this.centerX.Validating += new System.ComponentModel.CancelEventHandler(this.centerX_Validating);
             // 
+            // aRadius
+            // 
+            this.aRadius.HeaderText = "fixed circle radius";
+            this.aRadius.MaxInputLength = 3;
+            this.aRadius.Name = "aRadius";
+            this.aRadius.Width = 85;
+            // 
+            // bRadius
+            // 
+            this.bRadius.HeaderText = "rolling circle radius";
+            this.bRadius.MaxInputLength = 3;
+            this.bRadius.Name = "bRadius";
+            this.bRadius.Width = 90;
+            // 
+            // distance
+            // 
+            this.distance.HeaderText = "pen distance from center";
+            this.distance.MaxInputLength = 3;
+            this.distance.Name = "distance";
+            // 
+            // startAngle
+            // 
+            this.startAngle.HeaderText = "start angle (deg.)";
+            this.startAngle.MaxInputLength = 3;
+            this.startAngle.Name = "startAngle";
+            this.startAngle.Width = 85;
+            // 
+            // roll
+            // 
+            this.roll.HeaderText = "roll side";
+            this.roll.Items.AddRange(new object[] {
+            "inside",
+            "outside"});
+            this.roll.Name = "roll";
+            // 
+            // color
+            // 
+            this.color.HeaderText = "color";
+            this.color.Name = "color";
+            this.color.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // pointsPerCurve
+            // 
+            this.pointsPerCurve.HeaderText = "# points";
+            this.pointsPerCurve.MaxInputLength = 3;
+            this.pointsPerCurve.Name = "pointsPerCurve";
+            this.pointsPerCurve.Width = 50;
+            // 
+            // offsetX
+            // 
+            this.offsetX.HeaderText = "X offset";
+            this.offsetX.MaxInputLength = 3;
+            this.offsetX.Name = "offsetX";
+            this.offsetX.Width = 60;
+            // 
+            // offsetY
+            // 
+            this.offsetY.HeaderText = "Y offset";
+            this.offsetY.MaxInputLength = 3;
+            this.offsetY.Name = "offsetY";
+            this.offsetY.Width = 60;
+            // 
+            // penWidth
+            // 
+            this.penWidth.HeaderText = "pen width";
+            this.penWidth.Name = "penWidth";
+            this.penWidth.Width = 60;
+            // 
+            // penStyle
+            // 
+            this.penStyle.HeaderText = "pen style";
+            this.penStyle.Items.AddRange(new object[] {
+            "Dash",
+            "Dot",
+            "Solid"});
+            this.penStyle.Name = "penStyle";
+            this.penStyle.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.penStyle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // ScriptForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -291,7 +290,7 @@ namespace SpiroGraph
         private System.Windows.Forms.DataGridViewTextBoxColumn distance;
         private System.Windows.Forms.DataGridViewTextBoxColumn startAngle;
         private System.Windows.Forms.DataGridViewComboBoxColumn roll;
-        private System.Windows.Forms.DataGridViewTextBoxColumn color;
+        private System.Windows.Forms.DataGridViewComboBoxColumn color;
         private System.Windows.Forms.DataGridViewTextBoxColumn pointsPerCurve;
         private System.Windows.Forms.DataGridViewTextBoxColumn offsetX;
         private System.Windows.Forms.DataGridViewTextBoxColumn offsetY;

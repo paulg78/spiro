@@ -29,6 +29,7 @@ namespace SpiroGraph
         private void InitializeComponent()
         {
             this.pnlControl = new System.Windows.Forms.Panel();
+            this.btnColor = new System.Windows.Forms.Button();
             this.btnRedo = new System.Windows.Forms.Button();
             this.btnUndo = new System.Windows.Forms.Button();
             this.txtRadiusBDelta = new SpiroGraph.customTextBox();
@@ -72,14 +73,12 @@ namespace SpiroGraph
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cboBackgroundColor = new System.Windows.Forms.ToolStripComboBox();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.txtFileName = new System.Windows.Forms.TextBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnColor = new System.Windows.Forms.Button();
             this.pnlControl.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -127,6 +126,16 @@ namespace SpiroGraph
             this.pnlControl.Name = "pnlControl";
             this.pnlControl.Size = new System.Drawing.Size(243, 649);
             this.pnlControl.TabIndex = 0;
+            // 
+            // btnColor
+            // 
+            this.btnColor.Location = new System.Drawing.Point(159, 324);
+            this.btnColor.Name = "btnColor";
+            this.btnColor.Size = new System.Drawing.Size(75, 23);
+            this.btnColor.TabIndex = 2;
+            this.btnColor.Text = "Choose";
+            this.btnColor.UseVisualStyleBackColor = true;
+            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
             // 
             // btnRedo
             // 
@@ -534,30 +543,29 @@ namespace SpiroGraph
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.clearToolStripMenuItem.Text = "Clear drawing";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
             // editScriptToolStripMenuItem
             // 
             this.editScriptToolStripMenuItem.Name = "editScriptToolStripMenuItem";
-            this.editScriptToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.editScriptToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editScriptToolStripMenuItem.Text = "Edit Drawing Script";
             this.editScriptToolStripMenuItem.Click += new System.EventHandler(this.editScriptToolStripMenuItem_Click);
             // 
             // backgroundColorToolStripMenuItem
             // 
-            this.backgroundColorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cboBackgroundColor});
             this.backgroundColorToolStripMenuItem.Name = "backgroundColorToolStripMenuItem";
-            this.backgroundColorToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.backgroundColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.backgroundColorToolStripMenuItem.Text = "Background color";
+            this.backgroundColorToolStripMenuItem.Click += new System.EventHandler(this.backgroundColorToolStripMenuItem_Click);
             // 
-            // cboBackgroundColor
+            // helpToolStripMenuItem
             // 
-            this.cboBackgroundColor.Name = "cboBackgroundColor";
-            this.cboBackgroundColor.Size = new System.Drawing.Size(121, 23);
-            this.cboBackgroundColor.SelectedIndexChanged += new System.EventHandler(this.cboBackgroundColor_SelectedIndexChanged);
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
             // 
             // pictureBox1
             // 
@@ -580,21 +588,10 @@ namespace SpiroGraph
             this.txtFileName.Size = new System.Drawing.Size(331, 20);
             this.txtFileName.TabIndex = 1;
             // 
-            // helpToolStripMenuItem
+            // colorDialog1
             // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // btnColor
-            // 
-            this.btnColor.Location = new System.Drawing.Point(159, 324);
-            this.btnColor.Name = "btnColor";
-            this.btnColor.Size = new System.Drawing.Size(75, 23);
-            this.btnColor.TabIndex = 2;
-            this.btnColor.Text = "Choose";
-            this.btnColor.UseVisualStyleBackColor = true;
-            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
+            this.colorDialog1.AllowFullOpen = false;
+            this.colorDialog1.SolidColorOnly = true;
             // 
             // MainForm
             // 
@@ -662,7 +659,6 @@ namespace SpiroGraph
         private System.Windows.Forms.Button btnAnimate;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ToolStripMenuItem backgroundColorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripComboBox cboBackgroundColor;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ComboBox cboPenStyle;
         private System.Windows.Forms.Label label6;
