@@ -19,6 +19,27 @@ namespace SpiroGraph
         public ScriptForm(DrawingSpec drawingSpec, object[] colorNames)
         {
             InitializeComponent();
+            // Catch and report data errors from color mismatches
+            dgvScript.DataError += (s, e) =>
+            {
+                e.ThrowException = false;
+
+                if (e.Context.HasFlag(DataGridViewDataErrorContexts.Commit) ||
+                    e.Context.HasFlag(DataGridViewDataErrorContexts.Formatting) ||
+                    e.Context.HasFlag(DataGridViewDataErrorContexts.Parsing))
+                {
+                    var cell = dgvScript[e.ColumnIndex, e.RowIndex] as DataGridViewComboBoxCell;
+                    var value = cell?.Value;
+
+                    if (value != null)
+                    {
+                       // Console.WriteLine($"Missing color in ComboBox list: {value}");
+                        MessageBox.Show($"Missing color: {value}");
+
+                    }
+                }
+            };
+
             cboBGColor.Items.AddRange(colorNames);
             color.Items.AddRange(colorNames);
          //   drawingSpec = drawingSpec;
