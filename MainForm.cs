@@ -102,35 +102,12 @@ namespace SpiroGraph
             this.txtOffsetXdelta.Validating += NumericTextBox_Validating;
             txtOffsetYdelta.Tag = new Action<int>(v => delta.offsetY = v);
             this.txtOffsetYdelta.Validating += NumericTextBox_Validating;
-            cboColor.Items.AddRange(colorNames);
-            //cboBackgroundColor.Items.AddRange(colorNames);
-            //drawingSpec.DrawingName = "";
-            //drawingSpec.BackgroundColor = Color.White.Name;
-            //setCenter();
 
             // initialize drawing inputs/deltas
             setDefaults();
-            //di.aRadius = 210;
-            //di.bRadius = 90;
-            //di.distance = 110;
-            //di.pointsPerCurve = 100;
-            //di.roll = RollSide.inside;
-            //di.color = "Blue";
-            //di.penWidth = 1.0f;
-            //di.penStyle = System.Drawing.Drawing2D.DashStyle.Solid;
-            //di.offset.Width = 0;
-            //di.offset.Height = 0;
-            //// initialize deltas
-            //delta.aRadius = 0;
-            //delta.bRadius = 0;
-            //delta.penDistance = 0;
-            //delta.startAngle = 0;
-            //delta.offsetX = 0;
-            //delta.offsetY = 0;
+
             // populate form
             initFormParams(di, delta);
-            //cboBackgroundColor.Text = drawingSpec.BackgroundColor;
-            cboColor.SelectedIndexChanged += new System.EventHandler(cboColor_SelectedIndexChanged);
         }
 
         /// <summary>
@@ -211,7 +188,6 @@ namespace SpiroGraph
             txtPointsPerCurve.Text = di.pointsPerCurve.ToString();
             txtStartAngle.Text = di.startAngle.ToString();
             txtStartAngleDelta.Text = (delta.startAngle == 0) ? "" : delta.startAngle.ToString();
-            cboColor.Text = di.color;
             lblColor.ForeColor = ColorUtils.ActualColor(di.color);
             txtPenWidth.Text = di.penWidth.ToString();
             cboPenStyle.Text = di.penStyle.ToString();
@@ -357,30 +333,6 @@ namespace SpiroGraph
             }
         }
 
-        private void cboColor_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            lblColor.ForeColor = ColorUtils.ActualColor(cboColor.Text);
-            di.color = lblColor.ForeColor.Name;
-            if (cbShowWheels.Checked)
-            {  
-                drawSpiro();
-            }    
-        }
-        //private void btnColor_Click(object sender, EventArgs e)
-        //{
-        //    if (colorDialog1.ShowDialog() == DialogResult.OK)
-        //    {
-        //        Color chosen = colorDialog1.Color;
-        //        lblColor.ForeColor = chosen;
-        //        di.color = lblColor.ForeColor.Name;
-        //        if (cbShowWheels.Checked)
-        //        {
-        //            drawSpiro();
-        //        }
-
-        //    }
-
-        //}
         private void btnColor_Click(object sender, EventArgs e)
         {
             using (var dlg = new CustomNamedColorDialog())
