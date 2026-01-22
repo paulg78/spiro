@@ -20,7 +20,7 @@ namespace SpiroGraph
         public float penWidth;
         public DashStyle penStyle;
 
-        public DrawingInputType(RollSide _ct, Size _offset, int _aRadius, int _bRadius, int _distance, 
+        public DrawingInputType(RollSide _ct, Size _offset, int _aRadius, int _bRadius, int _distance,
             int _startAngle, int _PointsPerCurve, string _colorName, float _penWidth, DashStyle _penStyle)
         {
             roll = _ct;
@@ -143,7 +143,7 @@ namespace SpiroGraph
             // since GC eliminates a thread only when complete (whether or not there is a reference to it)
         }
 
-       // threadsafe method that allows animation thread to access form created by main thread
+        // threadsafe method that allows animation thread to access form created by main thread
         private static void RefreshDrawing()
         {
             //if (pb.InvokeRequired)
@@ -416,7 +416,7 @@ namespace SpiroGraph
                 point2.Y = (float)(ptOrigin.Y + aMinusb * Math.Sin(angle) - distance * Math.Sin(angle * aMinusbOverb));
                 g.DrawLine(pen, point1, point2);
                 point1 = point2;
-             }
+            }
             transformMatrix.Dispose();
             g.Transform = new Matrix();
         }
@@ -449,7 +449,7 @@ namespace SpiroGraph
             // Apply the Matrix object to the Graphics object
             // (i.e., to all the Graphics items drawn on the Graphics object)
             g.Transform = transformMatrix;
-            
+
             double angle = 0;
             double aPlusb = aRadius + bRadius;
             double aPlusbOverb = aPlusb / bRadius;

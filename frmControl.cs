@@ -35,7 +35,7 @@ namespace SpiroGraph
 
         private void btnFaster_Click(object sender, EventArgs e)
         {
-            lock(this)
+            lock (this)
             {
                 if (Spiro.delayPerPoint > 19)
                     Spiro.delayPerPoint = Spiro.delayPerPoint - 10;
@@ -64,6 +64,6 @@ namespace SpiroGraph
         {
             Close();
         }
-  
-}
+
+    }
 }

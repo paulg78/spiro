@@ -1,9 +1,9 @@
 using System;
 //using System.Collections.Generic;
 using System.Collections;
-using System.Xml.Serialization;
-using System.IO;
 using System.Drawing;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace SpiroGraph
 {
@@ -38,12 +38,12 @@ namespace SpiroGraph
             get { return center; }
             set { center = value; }
         }
-	
+
         public ArrayList Curves
         {
             get { return curves; }
         }
-        
+
         public void saveDrawing(string fileName)
         {
             drawingName = Path.GetFileNameWithoutExtension(fileName);

@@ -33,7 +33,7 @@ namespace SpiroGraph
 
                     if (value != null)
                     {
-                       // Console.WriteLine($"Missing color in ComboBox list: {value}");
+                        // Console.WriteLine($"Missing color in ComboBox list: {value}");
                         MessageBox.Show($"Missing color: {value}");
 
                     }
@@ -42,7 +42,7 @@ namespace SpiroGraph
 
             cboBGColor.Items.AddRange(colorNames);
             color.Items.AddRange(colorNames);
-         //   drawingSpec = drawingSpec;
+            //   drawingSpec = drawingSpec;
             txtName.Text = drawingSpec.DrawingName;
             centerX.Text = drawingSpec.Center.X.ToString();
             centerY.Text = drawingSpec.Center.Y.ToString();
@@ -51,7 +51,7 @@ namespace SpiroGraph
             {
                 DrawingInputType di = (DrawingInputType)o;
                 string[] row = { di.aRadius.ToString(), di.bRadius.ToString(), di.distance.ToString(),
-                    di.startAngle.ToString(), "inside", di.color, di.pointsPerCurve.ToString(), 
+                    di.startAngle.ToString(), "inside", di.color, di.pointsPerCurve.ToString(),
                     di.offset.Width.ToString(), di.offset.Height.ToString(), di.penWidth.ToString(),
                     di.penStyle.ToString()};
                 if (di.roll == RollSide.outside)

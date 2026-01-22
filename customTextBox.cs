@@ -3,7 +3,7 @@ namespace SpiroGraph
     /// <summary>
     /// This class implements a version of text box in which return acts as a tab
     /// </summary>
-    class customTextBox: System.Windows.Forms.TextBox
+    class customTextBox : System.Windows.Forms.TextBox
     {
         // This method intercepts the Enter Key signal before the containing Form does
         protected override bool ProcessCmdKey(ref System.Windows.Forms.Message m, System.Windows.Forms.Keys k)

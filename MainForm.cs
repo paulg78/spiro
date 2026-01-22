@@ -1,9 +1,9 @@
+using SpiroGraph.Utils;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using SpiroGraph.Utils;
 
 namespace SpiroGraph
 {
@@ -21,7 +21,7 @@ namespace SpiroGraph
         }
         DrawingInputType di; // set of drawing inputs
         DeltaType delta; // delta values (not used as drawing inputs)
-        
+
         DrawingSpec drawingSpec = new DrawingSpec();
         Bitmap drawing;
         public static readonly string[] colorNames = {
@@ -94,7 +94,7 @@ namespace SpiroGraph
             this.txtRadiusADelta.Validating += NumericTextBox_Validating;
             txtStartAngleDelta.Tag = new Action<int>(v => delta.startAngle = v);
             this.txtStartAngleDelta.Validating += NumericTextBox_Validating;
-            txtRadiusBDelta.Tag = new Action<int>(v =>delta.bRadius = v);
+            txtRadiusBDelta.Tag = new Action<int>(v => delta.bRadius = v);
             this.txtRadiusBDelta.Validating += NumericTextBox_Validating;
             txtPenDistanceDelta.Tag = new Action<int>(v => delta.penDistance = v);
             this.txtPenDistanceDelta.Validating += NumericTextBox_Validating;
@@ -182,7 +182,7 @@ namespace SpiroGraph
             txtRadiusA.Text = di.aRadius.ToString();
             txtRadiusADelta.Text = (delta.aRadius == 0) ? "" : delta.aRadius.ToString();
             txtRadiusB.Text = di.bRadius.ToString();
-            txtRadiusBDelta.Text = (delta.bRadius == 0) ? "" :delta.bRadius.ToString();
+            txtRadiusBDelta.Text = (delta.bRadius == 0) ? "" : delta.bRadius.ToString();
             txtPenDistance.Text = di.distance.ToString();
             txtPenDistanceDelta.Text = (delta.penDistance == 0) ? "" : delta.penDistance.ToString();
             txtPointsPerCurve.Text = di.pointsPerCurve.ToString();
@@ -205,7 +205,7 @@ namespace SpiroGraph
             g.Dispose();
             di.aRadius += delta.aRadius;
             txtRadiusA.Text = di.aRadius.ToString();
-            di.bRadius +=delta.bRadius;
+            di.bRadius += delta.bRadius;
             txtRadiusB.Text = di.bRadius.ToString();
             di.distance += delta.penDistance;
             txtPenDistance.Text = di.distance.ToString();
@@ -286,15 +286,15 @@ namespace SpiroGraph
 
         private void txtPointsPerCurve_Validating(object sender, CancelEventArgs e)
         {
-                int i;
-                if (int.TryParse(txtPointsPerCurve.Text, out i) && (i > 0))
+            int i;
+            if (int.TryParse(txtPointsPerCurve.Text, out i) && (i > 0))
+            {
+                di.pointsPerCurve = i;
+                if (cbShowWheels.Checked)
                 {
-                    di.pointsPerCurve = i;
-                    if (cbShowWheels.Checked)
-                    {
-                        drawSpiro();
-                    }
+                    drawSpiro();
                 }
+            }
             else
             {
                 MessageBox.Show
@@ -446,7 +446,7 @@ namespace SpiroGraph
                 if (drawingSpec.Curves.Count > 0)
                 {
                     di = (DrawingInputType)drawingSpec.Curves[drawingSpec.Curves.Count - 1];
-                    initFormParams(di,delta);
+                    initFormParams(di, delta);
                     btnUndo.Enabled = true;
                 }
                 txtFileName.Text = fName;
@@ -598,7 +598,7 @@ namespace SpiroGraph
                     Color chosen = dlg.SelectedColor;
                     drawingSpec.BackgroundColor = chosen.Name;
                     Graphics g = Graphics.FromImage(drawing);
-         //           g.Clear(ColorUtils.ActualColor(drawingSpec.BackgroundColor));
+                    //           g.Clear(ColorUtils.ActualColor(drawingSpec.BackgroundColor));
                     g.Clear(chosen);
                     g.Dispose();
                     drawSpiro();
