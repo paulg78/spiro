@@ -16,6 +16,8 @@ namespace SpiroGraph
             public int bRadius;
             public int penDistance;
             public int startAngle;
+            public int offsetX;
+            public int offsetY;
         }
         DrawingInputType di; // set of drawing inputs
         DeltaType delta; // delta values (not used as drawing inputs)
@@ -96,25 +98,36 @@ namespace SpiroGraph
             this.txtRadiusBDelta.Validating += NumericTextBox_Validating;
             txtPenDistanceDelta.Tag = new Action<int>(v => delta.penDistance = v);
             this.txtPenDistanceDelta.Validating += NumericTextBox_Validating;
+            txtOffsetXdelta.Tag = new Action<int>(v => delta.offsetX = v);
+            this.txtOffsetXdelta.Validating += NumericTextBox_Validating;
+            txtOffsetYdelta.Tag = new Action<int>(v => delta.offsetY = v);
+            this.txtOffsetYdelta.Validating += NumericTextBox_Validating;
             cboColor.Items.AddRange(colorNames);
             //cboBackgroundColor.Items.AddRange(colorNames);
-            drawingSpec.DrawingName = "";
-            drawingSpec.BackgroundColor = Color.White.Name;
-            setCenter();
+            //drawingSpec.DrawingName = "";
+            //drawingSpec.BackgroundColor = Color.White.Name;
+            //setCenter();
 
-            // initialize drawing inputs
-            di.aRadius = 210;
-            delta.aRadius = 0;
-            di.bRadius = 90;
-            di.distance = 110;
-            di.pointsPerCurve = 100;
-            di.roll = RollSide.inside;
-            di.color = "Blue";
-            di.penWidth = 1.0f;
-            di.penStyle = System.Drawing.Drawing2D.DashStyle.Solid;
-            di.offset.Width = 0;
-            di.offset.Height = 0;
-            // initialize form
+            // initialize drawing inputs/deltas
+            setDefaults();
+            //di.aRadius = 210;
+            //di.bRadius = 90;
+            //di.distance = 110;
+            //di.pointsPerCurve = 100;
+            //di.roll = RollSide.inside;
+            //di.color = "Blue";
+            //di.penWidth = 1.0f;
+            //di.penStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            //di.offset.Width = 0;
+            //di.offset.Height = 0;
+            //// initialize deltas
+            //delta.aRadius = 0;
+            //delta.bRadius = 0;
+            //delta.penDistance = 0;
+            //delta.startAngle = 0;
+            //delta.offsetX = 0;
+            //delta.offsetY = 0;
+            // populate form
             initFormParams(di, delta);
             //cboBackgroundColor.Text = drawingSpec.BackgroundColor;
             cboColor.SelectedIndexChanged += new System.EventHandler(cboColor_SelectedIndexChanged);
@@ -159,10 +172,36 @@ namespace SpiroGraph
             g.Dispose();
         }
 
+        private void setDefaults()
+        {
+            drawingSpec.DrawingName = "";
+            drawingSpec.BackgroundColor = Color.White.Name;
+            setCenter();
+            di.aRadius = 210;
+            di.bRadius = 90;
+            di.distance = 110;
+            di.startAngle = 0;
+            di.pointsPerCurve = 100;
+            di.roll = RollSide.inside;
+            di.color = "Blue";
+            di.penWidth = 1.0f;
+            di.penStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            di.offset.Width = 0;
+            di.offset.Height = 0;
+            // initialize deltas
+            delta.aRadius = 0;
+            delta.bRadius = 0;
+            delta.penDistance = 0;
+            delta.startAngle = 0;
+            delta.offsetX = 0;
+            delta.offsetY = 0;
+        }
         private void initFormParams(DrawingInputType di, DeltaType delta)
         {
             txtOffsetX.Text = di.offset.Width.ToString();
+            txtOffsetXdelta.Text = (delta.offsetX == 0) ? "" : delta.offsetX.ToString();
             txtOffsetY.Text = di.offset.Height.ToString();
+            txtOffsetYdelta.Text = (delta.offsetY == 0) ? "" : delta.offsetY.ToString();
             txtRadiusA.Text = di.aRadius.ToString();
             txtRadiusADelta.Text = (delta.aRadius == 0) ? "" : delta.aRadius.ToString();
             txtRadiusB.Text = di.bRadius.ToString();
@@ -196,8 +235,13 @@ namespace SpiroGraph
             txtPenDistance.Text = di.distance.ToString();
             di.startAngle += delta.startAngle;
             txtStartAngle.Text = di.startAngle.ToString();
-            if (cbShowWheels.Checked && 
-                (delta.aRadius != 0 ||delta.bRadius != 0 || delta.penDistance != 0 || delta.startAngle != 0))
+            di.offset.Width += delta.offsetX;
+            txtOffsetX.Text = di.offset.Width.ToString();
+            di.offset.Height += delta.offsetY;
+            txtOffsetY.Text = di.offset.Height.ToString();
+            if (cbShowWheels.Checked &&
+                (delta.aRadius != 0 || delta.bRadius != 0 || delta.penDistance != 0 ||
+                delta.startAngle != 0 || delta.offsetX != 0 || delta.offsetY != 0))
             {
                 drawSpiro(); // shows wheels and data with updated values (not yet drawn)
             }
@@ -477,7 +521,7 @@ namespace SpiroGraph
                 txtFileName.Text = fName;
             }
         }
-
+        //clear drawing area
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             drawingSpec.Curves.Clear();
@@ -545,67 +589,11 @@ namespace SpiroGraph
             Enum.Parse(typeof(System.Drawing.Drawing2D.DashStyle), cboPenStyle.Text);
         }
 
-        //private void cboBackgroundColor_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        // //   drawingSpec.BackgroundColor = cboBackgroundColor.Text;
-        //    Graphics g = Graphics.FromImage(drawing);
-        //    g.Clear(ColorUtils.ActualColor(drawingSpec.BackgroundColor));
-        //    g.Dispose();
-        //    drawSpiro();
-        //}
-
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void txtRadiusADelta_Validating(object sender, CancelEventArgs e)
-        {
-            if (String.IsNullOrWhiteSpace(txtRadiusADelta.Text))
-              delta.aRadius = 0;
-            else
-              try
-                {
-                    delta.aRadius = int.Parse(txtRadiusADelta.Text);
-                }
-                catch
-                {
-                    DialogResult r = MessageBox.Show("delta must be integer");
-                    txtRadiusADelta.Focus();
-                }
-        }
-
-        private void txtRadiusBDelta_Validating(object sender, CancelEventArgs e)
-        {
-            if (String.IsNullOrWhiteSpace(txtRadiusBDelta.Text))
-               delta.bRadius = 0;
-            else
-                try
-                {
-                   delta.bRadius = int.Parse(txtRadiusBDelta.Text);
-                }
-                catch
-                {
-                    DialogResult r = MessageBox.Show("delta must be integer");
-                    txtRadiusBDelta.Focus();
-                }
-        }
-
-        private void txtPenDistanceDelta_Validating(object sender, CancelEventArgs e)
-        {
-            if (String.IsNullOrWhiteSpace(txtPenDistanceDelta.Text))
-                delta.penDistance = 0;
-            else
-                try
-                {
-                    delta.penDistance = int.Parse(txtPenDistanceDelta.Text);
-                }
-                catch
-                {
-                    DialogResult r = MessageBox.Show("delta must be integer");
-                    txtPenDistanceDelta.Focus();
-                }
-        }
         private void NumericTextBox_Validating(object sender, CancelEventArgs e)
         {
             var tb = sender as TextBox;
@@ -626,22 +614,6 @@ namespace SpiroGraph
                 MessageBox.Show("Delta value must be an integer or empty");
                 e.Cancel = true;
             }
-        }
-
-        private void txtStartAngleDelta_Validating(object sender, CancelEventArgs e)
-        {
-            if (String.IsNullOrWhiteSpace(txtStartAngleDelta.Text))
-                delta.startAngle = 0;
-            else
-                try
-                {
-                    delta.startAngle = int.Parse(txtStartAngleDelta.Text);
-                }
-                catch
-                {
-                    DialogResult r = MessageBox.Show("delta must be integer");
-                    txtStartAngleDelta.Focus();
-                }
         }
 
         private void btnUndo_Click(object sender, EventArgs e)
@@ -680,6 +652,12 @@ namespace SpiroGraph
                     drawSpiro();
                 }
             }
+        }
+
+        private void setDrawingDefaultsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            setDefaults();
+            initFormParams(di, delta);
         }
     }
 }
