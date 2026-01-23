@@ -187,7 +187,7 @@ namespace SpiroGraph
             txtRadiusBDelta.Text = (delta.bRadius == 0) ? "" : delta.bRadius.ToString();
             txtPenDistance.Text = di.distance.ToString();
             txtPenDistanceDelta.Text = (delta.penDistance == 0) ? "" : delta.penDistance.ToString();
-            txtPointsPerCurve.Text = di.pointsPerCurve.ToString();
+            txtPointsPerRev.Text = di.pointsPerCurve.ToString();
             txtStartAngle.Text = di.startAngle.ToString();
             txtStartAngleDelta.Text = (delta.startAngle == 0) ? "" : delta.startAngle.ToString();
             lblColor.ForeColor = ColorUtils.ActualColor(di.color);
@@ -289,7 +289,7 @@ namespace SpiroGraph
         private void txtPointsPerCurve_Validating(object sender, CancelEventArgs e)
         {
             int i;
-            if (int.TryParse(txtPointsPerCurve.Text, out i) && (i > 0))
+            if (int.TryParse(txtPointsPerRev.Text, out i) && (i > 0))
             {
                 di.pointsPerCurve = i;
                 if (cbShowWheels.Checked)
@@ -301,7 +301,7 @@ namespace SpiroGraph
             {
                 MessageBox.Show
                     ("Points per curve must be greater than 0");
-                txtPointsPerCurve.Focus();
+                txtPointsPerRev.Focus();
             }
         }
 
@@ -644,6 +644,11 @@ namespace SpiroGraph
         private void lblColor_Click(object sender, EventArgs e)
         {
             btnColor_Click(sender, e);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
