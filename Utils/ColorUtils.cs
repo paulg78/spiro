@@ -6,36 +6,37 @@ namespace SpiroGraph.Utils
     {
         public static Color ActualColor(string value)
         {
-            if (string.IsNullOrWhiteSpace(value))
-                return Color.Empty;
+            return Color.FromName(value);
+            //if (string.IsNullOrWhiteSpace(value))
+            //    return Color.Empty;
 
-            if (value.StartsWith("#"))
-            {
-                try
-                {
-                    return ColorTranslator.FromHtml(value);
-                }
-                catch
-                {
-                    return Color.Empty;
-                }
-            }
+            //if (value.StartsWith("#"))
+            //{
+            //    try
+            //    {
+            //        return ColorTranslator.FromHtml(value);
+            //    }
+            //    catch
+            //    {
+            //        return Color.Empty;
+            //    }
+            //}
 
-            Color named = Color.FromName(value);
+            //Color named = Color.FromName(value);
 
-            if (named.IsKnownColor || named.IsNamedColor)
-                return named;
+            //if (named.IsKnownColor || named.IsNamedColor)
+            //    return named;
 
-            return Color.Empty;
+            //return Color.Empty;
         }
-        public static string ColorName(Color c)
-        {
-            // If it's a named color, return the name
-            if (c.IsNamedColor)
-                return c.Name;
+        //public static string ColorName(Color c)
+        //{
+        //    // If it's a named color, return the name
+        //    if (c.IsNamedColor)
+        //        return c.Name;
 
-            // Otherwise return a hex string like #RRGGBB
-            return ColorTranslator.ToHtml(c);
-        }
+        //    // Otherwise return a hex string like #RRGGBB
+        //    return ColorTranslator.ToHtml(c);
+        //}
     }
 }

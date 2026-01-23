@@ -19,26 +19,6 @@ namespace SpiroGraph
         public string color;
         public float penWidth;
         public DashStyle penStyle;
-
-        public DrawingInputType(RollSide _ct, Size _offset, int _aRadius, int _bRadius, int _distance,
-            int _startAngle, int _PointsPerCurve, string _colorName, float _penWidth, DashStyle _penStyle)
-        {
-            roll = _ct;
-            offset = _offset;
-            aRadius = _aRadius;
-            bRadius = _bRadius;
-            distance = _distance;
-            startAngle = _startAngle;
-            pointsPerCurve = _PointsPerCurve;
-            color = _colorName;
-            penWidth = _penWidth;
-            penStyle = _penStyle;
-        }
-
-        public DrawingInputType(DrawingInputType d)
-        {
-            this = d;
-        }
     }
 
     public struct DrawingResultType
@@ -146,11 +126,8 @@ namespace SpiroGraph
         // threadsafe method that allows animation thread to access form created by main thread
         private static void RefreshDrawing()
         {
-            //if (pb.InvokeRequired)
-            //{
             RefreshDrawingDelegate refreshDelegate = new RefreshDrawingDelegate(refDrawing);
             pb.BeginInvoke(refreshDelegate);
-            //}
         }
 
         private static void refDrawing()
@@ -161,11 +138,8 @@ namespace SpiroGraph
         // threadsafe method that allows animation thread to access form created by main thread
         private static void CloseControlForm()
         {
-            //if (pb.InvokeRequired)
-            //{
             CloseControlFormDelegate closeDelegate = new CloseControlFormDelegate(closeControlForm);
             pb.BeginInvoke(closeDelegate);
-            //}
         }
 
         private static void closeControlForm()
@@ -530,9 +504,9 @@ namespace SpiroGraph
             double aCirc = 2 * Math.PI * aRadius;
             double bCirc = 2 * Math.PI * bRadius;
             g.DrawString(
-                "Highest Common factor (fixed and rolling radius): " + dr.highestCommonFactor.ToString() + "\n" +
-                "'design' points: " + dr.designPoints.ToString() + "\n" +
-                "# revolutions back to start: " + dr.nbrRevolutions.ToString() + "\n" +
+                "Highest Common factor (HCF) of fixed and rolling radius: " + dr.highestCommonFactor.ToString() + "\n" +
+                "# of 'lobes' (fixed radius/HCF): " + dr.designPoints.ToString() + "\n" +
+                "# revolutions back to start (rolling radius/HCF): " + dr.nbrRevolutions.ToString() + "\n" +
                 "Fixed circle circumference: " + (aCirc).ToString("F2") + "\n" +
                 "Rolling circle circumference: " + (bCirc).ToString("F2") + "\n" +
                 "Fixed Circ / Rolling Circ: " + (aCirc / bCirc).ToString("F2") + "\n" +

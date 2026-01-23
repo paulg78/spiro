@@ -30,6 +30,7 @@ namespace SpiroGraph
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlControl = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -70,6 +71,9 @@ namespace SpiroGraph
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.txtFileName = new System.Windows.Forms.TextBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtRadiusBDelta = new SpiroGraph.customTextBox();
             this.txtRadiusB = new SpiroGraph.customTextBox();
             this.txtPenDistanceDelta = new SpiroGraph.customTextBox();
@@ -211,6 +215,7 @@ namespace SpiroGraph
             this.label9.TabIndex = 17;
             this.label9.Text = "delta for next";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.label9, "+ or - amount to change property after next draw");
             // 
             // cboPenStyle
             // 
@@ -292,7 +297,7 @@ namespace SpiroGraph
             this.groupBox2.Controls.Add(this.txtOffsetX);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(21, 48);
+            this.groupBox2.Location = new System.Drawing.Point(21, 43);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(211, 98);
             this.groupBox2.TabIndex = 4;
@@ -355,9 +360,9 @@ namespace SpiroGraph
             this.cbShowWheels.AutoSize = true;
             this.cbShowWheels.Location = new System.Drawing.Point(25, 340);
             this.cbShowWheels.Name = "cbShowWheels";
-            this.cbShowWheels.Size = new System.Drawing.Size(87, 17);
+            this.cbShowWheels.Size = new System.Drawing.Size(84, 17);
             this.cbShowWheels.TabIndex = 6;
-            this.cbShowWheels.Text = "show wheels";
+            this.cbShowWheels.Text = "show circles";
             this.cbShowWheels.UseVisualStyleBackColor = true;
             this.cbShowWheels.CheckedChanged += new System.EventHandler(this.cbShowWheels_CheckedChanged);
             // 
@@ -465,6 +470,9 @@ namespace SpiroGraph
             // 
             // helpToolStripMenuItem
             // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.infoToolStripMenuItem,
+            this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
@@ -495,11 +503,25 @@ namespace SpiroGraph
             this.colorDialog1.AllowFullOpen = false;
             this.colorDialog1.SolidColorOnly = true;
             // 
+            // infoToolStripMenuItem
+            // 
+            this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.infoToolStripMenuItem.Text = "Info";
+            this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Text = "about";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
             // txtRadiusBDelta
             // 
             this.txtRadiusBDelta.AcceptsReturn = true;
             this.txtRadiusBDelta.AccessibleDescription = "";
-            this.txtRadiusBDelta.Location = new System.Drawing.Point(180, 19);
+            this.txtRadiusBDelta.Location = new System.Drawing.Point(181, 19);
             this.txtRadiusBDelta.MaxLength = 3;
             this.txtRadiusBDelta.Name = "txtRadiusBDelta";
             this.txtRadiusBDelta.Size = new System.Drawing.Size(38, 20);
@@ -507,7 +529,7 @@ namespace SpiroGraph
             // 
             // txtRadiusB
             // 
-            this.txtRadiusB.Location = new System.Drawing.Point(129, 19);
+            this.txtRadiusB.Location = new System.Drawing.Point(131, 19);
             this.txtRadiusB.MaxLength = 3;
             this.txtRadiusB.Name = "txtRadiusB";
             this.txtRadiusB.Size = new System.Drawing.Size(38, 20);
@@ -526,7 +548,7 @@ namespace SpiroGraph
             // 
             // txtStartAngle
             // 
-            this.txtStartAngle.Location = new System.Drawing.Point(130, 44);
+            this.txtStartAngle.Location = new System.Drawing.Point(131, 46);
             this.txtStartAngle.MaxLength = 3;
             this.txtStartAngle.Name = "txtStartAngle";
             this.txtStartAngle.Size = new System.Drawing.Size(38, 20);
@@ -537,7 +559,7 @@ namespace SpiroGraph
             // 
             this.txtStartAngleDelta.AcceptsReturn = true;
             this.txtStartAngleDelta.AccessibleDescription = "";
-            this.txtStartAngleDelta.Location = new System.Drawing.Point(181, 44);
+            this.txtStartAngleDelta.Location = new System.Drawing.Point(181, 46);
             this.txtStartAngleDelta.MaxLength = 3;
             this.txtStartAngleDelta.Name = "txtStartAngleDelta";
             this.txtStartAngleDelta.Size = new System.Drawing.Size(38, 20);
@@ -565,7 +587,7 @@ namespace SpiroGraph
             // 
             this.txtOffsetYdelta.AcceptsReturn = true;
             this.txtOffsetYdelta.AccessibleDescription = "";
-            this.txtOffsetYdelta.Location = new System.Drawing.Point(164, 50);
+            this.txtOffsetYdelta.Location = new System.Drawing.Point(164, 49);
             this.txtOffsetYdelta.MaxLength = 3;
             this.txtOffsetYdelta.Name = "txtOffsetYdelta";
             this.txtOffsetYdelta.Size = new System.Drawing.Size(38, 20);
@@ -618,6 +640,7 @@ namespace SpiroGraph
             this.txtOffsetX.Name = "txtOffsetX";
             this.txtOffsetX.Size = new System.Drawing.Size(38, 20);
             this.txtOffsetX.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.txtOffsetX, "shift circle center right or left");
             this.txtOffsetX.Validating += new System.ComponentModel.CancelEventHandler(this.txtX_Validating);
             // 
             // txtPointsPerCurve
@@ -625,7 +648,7 @@ namespace SpiroGraph
             this.txtPointsPerCurve.Location = new System.Drawing.Point(112, 526);
             this.txtPointsPerCurve.MaxLength = 3;
             this.txtPointsPerCurve.Name = "txtPointsPerCurve";
-            this.txtPointsPerCurve.Size = new System.Drawing.Size(40, 20);
+            this.txtPointsPerCurve.Size = new System.Drawing.Size(38, 20);
             this.txtPointsPerCurve.TabIndex = 15;
             this.txtPointsPerCurve.Validating += new System.ComponentModel.CancelEventHandler(this.txtPointsPerCurve_Validating);
             // 
@@ -716,6 +739,9 @@ namespace SpiroGraph
         private System.Windows.Forms.ToolStripMenuItem setDrawingDefaultsToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

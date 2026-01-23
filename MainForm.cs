@@ -1,8 +1,10 @@
 using SpiroGraph.Utils;
 using System;
 using System.ComponentModel;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace SpiroGraph
@@ -429,10 +431,8 @@ namespace SpiroGraph
         private void loadScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.InitialDirectory = GetDrawingsDirectory();
-            //openFileDialog1.Filter = "drawing files (*.xml)|*.xml";
             openFileDialog1.Filter = "drawing scripts (*.xml)|*.xml|drawings (*.bmp)|*.bmp";
             openFileDialog1.FilterIndex = 2;
-            //openFileDialog1.RestoreDirectory = true;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string fName = openFileDialog1.FileName;
@@ -441,7 +441,6 @@ namespace SpiroGraph
                     fName = fName.Substring(0, fName.Length - 3) + "xml";
                 }
                 drawingSpec = DrawingSpec.retrieveDrawing(fName);
-                //cboBackgroundColor.Text = drawingSpec.BackgroundColor;
                 // populate form with last curve
                 if (drawingSpec.Curves.Count > 0)
                 {
@@ -522,7 +521,6 @@ namespace SpiroGraph
             {
                 if (Spiro.delayPerPoint > 20)
                     Spiro.delayPerPoint = Spiro.delayPerPoint - 10;
-                //Spiro.delay = (int)Math.Round((double)(Spiro.delay / 2));
             }
         }
 
@@ -530,7 +528,6 @@ namespace SpiroGraph
         {
             lock (this)
             {
-                //Spiro.delay = 2 * Spiro.delay;
                 Spiro.delayPerPoint = Spiro.delayPerPoint + 10;
             }
         }
@@ -598,7 +595,6 @@ namespace SpiroGraph
                     Color chosen = dlg.SelectedColor;
                     drawingSpec.BackgroundColor = chosen.Name;
                     Graphics g = Graphics.FromImage(drawing);
-                    //           g.Clear(ColorUtils.ActualColor(drawingSpec.BackgroundColor));
                     g.Clear(chosen);
                     g.Dispose();
                     drawSpiro();
@@ -610,6 +606,39 @@ namespace SpiroGraph
         {
             setDefaults();
             initFormParams(di, delta);
+            cbShowWheels.Checked = false;
+        }
+        private HelpForm _helpWindow;
+        private HelpForm _aboutWindow;
+
+        private void infoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_helpWindow == null || _helpWindow.IsDisposed)
+            {
+                _helpWindow = new HelpForm("Help", "SpiroGraph.Resources.HelpContent.rtf");
+                _helpWindow.StartPosition = FormStartPosition.Manual;
+                _helpWindow.Location = new Point(this.Left + 260, this.Top + 40);
+                _helpWindow.Show(this); // modeless
+            }
+            else
+            {
+                _helpWindow.Focus(); // bring to front
+            }
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_aboutWindow == null || _aboutWindow.IsDisposed)
+            {
+                _aboutWindow = new HelpForm("About", "SpiroGraph.Resources.AboutContent.rtf", maxwidth:300);
+                _helpWindow.StartPosition = FormStartPosition.Manual;
+                _helpWindow.Location = new Point(this.Left + 100, this.Top + 40);
+                _aboutWindow.Show(this);
+            }
+            else
+            {
+                _aboutWindow.Focus();
+            }
         }
     }
 }
