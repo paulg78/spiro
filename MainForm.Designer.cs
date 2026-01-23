@@ -54,7 +54,7 @@ namespace SpiroGraph
             this.lblColor = new System.Windows.Forms.Label();
             this.cbShowWheels = new System.Windows.Forms.CheckBox();
             this.btnGo = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblPointsPerRev = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.loadScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -115,7 +115,7 @@ namespace SpiroGraph
             this.pnlControl.Controls.Add(this.lblColor);
             this.pnlControl.Controls.Add(this.cbShowWheels);
             this.pnlControl.Controls.Add(this.btnGo);
-            this.pnlControl.Controls.Add(this.label3);
+            this.pnlControl.Controls.Add(this.lblPointsPerRev);
             this.pnlControl.Controls.Add(this.txtPointsPerRev);
             this.pnlControl.Controls.Add(this.menuStrip1);
             this.pnlControl.Dock = System.Windows.Forms.DockStyle.Left;
@@ -377,14 +377,14 @@ namespace SpiroGraph
             this.btnGo.UseVisualStyleBackColor = true;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
-            // label3
+            // lblPointsPerRev
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 529);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(103, 13);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Points per revolution";
+            this.lblPointsPerRev.AutoSize = true;
+            this.lblPointsPerRev.Location = new System.Drawing.Point(28, 529);
+            this.lblPointsPerRev.Name = "lblPointsPerRev";
+            this.lblPointsPerRev.Size = new System.Drawing.Size(103, 13);
+            this.lblPointsPerRev.TabIndex = 14;
+            this.lblPointsPerRev.Text = "Points per revolution";
             // 
             // menuStrip1
             // 
@@ -536,6 +536,7 @@ namespace SpiroGraph
             this.txtRadiusB.Name = "txtRadiusB";
             this.txtRadiusB.Size = new System.Drawing.Size(38, 20);
             this.txtRadiusB.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.txtRadiusB, "rolling circle radius");
             this.txtRadiusB.Validating += new System.ComponentModel.CancelEventHandler(this.txtRadiusB_Validating);
             // 
             // txtPenDistanceDelta
@@ -555,6 +556,7 @@ namespace SpiroGraph
             this.txtStartAngle.Name = "txtStartAngle";
             this.txtStartAngle.Size = new System.Drawing.Size(38, 20);
             this.txtStartAngle.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.txtStartAngle, "degrees (0=east)");
             this.txtStartAngle.Validating += new System.ComponentModel.CancelEventHandler(this.txtStartAngle_Validating);
             // 
             // txtStartAngleDelta
@@ -574,6 +576,7 @@ namespace SpiroGraph
             this.txtPenDistance.Name = "txtPenDistance";
             this.txtPenDistance.Size = new System.Drawing.Size(38, 20);
             this.txtPenDistance.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.txtPenDistance, "how far pen point is from rolling circle center");
             this.txtPenDistance.Validating += new System.ComponentModel.CancelEventHandler(this.txtPenDistance_Validating);
             // 
             // txtPenWidth
@@ -624,6 +627,7 @@ namespace SpiroGraph
             this.txtRadiusA.Name = "txtRadiusA";
             this.txtRadiusA.Size = new System.Drawing.Size(38, 20);
             this.txtRadiusA.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.txtRadiusA, "fixed circle radius");
             this.txtRadiusA.Validating += new System.ComponentModel.CancelEventHandler(this.txtRadiusA_Validating);
             // 
             // txtOffsetY
@@ -633,6 +637,7 @@ namespace SpiroGraph
             this.txtOffsetY.Name = "txtOffsetY";
             this.txtOffsetY.Size = new System.Drawing.Size(38, 20);
             this.txtOffsetY.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.txtOffsetY, "shift circle center up or down");
             this.txtOffsetY.Validating += new System.ComponentModel.CancelEventHandler(this.txtY_Validating);
             // 
             // txtOffsetX
@@ -652,6 +657,8 @@ namespace SpiroGraph
             this.txtPointsPerRev.Name = "txtPointsPerRev";
             this.txtPointsPerRev.Size = new System.Drawing.Size(38, 20);
             this.txtPointsPerRev.TabIndex = 15;
+            this.toolTip1.SetToolTip(this.txtPointsPerRev, "Number of pen points painted each time rolling circle makes one revolution around" +
+        " the fixed circle");
             this.txtPointsPerRev.Validating += new System.ComponentModel.CancelEventHandler(this.txtPointsPerCurve_Validating);
             // 
             // MainForm
@@ -689,7 +696,7 @@ namespace SpiroGraph
 
         private System.Windows.Forms.Panel pnlControl;
         private customTextBox txtRadiusA;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblPointsPerRev;
         private customTextBox txtPointsPerRev;
         private System.Windows.Forms.Label lblPenDistance;
         private customTextBox txtPenDistance;
