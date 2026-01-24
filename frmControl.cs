@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace SpiroGraph
@@ -10,6 +11,8 @@ namespace SpiroGraph
         public frmControl()
         {
             InitializeComponent();
+            StartPosition = FormStartPosition.Manual;
+            Location = new Point(MainForm.ActiveForm.Left + 10, MainForm.ActiveForm.Top + 350);
         }
 
         private void btnStopAnimation_Click(object sender, EventArgs e)

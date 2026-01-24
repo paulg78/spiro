@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <DrawingSpec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <DrawingName>drawing1</DrawingName>
+  <DrawingName>31pt2color</DrawingName>
   <BackgroundColor>White</BackgroundColor>
   <Center>
-    <X>343</X>
-    <Y>309</Y>
+    <X>460</X>
+    <Y>401</Y>
   </Center>
   <Curves>
     <anyType xsi:type="DrawingInputType">

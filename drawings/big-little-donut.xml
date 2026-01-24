@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <DrawingSpec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <DrawingName>drawing1</DrawingName>
+  <DrawingName>big-little-donut</DrawingName>
   <BackgroundColor>White</BackgroundColor>
   <Center>
-    <X>1632</X>
-    <Y>707</Y>
+    <X>458</X>
+    <Y>398</Y>
   </Center>
   <Curves>
     <anyType xsi:type="DrawingInputType">

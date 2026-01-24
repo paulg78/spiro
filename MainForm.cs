@@ -190,7 +190,7 @@ namespace SpiroGraph
             txtPointsPerRev.Text = di.pointsPerCurve.ToString();
             txtStartAngle.Text = di.startAngle.ToString();
             txtStartAngleDelta.Text = (delta.startAngle == 0) ? "" : delta.startAngle.ToString();
-            lblColor.ForeColor = ColorUtils.ActualColor(di.color);
+            btnColor.ForeColor = ColorUtils.ActualColor(di.color);
             txtPenWidth.Text = di.penWidth.ToString();
             cboPenStyle.Text = di.penStyle.ToString();
             if (di.roll == RollSide.inside)
@@ -341,9 +341,8 @@ namespace SpiroGraph
             {
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    Color chosen = dlg.SelectedColor;
-                    lblColor.ForeColor = chosen;
-                    di.color = lblColor.ForeColor.Name;
+                    btnColor.ForeColor = dlg.SelectedColor;
+                    di.color = btnColor.ForeColor.Name;
                     if (cbShowWheels.Checked)
                     {
                         drawSpiro();
@@ -363,7 +362,7 @@ namespace SpiroGraph
             if (cbShowWheels.Checked)
             {
                 Spiro.ShowCircles(g, PointF.Add(drawingSpec.Center, di.offset), di.aRadius, di.bRadius,
-                    di.distance, di.startAngle, di.pointsPerCurve, di.roll, lblColor.ForeColor,
+                    di.distance, di.startAngle, di.pointsPerCurve, di.roll, btnColor.ForeColor,
                     di.penWidth);
             }
             g.Dispose();
@@ -639,11 +638,6 @@ namespace SpiroGraph
             {
                 _aboutWindow.Focus();
             }
-        }
-
-        private void lblColor_Click(object sender, EventArgs e)
-        {
-            btnColor_Click(sender, e);
         }
     }
 }

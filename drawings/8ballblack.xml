@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <DrawingSpec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <DrawingName>drawing1</DrawingName>
+  <DrawingName>8ballblack</DrawingName>
   <BackgroundColor>White</BackgroundColor>
   <Center>
-    <X>552</X>
-    <Y>347</Y>
+    <X>379</X>
+    <Y>324</Y>
   </Center>
   <Curves>
     <anyType xsi:type="DrawingInputType">

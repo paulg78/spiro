@@ -51,7 +51,6 @@ namespace SpiroGraph
             this.lblOffsetX = new System.Windows.Forms.Label();
             this.lblOffsetY = new System.Windows.Forms.Label();
             this.btnAnimate = new System.Windows.Forms.Button();
-            this.lblColor = new System.Windows.Forms.Label();
             this.cbShowWheels = new System.Windows.Forms.CheckBox();
             this.btnGo = new System.Windows.Forms.Button();
             this.lblPointsPerRev = new System.Windows.Forms.Label();
@@ -112,7 +111,6 @@ namespace SpiroGraph
             this.pnlControl.Controls.Add(this.groupBox1);
             this.pnlControl.Controls.Add(this.groupBox2);
             this.pnlControl.Controls.Add(this.btnAnimate);
-            this.pnlControl.Controls.Add(this.lblColor);
             this.pnlControl.Controls.Add(this.cbShowWheels);
             this.pnlControl.Controls.Add(this.btnGo);
             this.pnlControl.Controls.Add(this.lblPointsPerRev);
@@ -175,18 +173,21 @@ namespace SpiroGraph
             // 
             // btnColor
             // 
-            this.btnColor.Location = new System.Drawing.Point(115, 419);
+            this.btnColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnColor.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnColor.Location = new System.Drawing.Point(39, 425);
             this.btnColor.Name = "btnColor";
-            this.btnColor.Size = new System.Drawing.Size(92, 23);
+            this.btnColor.Size = new System.Drawing.Size(92, 30);
             this.btnColor.TabIndex = 2;
-            this.btnColor.Text = "Choose";
+            this.btnColor.Text = "Pen Color";
+            this.toolTip1.SetToolTip(this.btnColor, "Pen Color");
             this.btnColor.UseVisualStyleBackColor = true;
             this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
             // 
             // btnRedo
             // 
             this.btnRedo.Enabled = false;
-            this.btnRedo.Location = new System.Drawing.Point(80, 568);
+            this.btnRedo.Location = new System.Drawing.Point(90, 568);
             this.btnRedo.Name = "btnRedo";
             this.btnRedo.Size = new System.Drawing.Size(46, 23);
             this.btnRedo.TabIndex = 37;
@@ -197,7 +198,7 @@ namespace SpiroGraph
             // btnUndo
             // 
             this.btnUndo.Enabled = false;
-            this.btnUndo.Location = new System.Drawing.Point(25, 568);
+            this.btnUndo.Location = new System.Drawing.Point(35, 568);
             this.btnUndo.Name = "btnUndo";
             this.btnUndo.Size = new System.Drawing.Size(46, 23);
             this.btnUndo.TabIndex = 1;
@@ -223,7 +224,7 @@ namespace SpiroGraph
             "Dash",
             "Dot",
             "Solid"});
-            this.cboPenStyle.Location = new System.Drawing.Point(89, 487);
+            this.cboPenStyle.Location = new System.Drawing.Point(102, 490);
             this.cboPenStyle.Name = "cboPenStyle";
             this.cboPenStyle.Size = new System.Drawing.Size(83, 21);
             this.cboPenStyle.TabIndex = 13;
@@ -232,7 +233,7 @@ namespace SpiroGraph
             // lblPenStyle
             // 
             this.lblPenStyle.AutoSize = true;
-            this.lblPenStyle.Location = new System.Drawing.Point(28, 490);
+            this.lblPenStyle.Location = new System.Drawing.Point(41, 493);
             this.lblPenStyle.Name = "lblPenStyle";
             this.lblPenStyle.Size = new System.Drawing.Size(52, 13);
             this.lblPenStyle.TabIndex = 12;
@@ -242,7 +243,7 @@ namespace SpiroGraph
             // lblPenWidth
             // 
             this.lblPenWidth.AutoSize = true;
-            this.lblPenWidth.Location = new System.Drawing.Point(28, 464);
+            this.lblPenWidth.Location = new System.Drawing.Point(41, 467);
             this.lblPenWidth.Name = "lblPenWidth";
             this.lblPenWidth.Size = new System.Drawing.Size(57, 13);
             this.lblPenWidth.TabIndex = 10;
@@ -343,18 +344,6 @@ namespace SpiroGraph
             this.btnAnimate.UseVisualStyleBackColor = true;
             this.btnAnimate.Click += new System.EventHandler(this.btnAnimate_Click);
             // 
-            // lblColor
-            // 
-            this.lblColor.AutoSize = true;
-            this.lblColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblColor.Location = new System.Drawing.Point(34, 424);
-            this.lblColor.Name = "lblColor";
-            this.lblColor.Size = new System.Drawing.Size(62, 13);
-            this.lblColor.TabIndex = 7;
-            this.lblColor.Text = "Pen Color";
-            this.lblColor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblColor.Click += new System.EventHandler(this.lblColor_Click);
-            // 
             // cbShowWheels
             // 
             this.cbShowWheels.AutoSize = true;
@@ -380,7 +369,7 @@ namespace SpiroGraph
             // lblPointsPerRev
             // 
             this.lblPointsPerRev.AutoSize = true;
-            this.lblPointsPerRev.Location = new System.Drawing.Point(28, 529);
+            this.lblPointsPerRev.Location = new System.Drawing.Point(41, 532);
             this.lblPointsPerRev.Name = "lblPointsPerRev";
             this.lblPointsPerRev.Size = new System.Drawing.Size(103, 13);
             this.lblPointsPerRev.TabIndex = 14;
@@ -580,7 +569,7 @@ namespace SpiroGraph
             // 
             // txtPenWidth
             // 
-            this.txtPenWidth.Location = new System.Drawing.Point(90, 461);
+            this.txtPenWidth.Location = new System.Drawing.Point(103, 464);
             this.txtPenWidth.MaxLength = 3;
             this.txtPenWidth.Name = "txtPenWidth";
             this.txtPenWidth.Size = new System.Drawing.Size(38, 20);
@@ -651,7 +640,7 @@ namespace SpiroGraph
             // 
             // txtPointsPerRev
             // 
-            this.txtPointsPerRev.Location = new System.Drawing.Point(134, 526);
+            this.txtPointsPerRev.Location = new System.Drawing.Point(147, 529);
             this.txtPointsPerRev.MaxLength = 3;
             this.txtPointsPerRev.Name = "txtPointsPerRev";
             this.txtPointsPerRev.Size = new System.Drawing.Size(38, 20);
@@ -707,7 +696,6 @@ namespace SpiroGraph
         private System.Windows.Forms.RadioButton rbOutside;
         private System.Windows.Forms.CheckBox cbShowWheels;
         private customTextBox txtStartAngle;
-        private System.Windows.Forms.Label lblColor;
         private System.Windows.Forms.Label lblStartAngle;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;

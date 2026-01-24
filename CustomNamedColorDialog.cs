@@ -14,12 +14,12 @@ namespace SpiroGraph
 
         public CustomNamedColorDialog()
         {
-            Text = "Select Color";
+            Text = "Select Color and return or click OK";
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
             StartPosition = FormStartPosition.CenterParent;
-            ClientSize = new Size(600, 360);
+            ClientSize = new Size(534, 216); // as determined by AutoSizeForm
 
             CreatePreviewPanel();
             CreateButtons();
@@ -30,9 +30,9 @@ namespace SpiroGraph
         {
             previewPanel = new Panel
             {
-                Width = 80,
-                Height = 80,
-                Left = 430,
+                Width = 100,
+                Height = 190,
+                Left = 420,
                 Top = 6,
                 BorderStyle = BorderStyle.FixedSingle,
                 BackColor = Color.White
@@ -47,8 +47,8 @@ namespace SpiroGraph
             {
                 Text = "OK",
                 Width = 80,
-                Left = 430,
-                Top = 106,
+                Left = 6,
+                Top = 182,
                 DialogResult = DialogResult.OK
             };
 
@@ -56,8 +56,8 @@ namespace SpiroGraph
             {
                 Text = "Cancel",
                 Width = 80,
-                Left = 430,
-                Top = 146,
+                Left = 92,
+                Top = 182,
                 DialogResult = DialogResult.Cancel
             };
 
@@ -68,22 +68,22 @@ namespace SpiroGraph
             CancelButton = cancelButton;
         }
 
-        private void AutoSizeForm(int cols, int swatchSize, int margin)
-        {
-            int count = MainForm.colorNames.Length;
-            int rows = (int)Math.Ceiling(count / (double)cols);
+        //private void AutoSizeForm(int cols, int swatchSize, int margin)
+        //{
+        //    int count = MainForm.colorNames.Length;
+        //    int rows = (int)Math.Ceiling(count / (double)cols);
 
-            int gridWidth = margin + cols * (swatchSize + margin);
-            int gridHeight = margin + rows * (swatchSize + margin);
+        //    int gridWidth = margin + cols * (swatchSize + margin);
+        //    int gridHeight = margin + rows * (swatchSize + margin);
 
-            int previewWidth = previewPanel.Width + 40; // includes spacing
-            int buttonArea = 200; // enough vertical space for OK/Cancel
+        //    int previewWidth = previewPanel.Width + 20; // includes spacing
+        //    int buttonArea = 40; // enough vertical space for OK/Cancel
 
-            this.ClientSize = new Size(
-                gridWidth + previewWidth,
-                Math.Max(gridHeight, buttonArea)
-            );
-        }
+        //    this.ClientSize = new Size(
+        //        gridWidth + previewWidth,
+        //        gridHeight + buttonArea
+        //    );
+        //}
         private void CreateColorGrid()
         {
             int swatchSize = 28;
@@ -129,7 +129,7 @@ namespace SpiroGraph
 
                 Controls.Add(panel);
             }
-            AutoSizeForm(cols, swatchSize, margin);
+            //AutoSizeForm(cols, swatchSize, margin);
         }
     }
 }

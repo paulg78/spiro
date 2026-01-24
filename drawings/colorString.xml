@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <DrawingSpec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <DrawingName>drawing1</DrawingName>
+  <DrawingName>colorString</DrawingName>
   <BackgroundColor>Gray</BackgroundColor>
   <Center>
     <X>424</X>

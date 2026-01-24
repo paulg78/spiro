@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <DrawingSpec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <DrawingName>drawing1</DrawingName>
+  <DrawingName>5ptStart</DrawingName>
   <BackgroundColor>White</BackgroundColor>
   <Center>
     <X>434</X>
@@ -14,9 +14,13 @@
         <Height>0</Height>
       </offset>
       <aRadius>300</aRadius>
+      <aRadiusDelta>0</aRadiusDelta>
       <bRadius>180</bRadius>
+      <bRadiusDelta>0</bRadiusDelta>
       <distance>200</distance>
+      <distanceDelta>0</distanceDelta>
       <startAngle>-18</startAngle>
+      <startAngleDelta>0</startAngleDelta>
       <pointsPerCurve>100</pointsPerCurve>
       <color>Blue</color>
       <penWidth>1</penWidth>

@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <DrawingSpec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <DrawingName>drawing1</DrawingName>
+  <DrawingName>drawing5-colorshift</DrawingName>
   <BackgroundColor>LightSteelBlue</BackgroundColor>
   <Center>
-    <X>247</X>
-    <Y>247</Y>
+    <X>445</X>
+    <Y>369</Y>
   </Center>
   <Curves>
     <anyType xsi:type="DrawingInputType">
