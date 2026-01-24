@@ -14,7 +14,7 @@ namespace SpiroGraph
 {
     public partial class HelpForm : Form
     {
-        public HelpForm(string title, string resourceName, int maxWidth)
+        public HelpForm(string title, string resourceName, int width, int minHeight)
         {
             InitializeComponent();
             Text = title;
@@ -26,7 +26,7 @@ namespace SpiroGraph
             richTextBox1.SelectAll();
             richTextBox1.SelectionIndent = 20;   // pixels
             richTextBox1.DeselectAll();
-            AutoSizeToContent(maxWidth);
+            AutoSizeToContent(width, minHeight);
         }
 
         private void LoadRtf(string resourceName)
@@ -39,18 +39,16 @@ namespace SpiroGraph
             richTextBox1.Rtf = reader.ReadToEnd();
         }
 
-        private void AutoSizeToContent(int maxWidth)
+        private void AutoSizeToContent(int width, int minHeight)
         {
             // Make sure the RichTextBox isn't docked/fill or over‑anchored
             richTextBox1.Dock = DockStyle.None;
             richTextBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left;
 
-            richTextBox1.Width = maxWidth;
+            richTextBox1.Width = width;
+            var preferred = richTextBox1.GetPreferredSize(new Size(width, minHeight));
 
-            var preferred = richTextBox1.GetPreferredSize(
-                new Size(maxWidth, int.MaxValue));
-
-            richTextBox1.Height = preferred.Height + 20;
+            richTextBox1.Height = Math.Max(preferred.Height + 20,minHeight);
 
             Width = richTextBox1.Right + 40;
             Height = richTextBox1.Bottom + 40;

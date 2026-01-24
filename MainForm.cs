@@ -615,7 +615,7 @@ namespace SpiroGraph
         {
             if (_helpWindow == null || _helpWindow.IsDisposed)
             {
-                _helpWindow = new HelpForm("Help", "SpiroGraph.Resources.HelpContent.rtf",600);
+                _helpWindow = new HelpForm("Help", "SpiroGraph.Resources.HelpContent.rtf",600,400);
                 _helpWindow.StartPosition = FormStartPosition.Manual;
                 _helpWindow.Location = new Point(this.Left + 260, this.Top + 40);
                 _helpWindow.Show(this); // modeless
@@ -630,7 +630,7 @@ namespace SpiroGraph
         {
             if (_aboutWindow == null || _aboutWindow.IsDisposed)
             {
-                _aboutWindow = new HelpForm("About", "SpiroGraph.Resources.AboutContent.rtf",300);
+                _aboutWindow = new HelpForm("About", "SpiroGraph.Resources.AboutContent.rtf",300, 50);
                 _aboutWindow.StartPosition = FormStartPosition.Manual;
                 _aboutWindow.Location = new Point(this.Left + 100, this.Top + 40);
                 _aboutWindow.Show(this);
@@ -644,11 +644,6 @@ namespace SpiroGraph
         private void lblColor_Click(object sender, EventArgs e)
         {
             btnColor_Click(sender, e);
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
