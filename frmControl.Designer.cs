@@ -37,7 +37,7 @@ namespace SpiroGraph
             // 
             // btnSlower
             // 
-            this.btnSlower.Location = new System.Drawing.Point(113, 53);
+            this.btnSlower.Location = new System.Drawing.Point(38, 58);
             this.btnSlower.Name = "btnSlower";
             this.btnSlower.Size = new System.Drawing.Size(58, 23);
             this.btnSlower.TabIndex = 47;
@@ -47,7 +47,7 @@ namespace SpiroGraph
             // 
             // btnFaster
             // 
-            this.btnFaster.Location = new System.Drawing.Point(38, 53);
+            this.btnFaster.Location = new System.Drawing.Point(113, 58);
             this.btnFaster.Name = "btnFaster";
             this.btnFaster.Size = new System.Drawing.Size(58, 23);
             this.btnFaster.TabIndex = 46;
@@ -77,7 +77,7 @@ namespace SpiroGraph
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(113, 96);
+            this.btnClose.Location = new System.Drawing.Point(76, 96);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(57, 23);
             this.btnClose.TabIndex = 48;
@@ -87,6 +87,7 @@ namespace SpiroGraph
             // 
             // frmControl
             // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(221, 131);
             this.Controls.Add(this.btnClose);
@@ -94,8 +95,12 @@ namespace SpiroGraph
             this.Controls.Add(this.btnFaster);
             this.Controls.Add(this.btnPause);
             this.Controls.Add(this.btnStopAnimation);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmControl";
-            this.Text = "Control";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.Text = "Animation Control";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmControl_FormClosing);
             this.ResumeLayout(false);
 
