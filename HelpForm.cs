@@ -46,10 +46,10 @@ namespace SpiroGraph
             richTextBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left;
 
             richTextBox1.Width = width;
-            var preferred = richTextBox1.GetPreferredSize(new Size(width, minHeight));
-
-            richTextBox1.Height = Math.Max(preferred.Height + 20,minHeight);
-
+            // GetPreferredSize doesn't work well for RichTextBox, so don't auto-size height
+            //var preferred = richTextBox1.GetPreferredSize(new Size(width, minHeight));
+            //richTextBox1.Height = Math.Max(preferred.Height + 20,minHeight);
+            richTextBox1.Height = minHeight;
             Width = richTextBox1.Right + 40;
             Height = richTextBox1.Bottom + 40;
         }
