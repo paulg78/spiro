@@ -339,6 +339,8 @@ namespace SpiroGraph
         {
             using (var dlg = new CustomNamedColorDialog())
             {
+                dlg.StartPosition = FormStartPosition.Manual;
+                dlg.Location = new Point(this.Left + 150, this.Top + 350);
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     btnColor.ForeColor = dlg.SelectedColor;
@@ -589,6 +591,8 @@ namespace SpiroGraph
         {
             using (var dlg = new CustomNamedColorDialog())
             {
+                dlg.StartPosition = FormStartPosition.Manual;
+                dlg.Location = new Point(this.Left + 100, this.Top + 50);
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     Color chosen = dlg.SelectedColor;

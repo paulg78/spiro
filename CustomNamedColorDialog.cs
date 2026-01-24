@@ -18,7 +18,6 @@ namespace SpiroGraph
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
-            StartPosition = FormStartPosition.CenterParent;
             ClientSize = new Size(534, 216); // as determined by AutoSizeForm
 
             CreatePreviewPanel();
