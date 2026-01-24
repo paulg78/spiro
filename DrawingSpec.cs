@@ -15,7 +15,7 @@ namespace SpiroGraph
 
         private string drawingName;
         private Point center;
-        private string backgroundColor;
+        private string backgroundColor = "White";
 
         // curves is a list of DrawingInputType structures
         private ArrayList curves = new ArrayList();
