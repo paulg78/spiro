@@ -618,9 +618,9 @@ namespace SpiroGraph
         {
             if (_helpWindow == null || _helpWindow.IsDisposed)
             {
-                _helpWindow = new HelpForm("Help", "SpiroGraph.Resources.HelpContent.rtf",600,400);
+                _helpWindow = new HelpForm("Help", "SpiroGraph.Resources.HelpContent.rtf",600,540);
                 _helpWindow.StartPosition = FormStartPosition.Manual;
-                _helpWindow.Location = new Point(this.Left + 260, this.Top + 40);
+                _helpWindow.Location = new Point(this.Left + 260, this.Top + 20);
                 _helpWindow.Show(this); // modeless
             }
             else
