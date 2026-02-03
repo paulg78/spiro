@@ -250,7 +250,8 @@ namespace SpiroGraph
             // 
             // ScriptForm
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(993, 451);
             this.Controls.Add(this.cboBGColor);
             this.Controls.Add(this.label3);
