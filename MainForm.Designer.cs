@@ -33,15 +33,16 @@ namespace SpiroGraph
             this.components = new System.ComponentModel.Container();
             this.pnlControl = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.txtRadiusBDelta = new SpiroGraph.customTextBox();
-            this.txtRadiusB = new SpiroGraph.customTextBox();
-            this.lblRadiusB = new System.Windows.Forms.Label();
-            this.lblStartAngle = new System.Windows.Forms.Label();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.txtPenDistanceDelta = new SpiroGraph.customTextBox();
-            this.txtStartAngle = new SpiroGraph.customTextBox();
-            this.txtStartAngleDelta = new SpiroGraph.customTextBox();
-            this.lblPenDistance = new System.Windows.Forms.Label();
+            this.lblStartAngle = new System.Windows.Forms.Label();
             this.txtPenDistance = new SpiroGraph.customTextBox();
+            this.lblPenDistance = new System.Windows.Forms.Label();
+            this.txtStartAngleDelta = new SpiroGraph.customTextBox();
+            this.txtStartAngle = new SpiroGraph.customTextBox();
+            this.txtRadiusBDelta = new SpiroGraph.customTextBox();
+            this.lblRadiusB = new System.Windows.Forms.Label();
+            this.txtRadiusB = new SpiroGraph.customTextBox();
             this.btnColor = new System.Windows.Forms.Button();
             this.btnRedo = new System.Windows.Forms.Button();
             this.btnUndo = new System.Windows.Forms.Button();
@@ -88,15 +89,14 @@ namespace SpiroGraph
             this.txtFileName = new System.Windows.Forms.TextBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.pnlControl.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlControl
@@ -137,56 +137,83 @@ namespace SpiroGraph
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Rolling Circle";
             // 
-            // txtRadiusBDelta
+            // tableLayoutPanel2
             // 
-            this.txtRadiusBDelta.AcceptsReturn = true;
-            this.txtRadiusBDelta.AccessibleDescription = "";
-            this.txtRadiusBDelta.Location = new System.Drawing.Point(166, 3);
-            this.txtRadiusBDelta.MaxLength = 3;
-            this.txtRadiusBDelta.Name = "txtRadiusBDelta";
-            this.txtRadiusBDelta.Size = new System.Drawing.Size(38, 20);
-            this.txtRadiusBDelta.TabIndex = 3;
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.64286F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.125F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.23214F));
+            this.tableLayoutPanel2.Controls.Add(this.txtPenDistanceDelta, 2, 2);
+            this.tableLayoutPanel2.Controls.Add(this.lblStartAngle, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.txtPenDistance, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.lblPenDistance, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.txtStartAngleDelta, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.txtStartAngle, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.txtRadiusBDelta, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblRadiusB, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.txtRadiusB, 1, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(224, 84);
+            this.tableLayoutPanel2.TabIndex = 30;
             // 
-            // txtRadiusB
+            // txtPenDistanceDelta
             // 
-            this.txtRadiusB.Location = new System.Drawing.Point(103, 3);
-            this.txtRadiusB.MaxLength = 3;
-            this.txtRadiusB.Name = "txtRadiusB";
-            this.txtRadiusB.Size = new System.Drawing.Size(38, 20);
-            this.txtRadiusB.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.txtRadiusB, "rolling circle radius");
-            this.txtRadiusB.Validating += new System.ComponentModel.CancelEventHandler(this.txtRadiusB_Validating);
-            // 
-            // lblRadiusB
-            // 
-            this.lblRadiusB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblRadiusB.AutoSize = true;
-            this.lblRadiusB.Location = new System.Drawing.Point(3, 15);
-            this.lblRadiusB.Name = "lblRadiusB";
-            this.lblRadiusB.Size = new System.Drawing.Size(40, 13);
-            this.lblRadiusB.TabIndex = 0;
-            this.lblRadiusB.Text = "Radius";
-            this.lblRadiusB.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.txtPenDistanceDelta.AcceptsReturn = true;
+            this.txtPenDistanceDelta.AccessibleDescription = "";
+            this.txtPenDistanceDelta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPenDistanceDelta.Location = new System.Drawing.Point(183, 59);
+            this.txtPenDistanceDelta.MaxLength = 3;
+            this.txtPenDistanceDelta.Name = "txtPenDistanceDelta";
+            this.txtPenDistanceDelta.Size = new System.Drawing.Size(38, 20);
+            this.txtPenDistanceDelta.TabIndex = 5;
             // 
             // lblStartAngle
             // 
             this.lblStartAngle.AutoSize = true;
-            this.lblStartAngle.Location = new System.Drawing.Point(3, 28);
+            this.lblStartAngle.Location = new System.Drawing.Point(5, 33);
+            this.lblStartAngle.Margin = new System.Windows.Forms.Padding(5);
             this.lblStartAngle.Name = "lblStartAngle";
             this.lblStartAngle.Size = new System.Drawing.Size(81, 13);
             this.lblStartAngle.TabIndex = 29;
             this.lblStartAngle.Text = "Pen Start Angle";
             this.lblStartAngle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtPenDistanceDelta
+            // txtPenDistance
             // 
-            this.txtPenDistanceDelta.AcceptsReturn = true;
-            this.txtPenDistanceDelta.AccessibleDescription = "";
-            this.txtPenDistanceDelta.Location = new System.Drawing.Point(166, 59);
-            this.txtPenDistanceDelta.MaxLength = 3;
-            this.txtPenDistanceDelta.Name = "txtPenDistanceDelta";
-            this.txtPenDistanceDelta.Size = new System.Drawing.Size(38, 20);
-            this.txtPenDistanceDelta.TabIndex = 5;
+            this.txtPenDistance.Location = new System.Drawing.Point(103, 59);
+            this.txtPenDistance.MaxLength = 3;
+            this.txtPenDistance.Name = "txtPenDistance";
+            this.txtPenDistance.Size = new System.Drawing.Size(38, 20);
+            this.txtPenDistance.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.txtPenDistance, "how far pen point is from rolling circle center");
+            this.txtPenDistance.Validating += new System.ComponentModel.CancelEventHandler(this.txtPenDistance_Validating);
+            // 
+            // lblPenDistance
+            // 
+            this.lblPenDistance.AutoSize = true;
+            this.lblPenDistance.Location = new System.Drawing.Point(5, 56);
+            this.lblPenDistance.Margin = new System.Windows.Forms.Padding(5, 0, 3, 0);
+            this.lblPenDistance.Name = "lblPenDistance";
+            this.lblPenDistance.Size = new System.Drawing.Size(92, 26);
+            this.lblPenDistance.TabIndex = 5;
+            this.lblPenDistance.Text = "Pen distance from center";
+            this.lblPenDistance.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtStartAngleDelta
+            // 
+            this.txtStartAngleDelta.AcceptsReturn = true;
+            this.txtStartAngleDelta.AccessibleDescription = "";
+            this.txtStartAngleDelta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtStartAngleDelta.Location = new System.Drawing.Point(183, 31);
+            this.txtStartAngleDelta.MaxLength = 3;
+            this.txtStartAngleDelta.Name = "txtStartAngleDelta";
+            this.txtStartAngleDelta.Size = new System.Drawing.Size(38, 20);
+            this.txtStartAngleDelta.TabIndex = 4;
             // 
             // txtStartAngle
             // 
@@ -198,35 +225,37 @@ namespace SpiroGraph
             this.toolTip1.SetToolTip(this.txtStartAngle, "degrees (0=east)");
             this.txtStartAngle.Validating += new System.ComponentModel.CancelEventHandler(this.txtStartAngle_Validating);
             // 
-            // txtStartAngleDelta
+            // txtRadiusBDelta
             // 
-            this.txtStartAngleDelta.AcceptsReturn = true;
-            this.txtStartAngleDelta.AccessibleDescription = "";
-            this.txtStartAngleDelta.Location = new System.Drawing.Point(166, 31);
-            this.txtStartAngleDelta.MaxLength = 3;
-            this.txtStartAngleDelta.Name = "txtStartAngleDelta";
-            this.txtStartAngleDelta.Size = new System.Drawing.Size(38, 20);
-            this.txtStartAngleDelta.TabIndex = 4;
+            this.txtRadiusBDelta.AcceptsReturn = true;
+            this.txtRadiusBDelta.AccessibleDescription = "";
+            this.txtRadiusBDelta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtRadiusBDelta.Location = new System.Drawing.Point(183, 3);
+            this.txtRadiusBDelta.MaxLength = 3;
+            this.txtRadiusBDelta.Name = "txtRadiusBDelta";
+            this.txtRadiusBDelta.Size = new System.Drawing.Size(38, 20);
+            this.txtRadiusBDelta.TabIndex = 3;
             // 
-            // lblPenDistance
+            // lblRadiusB
             // 
-            this.lblPenDistance.AutoSize = true;
-            this.lblPenDistance.Location = new System.Drawing.Point(3, 56);
-            this.lblPenDistance.Name = "lblPenDistance";
-            this.lblPenDistance.Size = new System.Drawing.Size(92, 26);
-            this.lblPenDistance.TabIndex = 5;
-            this.lblPenDistance.Text = "Pen distance from center";
-            this.lblPenDistance.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblRadiusB.AutoSize = true;
+            this.lblRadiusB.Location = new System.Drawing.Point(5, 5);
+            this.lblRadiusB.Margin = new System.Windows.Forms.Padding(5);
+            this.lblRadiusB.Name = "lblRadiusB";
+            this.lblRadiusB.Size = new System.Drawing.Size(40, 13);
+            this.lblRadiusB.TabIndex = 0;
+            this.lblRadiusB.Text = "Radius";
+            this.lblRadiusB.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txtPenDistance
+            // txtRadiusB
             // 
-            this.txtPenDistance.Location = new System.Drawing.Point(103, 59);
-            this.txtPenDistance.MaxLength = 3;
-            this.txtPenDistance.Name = "txtPenDistance";
-            this.txtPenDistance.Size = new System.Drawing.Size(38, 20);
-            this.txtPenDistance.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.txtPenDistance, "how far pen point is from rolling circle center");
-            this.txtPenDistance.Validating += new System.ComponentModel.CancelEventHandler(this.txtPenDistance_Validating);
+            this.txtRadiusB.Location = new System.Drawing.Point(103, 3);
+            this.txtRadiusB.MaxLength = 3;
+            this.txtRadiusB.Name = "txtRadiusB";
+            this.txtRadiusB.Size = new System.Drawing.Size(38, 20);
+            this.txtRadiusB.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.txtRadiusB, "rolling circle radius");
+            this.txtRadiusB.Validating += new System.ComponentModel.CancelEventHandler(this.txtRadiusB_Validating);
             // 
             // btnColor
             // 
@@ -353,8 +382,6 @@ namespace SpiroGraph
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox2.Controls.Add(this.tableLayoutPanel1);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -371,7 +398,7 @@ namespace SpiroGraph
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 63F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 8F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 61F));
             this.tableLayoutPanel1.Controls.Add(this.lblOffsetX, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtOffsetX, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtOffsetXdelta, 2, 0);
@@ -393,9 +420,8 @@ namespace SpiroGraph
             // 
             // lblOffsetX
             // 
-            this.lblOffsetX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblOffsetX.AutoSize = true;
-            this.lblOffsetX.Location = new System.Drawing.Point(5, 9);
+            this.lblOffsetX.Location = new System.Drawing.Point(5, 5);
             this.lblOffsetX.Margin = new System.Windows.Forms.Padding(5);
             this.lblOffsetX.Name = "lblOffsetX";
             this.lblOffsetX.Size = new System.Drawing.Size(78, 13);
@@ -426,10 +452,10 @@ namespace SpiroGraph
             // 
             // lblOffsetY
             // 
-            this.lblOffsetY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblOffsetY.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblOffsetY.AutoSize = true;
-            this.lblOffsetY.Location = new System.Drawing.Point(3, 37);
-            this.lblOffsetY.Margin = new System.Windows.Forms.Padding(3, 0, 3, 5);
+            this.lblOffsetY.Location = new System.Drawing.Point(5, 34);
+            this.lblOffsetY.Margin = new System.Windows.Forms.Padding(5);
             this.lblOffsetY.Name = "lblOffsetY";
             this.lblOffsetY.Size = new System.Drawing.Size(84, 13);
             this.lblOffsetY.TabIndex = 1;
@@ -458,10 +484,10 @@ namespace SpiroGraph
             // 
             // lblRadiusA
             // 
-            this.lblRadiusA.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblRadiusA.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblRadiusA.AutoSize = true;
-            this.lblRadiusA.Location = new System.Drawing.Point(3, 65);
-            this.lblRadiusA.Margin = new System.Windows.Forms.Padding(3, 0, 3, 6);
+            this.lblRadiusA.Location = new System.Drawing.Point(5, 63);
+            this.lblRadiusA.Margin = new System.Windows.Forms.Padding(5);
             this.lblRadiusA.Name = "lblRadiusA";
             this.lblRadiusA.Size = new System.Drawing.Size(40, 13);
             this.lblRadiusA.TabIndex = 0;
@@ -472,7 +498,8 @@ namespace SpiroGraph
             // 
             this.txtRadiusA.AcceptsReturn = true;
             this.txtRadiusA.AccessibleDescription = "";
-            this.txtRadiusA.Location = new System.Drawing.Point(103, 58);
+            this.txtRadiusA.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtRadiusA.Location = new System.Drawing.Point(103, 59);
             this.txtRadiusA.MaxLength = 3;
             this.txtRadiusA.Name = "txtRadiusA";
             this.txtRadiusA.Size = new System.Drawing.Size(38, 20);
@@ -676,30 +703,6 @@ namespace SpiroGraph
             this.colorDialog1.AllowFullOpen = false;
             this.colorDialog1.SolidColorOnly = true;
             // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.64286F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.125F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.23214F));
-            this.tableLayoutPanel2.Controls.Add(this.txtPenDistanceDelta, 2, 2);
-            this.tableLayoutPanel2.Controls.Add(this.lblStartAngle, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.txtPenDistance, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.lblPenDistance, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.txtStartAngleDelta, 2, 1);
-            this.tableLayoutPanel2.Controls.Add(this.txtStartAngle, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.txtRadiusBDelta, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.lblRadiusB, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.txtRadiusB, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 16);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 3;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(224, 84);
-            this.tableLayoutPanel2.TabIndex = 30;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -718,6 +721,8 @@ namespace SpiroGraph
             this.pnlControl.ResumeLayout(false);
             this.pnlControl.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -726,8 +731,6 @@ namespace SpiroGraph
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
