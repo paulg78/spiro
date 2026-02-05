@@ -1,10 +1,8 @@
 using SpiroGraph.Utils;
 using System;
 using System.ComponentModel;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace SpiroGraph
