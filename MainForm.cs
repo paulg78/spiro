@@ -177,6 +177,7 @@ namespace SpiroGraph
         }
         private void initFormParams(DrawingInputType di, DeltaType delta)
         {
+            lblFileName.Text = drawingSpec.DrawingName;
             txtOffsetX.Text = di.offset.Width.ToString();
             txtOffsetXdelta.Text = (delta.offsetX == 0) ? "" : delta.offsetX.ToString();
             txtOffsetY.Text = di.offset.Height.ToString();
@@ -449,7 +450,7 @@ namespace SpiroGraph
                     initFormParams(di, delta);
                     btnUndo.Enabled = true;
                 }
-                txtFileName.Text = Path.GetFileNameWithoutExtension(fName);
+                lblFileName.Text = Path.GetFileNameWithoutExtension(fName);
                 drawSpiro();
                 btnRedo.Enabled = false;
             }
@@ -470,7 +471,7 @@ namespace SpiroGraph
                     fName = fName.Substring(0, fName.Length - 3) + "xml";
                 }
                 drawingSpec.saveDrawing(fName);
-                txtFileName.Text = Path.GetFileNameWithoutExtension(fName);
+                lblFileName.Text = Path.GetFileNameWithoutExtension(fName);
             }
         }
         //clear drawing area
@@ -478,9 +479,10 @@ namespace SpiroGraph
         {
             drawingSpec.Curves.Clear();
             drawingSpec.ClearRedoStack();
+            drawingSpec.DrawingName = "";
             btnUndo.Enabled = false;
             btnRedo.Enabled = false;
-            txtFileName.Text = "";
+            lblFileName.Text = "";
             drawSpiro();
         }
 
@@ -537,11 +539,6 @@ namespace SpiroGraph
         {
             di.penStyle = (System.Drawing.Drawing2D.DashStyle)
             Enum.Parse(typeof(System.Drawing.Drawing2D.DashStyle), cboPenStyle.Text);
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
         }
 
         private void NumericTextBox_Validating(object sender, CancelEventArgs e)
