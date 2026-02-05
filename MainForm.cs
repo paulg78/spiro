@@ -449,7 +449,7 @@ namespace SpiroGraph
                     initFormParams(di, delta);
                     btnUndo.Enabled = true;
                 }
-                txtFileName.Text = fName;
+                txtFileName.Text = Path.GetFileNameWithoutExtension(fName);
                 drawSpiro();
                 btnRedo.Enabled = false;
             }
@@ -470,7 +470,7 @@ namespace SpiroGraph
                     fName = fName.Substring(0, fName.Length - 3) + "xml";
                 }
                 drawingSpec.saveDrawing(fName);
-                txtFileName.Text = fName;
+                txtFileName.Text = Path.GetFileNameWithoutExtension(fName);
             }
         }
         //clear drawing area
