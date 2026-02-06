@@ -10,7 +10,7 @@ namespace SpiroGraph
 
     public partial class MainForm : Form
     {
-        public struct DeltaType
+        private struct DeltaType
         {
             public int aRadius;
             public int bRadius;
@@ -21,6 +21,7 @@ namespace SpiroGraph
         }
         DrawingInputType di; // set of drawing inputs
         DeltaType delta; // delta values (not used as drawing inputs)
+        Boolean unSavedChanges = false;
 
         DrawingSpec drawingSpec = new DrawingSpec();
         Bitmap drawing;
@@ -224,6 +225,7 @@ namespace SpiroGraph
             }
             pictureBox1.Refresh();
             btnUndo.Enabled = true;
+            unSavedChanges = true;
         }
 
         private void cbShowWheels_CheckedChanged(object sender, EventArgs e)
@@ -451,6 +453,7 @@ namespace SpiroGraph
                 lblFileName.Text = Path.GetFileNameWithoutExtension(fName);
                 drawSpiro();
                 btnRedo.Enabled = false;
+                unSavedChanges = false;
             }
         }
 
@@ -470,6 +473,7 @@ namespace SpiroGraph
                 }
                 drawingSpec.saveDrawing(fName);
                 lblFileName.Text = Path.GetFileNameWithoutExtension(fName);
+                unSavedChanges = false;
             }
         }
         //clear drawing area
@@ -480,6 +484,7 @@ namespace SpiroGraph
             drawingSpec.DrawingName = "";
             btnUndo.Enabled = false;
             btnRedo.Enabled = false;
+            unSavedChanges = false;
             lblFileName.Text = "";
             drawSpiro();
         }
@@ -498,6 +503,9 @@ namespace SpiroGraph
                     initFormParams(di, delta);
                 }
                 drawSpiro();
+                btnRedo.Enabled = false;
+                unSavedChanges = true;
+                drawingSpec.ClearRedoStack();
             }
         }
 
@@ -571,6 +579,7 @@ namespace SpiroGraph
                 initFormParams(di, delta);
             }
             drawSpiro();
+            unSavedChanges = true;
             btnRedo.Enabled = true;
         }
         private void btnRedo_Click(object sender, EventArgs e)
@@ -580,6 +589,7 @@ namespace SpiroGraph
             di = (DrawingInputType)drawingSpec.Curves[drawingSpec.Curves.Count - 1];
             initFormParams(di, delta);
             drawSpiro();
+            unSavedChanges = true;
         }
 
         private void backgroundColorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -596,6 +606,7 @@ namespace SpiroGraph
                     g.Clear(chosen);
                     g.Dispose();
                     drawSpiro();
+                    unSavedChanges = true;
                 }
             }
         }
@@ -613,7 +624,7 @@ namespace SpiroGraph
         {
             if (_helpWindow == null || _helpWindow.IsDisposed)
             {
-                _helpWindow = new HelpForm("Help", "SpiroGraph.Resources.HelpContent.rtf",600,540);
+                _helpWindow = new HelpForm("Help", "SpiroGraph.Resources.HelpContent.rtf", 600, 540);
                 _helpWindow.StartPosition = FormStartPosition.Manual;
                 _helpWindow.Location = new Point(this.Left + 260, this.Top + 20);
                 _helpWindow.Show(this); // modeless
@@ -628,7 +639,7 @@ namespace SpiroGraph
         {
             if (_aboutWindow == null || _aboutWindow.IsDisposed)
             {
-                _aboutWindow = new HelpForm("About", "SpiroGraph.Resources.AboutContent.rtf",300, 50);
+                _aboutWindow = new HelpForm("About", "SpiroGraph.Resources.AboutContent.rtf", 300, 50);
                 _aboutWindow.StartPosition = FormStartPosition.Manual;
                 _aboutWindow.Location = new Point(this.Left + 100, this.Top + 40);
                 _aboutWindow.Show(this);
@@ -636,6 +647,24 @@ namespace SpiroGraph
             else
             {
                 _aboutWindow.Focus();
+            }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (unSavedChanges)
+            {
+                var result = MessageBox.Show("Do you want to save your drawing before exiting?", "Unsaved Changes",
+                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    saveToolStripMenuItem_Click(sender, e);
+                    MessageBox.Show("Drawing saved. Exiting now.");
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    e.Cancel = true; // prevent closing
+                }
             }
         }
     }

@@ -17,10 +17,11 @@ namespace SpiroGraph
         private Point center;
         private string backgroundColor = "White";
 
-        // curves is a list of DrawingInputType structures
+        // curves and undone are lists of DrawingInputType structures
         private ArrayList curves = new ArrayList();
-        private ArrayList undone = new ArrayList();
+        private ArrayList undone = new ArrayList(); // used for undo and redo functionality
 
+        // the public properties are used for XML serialization and deserialization
         public string DrawingName
         {
             get { return drawingName; }

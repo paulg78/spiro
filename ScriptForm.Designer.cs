@@ -180,7 +180,7 @@ namespace SpiroGraph
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 3;
-            this.btnOk.Text = "OK";
+            this.btnOk.Text = "Save Edits";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
@@ -192,7 +192,7 @@ namespace SpiroGraph
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 4;
-            this.btnCancel.Text = "cancel";
+            this.btnCancel.Text = "Cancel Edits";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // label1
@@ -265,7 +265,7 @@ namespace SpiroGraph
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.dgvScript);
             this.Name = "ScriptForm";
-            this.Text = "Drawing Script";
+            this.Text = "Edit Drawing Script";
             ((System.ComponentModel.ISupportInitialize)(this.dgvScript)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
