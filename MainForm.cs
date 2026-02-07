@@ -173,6 +173,8 @@ namespace SpiroGraph
             delta.startAngle = 0;
             delta.offsetX = 0;
             delta.offsetY = 0;
+            cbShowWheels.Checked = true;
+            drawSpiro();
         }
         private void initFormParams(DrawingInputType di, DeltaType delta)
         {
@@ -197,8 +199,6 @@ namespace SpiroGraph
                 rbInside.Checked = true;
             else
                 rbOutside.Checked = true;
-            cbShowWheels.Checked = true;
-            drawSpiro();
         }
 
         private void btnGo_Click(object sender, System.EventArgs e)
