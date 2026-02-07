@@ -156,7 +156,7 @@ namespace SpiroGraph
             drawingSpec.BackgroundColor = Color.White.Name;
             setCenter();
             di.aRadius = 210;
-            di.bRadius = 90;
+            di.bRadius = 60;
             di.distance = 110;
             di.startAngle = 0;
             di.pointsPerCurve = 100;
@@ -197,6 +197,8 @@ namespace SpiroGraph
                 rbInside.Checked = true;
             else
                 rbOutside.Checked = true;
+            cbShowWheels.Checked = true;
+            drawSpiro();
         }
 
         private void btnGo_Click(object sender, System.EventArgs e)
@@ -615,7 +617,6 @@ namespace SpiroGraph
         {
             setDefaults();
             initFormParams(di, delta);
-            cbShowWheels.Checked = false;
         }
         private HelpForm _helpWindow;
         private HelpForm _aboutWindow;
