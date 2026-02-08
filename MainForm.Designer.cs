@@ -122,7 +122,7 @@ namespace SpiroGraph
             this.pnlControl.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlControl.Location = new System.Drawing.Point(0, 0);
             this.pnlControl.Name = "pnlControl";
-            this.pnlControl.Size = new System.Drawing.Size(243, 650);
+            this.pnlControl.Size = new System.Drawing.Size(243, 701);
             this.pnlControl.TabIndex = 0;
             // 
             // groupBoxRolling
@@ -676,7 +676,7 @@ namespace SpiroGraph
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Location = new System.Drawing.Point(244, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(759, 650);
+            this.pictureBox1.Size = new System.Drawing.Size(1041, 701);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -689,7 +689,7 @@ namespace SpiroGraph
             // 
             this.lblFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblFileName.AutoSize = true;
-            this.lblFileName.Location = new System.Drawing.Point(247, 633);
+            this.lblFileName.Location = new System.Drawing.Point(247, 684);
             this.lblFileName.Name = "lblFileName";
             this.lblFileName.Size = new System.Drawing.Size(61, 13);
             this.lblFileName.TabIndex = 2;
@@ -698,7 +698,7 @@ namespace SpiroGraph
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1002, 650);
+            this.ClientSize = new System.Drawing.Size(1284, 701);
             this.Controls.Add(this.lblFileName);
             this.Controls.Add(this.pnlControl);
             this.Controls.Add(this.pictureBox1);

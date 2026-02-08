@@ -104,6 +104,26 @@ namespace SpiroGraph
             txtOffsetYdelta.Tag = new Action<int>(v => delta.offsetY = v);
             this.txtOffsetYdelta.Validating += NumericTextBox_Validating;
 
+            // Get the working area of the primary screen (excludes Taskbar)
+            // Rectangle workingArea = Screen.PrimaryScreen.WorkingArea;
+
+            // Get the screen that the form is currently on (in case of multiple monitors)
+            Screen currentScreen = Screen.FromControl(this);
+
+            // Get the working area (excludes taskbar) of current screen
+            Rectangle workingArea = currentScreen.WorkingArea;
+            // Define limits
+            int maxWidth = 1920;
+            int maxHeight = 1080;
+
+            // Set form size based on the smaller of the screen or your limit
+            this.Width = Math.Min(workingArea.Width, maxWidth);
+            this.Height = Math.Min(workingArea.Height, maxHeight);
+
+            // Center the form
+            this.Left = (workingArea.Width - this.Width) / 2;
+            this.Top = (workingArea.Height - this.Height) / 2;
+
             // initialize drawing inputs/deltas
             setDefaults();
 
