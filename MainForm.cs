@@ -462,6 +462,7 @@ namespace SpiroGraph
                     fName = fName.Substring(0, fName.Length - 3) + "xml";
                 }
                 drawingSpec = DrawingSpec.retrieveDrawing(fName);
+                setCenter();
                 // populate form with last curve
                 if (drawingSpec.Curves.Count > 0)
                 {
