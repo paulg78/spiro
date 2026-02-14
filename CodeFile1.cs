@@ -97,6 +97,7 @@ namespace SpiroGraph
             stopAnimation = false;
             pauseAnimation = false;
             pen.Color = ColorUtils.ActualColor(di.color);
+            pen.Width = di.penWidth;
 
             center = _center;
             aRadius = di.aRadius;
@@ -253,7 +254,7 @@ namespace SpiroGraph
             // new parts of the drawing won't be erased.
             Graphics gErase = Graphics.FromImage(imageForErase);
             Graphics g = Graphics.FromImage(pb.Image);
-            Pen rollingCirclePen = new Pen(Color.Gray, 1);
+            Pen rollingCirclePen = new Pen(Color.Gray, 1F);
             Pen penHolder = new Pen(pen.Color, 1.5F);  // pen for drawing pen holder line
             SolidBrush penBrush = new SolidBrush(pen.Color);
             Double angleStep = radiansPerCircle / pointsPerCurve;
@@ -454,7 +455,7 @@ namespace SpiroGraph
             // (i.e., to all the Graphics items drawn on the Graphics object)
             g.Transform = transformMatrix;
 
-            Pen pen = new Pen(Color.Gray, 1.5F);  // pen for drawing wheels and boundary circles
+            Pen pen = new Pen(Color.Gray, 2F);  // pen for drawing wheels and boundary circles
             Pen penHolder = new Pen(penColor, 1.5F);  // pen for drawing pen holder line
             // draw fixed circle
             g.DrawEllipse(pen, ptOrigin.X - aRadius, ptOrigin.Y - aRadius, 2 * aRadius, 2 * aRadius);
