@@ -17,7 +17,7 @@ namespace SpiroGraph
 
         private void btnStopAnimation_Click(object sender, EventArgs e)
         {
-            Spiro.StopAnimation();
+            // Spiro.StopAnimation();
             Close();
         }
 
@@ -62,11 +62,5 @@ namespace SpiroGraph
         {
             Spiro.StopAnimation();
         }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
     }
 }

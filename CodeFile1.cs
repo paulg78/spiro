@@ -510,7 +510,7 @@ namespace SpiroGraph
                 "Fixed circle circumference: " + (aCirc).ToString("F2") + "\n" +
                 "Rolling circle circumference: " + (bCirc).ToString("F2") + "\n" +
                 "Fixed Circ / Rolling Circ: " + (aCirc / bCirc).ToString("F2") + "\n" +
-                "points to be plotted: " + dr.nbrPoints.ToString(),
+                "Points to be plotted: " + dr.nbrPoints.ToString(),
                 new Font(FontFamily.GenericSansSerif, 10.0F, FontStyle.Regular), Brushes.Black, 10, 10);
         }
 
