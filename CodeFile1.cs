@@ -1,7 +1,9 @@
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace SpiroGraph
 {
@@ -50,6 +52,22 @@ namespace SpiroGraph
         private static int pointsPerCurve;
         private static System.Windows.Forms.PictureBox pb;
         public static int delayPerPoint;
+        private static Bitmap overlay;               // transient animation layer
+        private static object overlayLock = new object();
+        private static object backgroundLock = new object();
+
+        // helper paint handler - draws overlay on top of PictureBox image
+        private static void OverlayPaint(object sender, PaintEventArgs e)
+        {
+            lock (overlayLock)
+            {
+                if (overlay != null)
+                {
+                    e.Graphics.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceOver;
+                    e.Graphics.DrawImageUnscaled(overlay, Point.Empty);
+                }
+            }
+        }
 
         // Thread handling
         private static Thread animationThread;
@@ -107,28 +125,69 @@ namespace SpiroGraph
             pointsPerCurve = di.pointsPerCurve;
             delayPerPoint = (int)Math.Round((double)(defaultDelayPerCurve / pointsPerCurve));
             pb = _pb;
-            if (di.roll == RollSide.outside)
+
+            // create overlay bitmap (with alpha) sized to picturebox
+            lock (overlayLock)
             {
-                animationThread = new Thread(new ThreadStart(AnimateEpitrochoid));
+                overlay?.Dispose();
+                overlay = new Bitmap(Math.Max(1, pb.Width), Math.Max(1, pb.Height), PixelFormat.Format32bppArgb);
+                using (var g = Graphics.FromImage(overlay))
+                {
+                    g.Clear(Color.Transparent);
+                }
             }
-            else
+
+            // attach paint handler so overlay is drawn over background
+            pb.Paint -= OverlayPaint; // guard against double attach
+            pb.Paint += OverlayPaint;
+            try
             {
-                animationThread = new Thread(new ThreadStart(AnimateHypotrochoid));
+                if (di.roll == RollSide.outside)
+                {
+                    animationThread = new Thread(new ThreadStart(AnimateEpitrochoid));
+                }
+                else
+                {
+                    animationThread = new Thread(new ThreadStart(AnimateHypotrochoid));
+                }
+                animationThread.Priority = ThreadPriority.BelowNormal;
+                animationThread.Start();
+                controlForm = new frmControl();
+                controlForm.ShowDialog();
             }
-            animationThread.Priority = ThreadPriority.BelowNormal;
-            animationThread.Start();
-            controlForm = new frmControl();
-            controlForm.ShowDialog();
-            controlForm = null; // allow garbage collector to dispose form
-            animationThread = null;  // might help garbage collector but probably not, 
-            // since GC eliminates a thread only when complete (whether or not there is a reference to it)
+            finally
+            {
+                // cleanup overlay and handler (execute on UI thread)
+                if (pb != null)
+                {
+                    try
+                    {
+                        pb.BeginInvoke(new Action(() =>
+                        {
+                            pb.Paint -= OverlayPaint;
+                        }));
+                    }
+                    catch
+                    {
+                        // ignore exceptions during cleanup invocation
+                    }
+                }
+                lock (overlayLock)
+                {
+                    overlay?.Dispose();
+                    overlay = null;
+                }
+                controlForm = null;
+                animationThread = null;
+            }
         }
 
         // threadsafe method that allows animation thread to access form created by main thread
         private static void RefreshDrawing()
         {
             RefreshDrawingDelegate refreshDelegate = new RefreshDrawingDelegate(refDrawing);
-            pb.BeginInvoke(refreshDelegate);
+            if (pb != null)
+                pb.BeginInvoke(refreshDelegate);
         }
 
         private static void refDrawing()
@@ -140,7 +199,8 @@ namespace SpiroGraph
         private static void CloseControlForm()
         {
             CloseControlFormDelegate closeDelegate = new CloseControlFormDelegate(closeControlForm);
-            pb.BeginInvoke(closeDelegate);
+            if (pb != null)
+                pb.BeginInvoke(closeDelegate);
         }
 
         private static void closeControlForm()
@@ -148,15 +208,10 @@ namespace SpiroGraph
             if (controlForm != null)
                 controlForm.Close();
         }
-        //private static void AnimateHypotrochoid(PointF ptOrigin, int aRadius, int bRadius,
-        //    int distance, int startAngle, int PointsPerCurve, System.Windows.Forms.PictureBox pb)
+
         private static void AnimateHypotrochoid()
         {
-            Bitmap imageForErase = (Bitmap)pb.Image.Clone();
-            // create graphics object for the drawing so that the drawing can be changed and
-            // new parts of the drawing won't be erased.
-            Graphics gErase = Graphics.FromImage(imageForErase);
-            Graphics g = Graphics.FromImage(pb.Image);
+            // Pens/brushes for drawing
             Pen rollingCirclePen = new Pen(Color.Gray, 1);
             Pen penHolder = new Pen(pen.Color, 1.5F);  // pen for drawing pen holder line
             SolidBrush penBrush = new SolidBrush(pen.Color);
@@ -167,12 +222,10 @@ namespace SpiroGraph
 
             // Compute number of revolutions.
             int hcf = HighestCommonFactor(aRadius, bRadius);
-            int NumRevolutions = (int)(bRadius / hcf);
+            int NumRevolutions = bRadius / hcf;
 
             // Total number of points to generate
             int NumPoints = pointsPerCurve * NumRevolutions;
-            // x = (a-b)*cos(t) + h*cos(t*(a-b)/b)
-            // y = (a-b)*cos(t) - h*sin(t*(a-b)/b)
 
             point1.X = (float)(center.X + aRadius - bRadius + distance);
             point1.Y = center.Y;
@@ -180,80 +233,114 @@ namespace SpiroGraph
             // create rotation transform around center
             Matrix transformMatrix = new Matrix();
             transformMatrix.RotateAt(startAngle, center, MatrixOrder.Append);
-            // Apply the Matrix object to the Graphics object
-            // (i.e., to all the Graphics items drawn on the Graphics object)
-            g.Transform = transformMatrix;
 
             double angle = 0;
             double aMinusb = aRadius - bRadius;
             double aMinusbOverb = aMinusb / bRadius;
             int pt = 0;
-            do
+            try
             {
-                angle += angleStep;
-                point2.X = (float)(center.X + aMinusb * Math.Cos(angle) + distance * Math.Cos(angle * aMinusbOverb));
-                point2.Y = (float)(center.Y + aMinusb * Math.Sin(angle) - distance * Math.Sin(angle * aMinusbOverb));
-                // draw next rolling circle
-                PointF circlePt = new PointF(
-                    (float)(center.X + aMinusb * Math.Cos(angle) - bRadius),
-                    (float)(center.Y + aMinusb * Math.Sin(angle) - bRadius));
-                g.DrawEllipse(rollingCirclePen, circlePt.X, circlePt.Y, 2 * bRadius, 2 * bRadius);
-                // draw pen holder
-                penConnect.X = (float)(center.X + aMinusb * Math.Cos(angle) + bRadius * Math.Cos(angle * aMinusbOverb));
-                penConnect.Y = (float)(center.Y + aMinusb * Math.Sin(angle) - bRadius * Math.Sin(angle * aMinusbOverb));
-                g.DrawLine(penHolder, penConnect.X, penConnect.Y, point2.X, point2.Y);
-                // draw pen (i.e. point)
-                g.FillEllipse(penBrush, point2.X - 2, point2.Y - 2, 4, 4);
-
-                // draw next line segment
-                g.DrawLine(pen, point1, point2);
-                //pb.Refresh();
-                RefreshDrawing();
-                if (pauseAnimation)
+                do
                 {
-                    try
+                    angle += angleStep;
+                    // x = (a-b)*cos(t) + h*cos(t*(a-b)/b)
+                    // y = (a-b)*cos(t) - h*sin(t*(a-b)/b)
+                    point2.X = (float)(center.X + aMinusb * Math.Cos(angle) + distance * Math.Cos(angle * aMinusbOverb));
+                    point2.Y = (float)(center.Y + aMinusb * Math.Sin(angle) - distance * Math.Sin(angle * aMinusbOverb));
+
+                    // rolling circle and pen holder positions (transformed coordinates)
+                    PointF circlePt = new PointF(
+                        (float)(center.X + aMinusb * Math.Cos(angle) - bRadius),
+                        (float)(center.Y + aMinusb * Math.Sin(angle) - bRadius));
+                    penConnect.X = (float)(center.X + aMinusb * Math.Cos(angle) + bRadius * Math.Cos(angle * aMinusbOverb));
+                    penConnect.Y = (float)(center.Y + aMinusb * Math.Sin(angle) - bRadius * Math.Sin(angle * aMinusbOverb));
+
+                    // draw overlay (transient)
+                    lock (overlayLock)
                     {
-                        Thread.Sleep(Timeout.Infinite);
+                        using (Graphics gOverlay = Graphics.FromImage(overlay))
+                        {
+                            gOverlay.Clear(Color.Transparent);
+                            gOverlay.SmoothingMode = SmoothingMode.AntiAlias;
+                            gOverlay.Transform = transformMatrix;
+                            // draw rolling circle (temporary)
+                            gOverlay.DrawEllipse(rollingCirclePen, circlePt.X, circlePt.Y, 2 * bRadius, 2 * bRadius);
+                            // draw pen holder and pen (temporary)
+                            gOverlay.DrawLine(rollingCirclePen, penConnect.X, penConnect.Y, point2.X, point2.Y);
+                            gOverlay.FillEllipse(penBrush, point2.X - 2, point2.Y - 2, 4, 4);
+                        }
                     }
-                    catch (ThreadInterruptedException)
+
+                    // commit permanent line segment to background
+                    // execute drawing on UI thread to avoid GDI+ cross-thread access
+                    if (pb != null)
                     {
+                        // capture values for UI thread
+                        PointF _p1 = point1;
+                        PointF _p2 = point2;
+                        Matrix _m = transformMatrix.Clone() as Matrix;
+                        Pen _pen = (Pen)pen.Clone();
+
+                        try
+                        {
+                            pb.BeginInvoke(new Action(() =>
+                            {
+                                lock (backgroundLock)
+                                {
+                                    using (Graphics gBack = Graphics.FromImage(pb.Image))
+                                    {
+                                        gBack.SmoothingMode = SmoothingMode.AntiAlias;
+                                        gBack.Transform = _m;
+                                        gBack.DrawLine(_pen, _p1, _p2);
+                                    }
+                                }
+                                _m.Dispose();
+                                _pen.Dispose();
+                            }));
+                        }
+                        catch
+                        {
+                            // ignore invocation exceptions during shutdown
+                            _m.Dispose();
+                            _pen.Dispose();
+                        }
                     }
+
+                    // request repaint (UI thread will paint background then overlay)
+                    RefreshDrawing();
+
+                    if (pauseAnimation)
+                    {
+                        try
+                        {
+                            Thread.Sleep(Timeout.Infinite);
+                        }
+                        catch (ThreadInterruptedException)
+                        {
+                        }
+                    }
+                    else
+                        Thread.Sleep(delayPerPoint);
+
+                    point1 = point2;
+                    pt++;
                 }
-                else
-                    Thread.Sleep(delayPerPoint);
+                while (pt < NumPoints && !stopAnimation);
 
-                // create eraser from latest image
-                gErase.DrawLine(pen, point1, point2);
-                TextureBrush tb = new TextureBrush(imageForErase);
-                Pen eraser = new Pen(tb, 1);
-
-                // erase rolling circle
-                g.DrawEllipse(eraser, circlePt.X, circlePt.Y, 2 * bRadius, 2 * bRadius);
-                // erase pen
-                g.FillEllipse(tb, point2.X - 2, point2.Y - 2, 4, 4);
-                // erase pen holder
-                eraser.Width = 2.0F; // make eraser a little larger to see if that leaves less "dirt" behind
-                g.DrawLine(eraser, penConnect.X, penConnect.Y, point2.X, point2.Y);
-                point1 = point2;
-                tb.Dispose();
-                eraser.Dispose();
-                pt++;
+                if (pt == NumPoints)  // animation completed 
+                    Spiro.CloseControlForm();
             }
-            while (pt < NumPoints && !stopAnimation);
-            if (pt == NumPoints)  // animation completed 
-                Spiro.CloseControlForm();
-            transformMatrix.Dispose();
-            g.Dispose();
-            gErase.Dispose();
+            finally
+            {
+                transformMatrix.Dispose();
+                rollingCirclePen.Dispose();
+                penHolder.Dispose();
+                penBrush.Dispose();
+            }
         }
 
         private static void AnimateEpitrochoid()
         {
-            Bitmap imageForErase = (Bitmap)pb.Image.Clone();
-            // create graphics object for the drawing so that the drawing can be changed and
-            // new parts of the drawing won't be erased.
-            Graphics gErase = Graphics.FromImage(imageForErase);
-            Graphics g = Graphics.FromImage(pb.Image);
             Pen rollingCirclePen = new Pen(Color.Gray, 1F);
             Pen penHolder = new Pen(pen.Color, 1.5F);  // pen for drawing pen holder line
             SolidBrush penBrush = new SolidBrush(pen.Color);
@@ -268,8 +355,6 @@ namespace SpiroGraph
 
             // Total number of points to generate
             int NumPoints = pointsPerCurve * NumRevolutions;
-            // x = (a-b)*cos(t) + h*cos(t*(a-b)/b)
-            // y = (a-b)*cos(t) - h*sin(t*(a-b)/b)
 
             point1.X = (float)(center.X + aRadius + bRadius - distance);
             point1.Y = center.Y;
@@ -277,71 +362,107 @@ namespace SpiroGraph
             // create rotation transform around center
             Matrix transformMatrix = new Matrix();
             transformMatrix.RotateAt(startAngle, center, MatrixOrder.Append);
-            // Apply the Matrix object to the Graphics object
-            // (i.e., to all the Graphics items drawn on the Graphics object)
-            g.Transform = transformMatrix;
 
             double angle = 0;
             double aPlusb = aRadius + bRadius;
             double aPlusbOverb = aPlusb / bRadius;
             int pt = 0;
-            do
+            try
             {
-                angle += angleStep;
-                point2.X = (float)(center.X + aPlusb * Math.Cos(angle) - distance * Math.Cos(angle * aPlusbOverb));
-                point2.Y = (float)(center.Y + aPlusb * Math.Sin(angle) - distance * Math.Sin(angle * aPlusbOverb));
-                // draw next rolling circle
-                PointF circlePt = new PointF(
-                    //(float)(center.X + aPlusb * Math.Cos(angle) + bRadius),
-                    (float)(center.X + aPlusb * Math.Cos(angle) - bRadius),
-                    (float)(center.Y + aPlusb * Math.Sin(angle) - bRadius));
-                g.DrawEllipse(rollingCirclePen, circlePt.X, circlePt.Y, 2 * bRadius, 2 * bRadius);
-                // draw pen holder
-                penConnect.X = (float)(center.X + aPlusb * Math.Cos(angle) - bRadius * Math.Cos(angle * aPlusbOverb));
-                penConnect.Y = (float)(center.Y + aPlusb * Math.Sin(angle) - bRadius * Math.Sin(angle * aPlusbOverb));
-                g.DrawLine(penHolder, penConnect.X, penConnect.Y, point2.X, point2.Y);
-                // draw pen (i.e. point)
-                g.FillEllipse(penBrush, point2.X - 2, point2.Y - 2, 4, 4);
-
-                // draw next line segment
-                g.DrawLine(pen, point1, point2);
-                RefreshDrawing();
-                if (pauseAnimation)
+                do
                 {
-                    try
+                    angle += angleStep;
+
+                    // x = (a-b)*cos(t) + h*cos(t*(a-b)/b)
+                    // y = (a-b)*cos(t) - h*sin(t*(a-b)/b)
+                    point2.X = (float)(center.X + aPlusb * Math.Cos(angle) - distance * Math.Cos(angle * aPlusbOverb));
+                    point2.Y = (float)(center.Y + aPlusb * Math.Sin(angle) - distance * Math.Sin(angle * aPlusbOverb));
+
+                    PointF circlePt = new PointF(
+                        (float)(center.X + aPlusb * Math.Cos(angle) - bRadius),
+                        (float)(center.Y + aPlusb * Math.Sin(angle) - bRadius));
+                    penConnect.X = (float)(center.X + aPlusb * Math.Cos(angle) - bRadius * Math.Cos(angle * aPlusbOverb));
+                    penConnect.Y = (float)(center.Y + aPlusb * Math.Sin(angle) - bRadius * Math.Sin(angle * aPlusbOverb));
+
+                    // draw overlay (transient)
+                    lock (overlayLock)
                     {
-                        Thread.Sleep(Timeout.Infinite);
+                        using (Graphics gOverlay = Graphics.FromImage(overlay))
+                        {
+                            gOverlay.Clear(Color.Transparent);
+                            gOverlay.SmoothingMode = SmoothingMode.AntiAlias;
+                            gOverlay.Transform = transformMatrix;
+                            gOverlay.DrawEllipse(rollingCirclePen, circlePt.X, circlePt.Y, 2 * bRadius, 2 * bRadius);
+                            gOverlay.DrawLine(rollingCirclePen, penConnect.X, penConnect.Y, point2.X, point2.Y);
+                            gOverlay.FillEllipse(penBrush, point2.X - 2, point2.Y - 2, 4, 4);
+                        }
                     }
-                    catch (ThreadInterruptedException)
+
+                    // commit permanent line segment to background
+                    // execute drawing on UI thread to avoid GDI+ cross-thread access
+                    if (pb != null)
                     {
+                        // capture values for UI thread
+                        PointF _p1 = point1;
+                        PointF _p2 = point2;
+                        Matrix _m = transformMatrix.Clone() as Matrix;
+                        Pen _pen = (Pen)pen.Clone();
+
+                        try
+                        {
+                            pb.BeginInvoke(new Action(() =>
+                            {
+                                lock (backgroundLock)
+                                {
+                                    using (Graphics gBack = Graphics.FromImage(pb.Image))
+                                    {
+                                        gBack.SmoothingMode = SmoothingMode.AntiAlias;
+                                        gBack.Transform = _m;
+                                        gBack.DrawLine(_pen, _p1, _p2);
+                                    }
+                                }
+                                _m.Dispose();
+                                _pen.Dispose();
+                            }));
+                        }
+                        catch
+                        {
+                            // ignore invocation exceptions during shutdown
+                            _m.Dispose();
+                            _pen.Dispose();
+                        }
                     }
+
+                    RefreshDrawing();
+
+                    if (pauseAnimation)
+                    {
+                        try
+                        {
+                            Thread.Sleep(Timeout.Infinite);
+                        }
+                        catch (ThreadInterruptedException)
+                        {
+                        }
+                    }
+                    else
+                        Thread.Sleep(delayPerPoint);
+
+                    point1 = point2;
+                    pt++;
                 }
-                else
-                    Thread.Sleep(delayPerPoint);
+                while (pt < NumPoints && !stopAnimation);
 
-                // create eraser from latest image
-                gErase.DrawLine(pen, point1, point2);
-                TextureBrush tb = new TextureBrush(imageForErase);
-                Pen eraser = new Pen(tb, 1);
-
-                // erase rolling circle
-                g.DrawEllipse(eraser, circlePt.X, circlePt.Y, 2 * bRadius, 2 * bRadius);
-                // erase pen
-                g.FillEllipse(tb, point2.X - 2, point2.Y - 2, 4, 4);
-                // erase pen holder
-                eraser.Width = 2.0F; // make eraser a little larger to see if that leaves less "dirt" behind
-                g.DrawLine(eraser, penConnect.X, penConnect.Y, point2.X, point2.Y);
-                point1 = point2;
-                tb.Dispose();
-                eraser.Dispose();
-                pt++;
+                if (pt == NumPoints)  // animation completed 
+                    Spiro.CloseControlForm();
             }
-            while (pt < NumPoints && !stopAnimation);
-            if (pt == NumPoints)  // animation completed 
-                Spiro.CloseControlForm();
-            transformMatrix.Dispose();
-            g.Dispose();
-            gErase.Dispose();
+            finally
+            {
+                transformMatrix.Dispose();
+                rollingCirclePen.Dispose();
+                penHolder.Dispose();
+                penBrush.Dispose();
+            }
         }
 
         public static void DrawCurve(Graphics g, DrawingInputType di, PointF center)
@@ -378,7 +499,6 @@ namespace SpiroGraph
             Matrix transformMatrix = new Matrix();
             transformMatrix.RotateAt(startAngle, ptOrigin, MatrixOrder.Append);
             // Apply the Matrix object to the Graphics object
-            // (i.e., to all the Graphics items drawn on the Graphics object)
             g.Transform = transformMatrix;
 
             double angle = 0;
@@ -391,7 +511,7 @@ namespace SpiroGraph
                 point2.Y = (float)(ptOrigin.Y + aMinusb * Math.Sin(angle) - distance * Math.Sin(angle * aMinusbOverb));
                 g.DrawLine(pen, point1, point2);
                 point1 = point2;
-            }
+             }
             transformMatrix.Dispose();
             g.Transform = new Matrix();
         }
@@ -422,9 +542,8 @@ namespace SpiroGraph
             Matrix transformMatrix = new Matrix();
             transformMatrix.RotateAt(startAngle, ptOrigin, MatrixOrder.Append);
             // Apply the Matrix object to the Graphics object
-            // (i.e., to all the Graphics items drawn on the Graphics object)
             g.Transform = transformMatrix;
-
+            
             double angle = 0;
             double aPlusb = aRadius + bRadius;
             double aPlusbOverb = aPlusb / bRadius;
@@ -452,7 +571,6 @@ namespace SpiroGraph
             transformMatrix.RotateAt(startAngle,
                 ptOrigin, MatrixOrder.Append);
             // Apply the Matrix object to the Graphics object
-            // (i.e., to all the Graphics items drawn on the Graphics object)
             g.Transform = transformMatrix;
 
             Pen pen = new Pen(Color.Gray, 2F);  // pen for drawing wheels and boundary circles
