@@ -209,7 +209,7 @@ namespace SpiroGraph
             txtPointsPerRev.Text = di.pointsPerCurve.ToString();
             txtStartAngle.Text = di.startAngle.ToString();
             txtStartAngleDelta.Text = (delta.startAngle == 0) ? "" : delta.startAngle.ToString();
-            btnColor.ForeColor = ColorUtils.ActualColor(di.color);
+            panelColor.BackColor = ColorUtils.ActualColor(di.color);
             txtPenWidth.Text = di.penWidth.ToString();
             cboPenStyle.Text = di.penStyle.ToString();
             if (di.roll == RollSide.inside)
@@ -363,8 +363,8 @@ namespace SpiroGraph
                 dlg.Location = new Point(this.Left + 150, this.Top + 350);
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    btnColor.ForeColor = dlg.SelectedColor;
-                    di.color = btnColor.ForeColor.Name;
+                    panelColor.BackColor = dlg.SelectedColor;
+                    di.color = panelColor.BackColor.Name;
                     if (cbShowWheels.Checked)
                     {
                         drawSpiro();
@@ -384,7 +384,7 @@ namespace SpiroGraph
             if (cbShowWheels.Checked)
             {
                 Spiro.ShowCircles(g, PointF.Add(drawingSpec.Center, di.offset), di.aRadius, di.bRadius,
-                    di.distance, di.startAngle, di.pointsPerCurve, di.roll, btnColor.ForeColor,
+                    di.distance, di.startAngle, di.pointsPerCurve, di.roll, panelColor.BackColor,
                     di.penWidth);
             }
             g.Dispose();
@@ -678,13 +678,25 @@ namespace SpiroGraph
                 if (result == DialogResult.Yes)
                 {
                     saveToolStripMenuItem_Click(sender, e);
-                    MessageBox.Show("Drawing saved. Exiting now.");
+                    if (unSavedChanges) // user canceled save
+                    { 
+                        e.Cancel = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Drawing saved. Exiting now.");
+                    }
                 }
                 else if (result == DialogResult.Cancel)
                 {
                     e.Cancel = true; // prevent closing
                 }
             }
+        }
+
+        private void closeProgramToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

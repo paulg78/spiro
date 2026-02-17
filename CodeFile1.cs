@@ -41,7 +41,8 @@ namespace SpiroGraph
     {
         private const Double radiansPerCircle = 2 * Math.PI;
         private const int defaultDelayPerCurve = 10000;
-
+        private static readonly float circlePenSize = 2F;
+        private static readonly float penHolderPenSize = 2F;
         private static Pen pen = new Pen(Color.Red);
         // member variables used for animation (used because ThreadStart delegate can't have parameters)
         private static Point center;
@@ -212,8 +213,8 @@ namespace SpiroGraph
         private static void AnimateHypotrochoid()
         {
             // Pens/brushes for drawing
-            Pen rollingCirclePen = new Pen(Color.Gray, 1);
-            Pen penHolder = new Pen(pen.Color, 1.5F);  // pen for drawing pen holder line
+            Pen rollingCirclePen = new Pen(Color.Gray, circlePenSize);
+            Pen penHolder = new Pen(pen.Color, penHolderPenSize);  // pen for drawing pen holder line
             SolidBrush penBrush = new SolidBrush(pen.Color);
             Double angleStep = radiansPerCircle / pointsPerCurve;
             PointF point1 = new PointF();
@@ -341,8 +342,8 @@ namespace SpiroGraph
 
         private static void AnimateEpitrochoid()
         {
-            Pen rollingCirclePen = new Pen(Color.Gray, 1F);
-            Pen penHolder = new Pen(pen.Color, 1.5F);  // pen for drawing pen holder line
+            Pen rollingCirclePen = new Pen(Color.Gray,circlePenSize);
+            Pen penHolder = new Pen(pen.Color, penHolderPenSize);  // pen for drawing pen holder line
             SolidBrush penBrush = new SolidBrush(pen.Color);
             Double angleStep = radiansPerCircle / pointsPerCurve;
             PointF point1 = new PointF();
@@ -573,8 +574,8 @@ namespace SpiroGraph
             // Apply the Matrix object to the Graphics object
             g.Transform = transformMatrix;
 
-            Pen pen = new Pen(Color.Gray, 2F);  // pen for drawing wheels and boundary circles
-            Pen penHolder = new Pen(penColor, 1.5F);  // pen for drawing pen holder line
+            Pen pen = new Pen(Color.Gray, circlePenSize);  // pen for drawing wheels and boundary circles
+            Pen penHolder = new Pen(penColor, penHolderPenSize);  // pen for drawing pen holder line
             // draw fixed circle
             g.DrawEllipse(pen, ptOrigin.X - aRadius, ptOrigin.Y - aRadius, 2 * aRadius, 2 * aRadius);
             // draw rolling circle and show pen, inside or outside of fixed circle
