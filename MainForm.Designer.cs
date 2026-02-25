@@ -32,18 +32,20 @@ namespace SpiroGraph
         {
             this.components = new System.ComponentModel.Container();
             this.pnlControl = new System.Windows.Forms.Panel();
+            this.groupBoxPen = new System.Windows.Forms.GroupBox();
+            this.panelColor = new System.Windows.Forms.Panel();
+            this.btnColor = new System.Windows.Forms.Button();
+            this.cboPenStyle = new System.Windows.Forms.ComboBox();
+            this.lblPenStyle = new System.Windows.Forms.Label();
+            this.lblPenWidth = new System.Windows.Forms.Label();
             this.groupBoxRolling = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.lblStartAngle = new System.Windows.Forms.Label();
             this.lblPenDistance = new System.Windows.Forms.Label();
             this.lblRadiusB = new System.Windows.Forms.Label();
-            this.btnColor = new System.Windows.Forms.Button();
             this.btnRedo = new System.Windows.Forms.Button();
             this.btnUndo = new System.Windows.Forms.Button();
             this.lblDeltaHdg = new System.Windows.Forms.Label();
-            this.cboPenStyle = new System.Windows.Forms.ComboBox();
-            this.lblPenStyle = new System.Windows.Forms.Label();
-            this.lblPenWidth = new System.Windows.Forms.Label();
             this.groupBoxInOut = new System.Windows.Forms.GroupBox();
             this.rbOutside = new System.Windows.Forms.RadioButton();
             this.rbInside = new System.Windows.Forms.RadioButton();
@@ -60,6 +62,7 @@ namespace SpiroGraph
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.loadScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeProgramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.drawingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,13 +77,13 @@ namespace SpiroGraph
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lblFileName = new System.Windows.Forms.Label();
+            this.txtPenWidth = new SpiroGraph.customTextBox();
             this.txtPenDistanceDelta = new SpiroGraph.customTextBox();
             this.txtPenDistance = new SpiroGraph.customTextBox();
             this.txtStartAngleDelta = new SpiroGraph.customTextBox();
             this.txtStartAngle = new SpiroGraph.customTextBox();
             this.txtRadiusBDelta = new SpiroGraph.customTextBox();
             this.txtRadiusB = new SpiroGraph.customTextBox();
-            this.txtPenWidth = new SpiroGraph.customTextBox();
             this.txtOffsetX = new SpiroGraph.customTextBox();
             this.txtOffsetXdelta = new SpiroGraph.customTextBox();
             this.txtOffsetY = new SpiroGraph.customTextBox();
@@ -88,10 +91,8 @@ namespace SpiroGraph
             this.txtRadiusA = new SpiroGraph.customTextBox();
             this.txtRadiusADelta = new SpiroGraph.customTextBox();
             this.txtPointsPerRev = new SpiroGraph.customTextBox();
-            this.panelColor = new System.Windows.Forms.Panel();
-            this.groupBoxPen = new System.Windows.Forms.GroupBox();
-            this.closeProgramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlControl.SuspendLayout();
+            this.groupBoxPen.SuspendLayout();
             this.groupBoxRolling.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBoxInOut.SuspendLayout();
@@ -99,7 +100,6 @@ namespace SpiroGraph
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.groupBoxPen.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlControl
@@ -124,6 +124,78 @@ namespace SpiroGraph
             this.pnlControl.Name = "pnlControl";
             this.pnlControl.Size = new System.Drawing.Size(243, 701);
             this.pnlControl.TabIndex = 0;
+            // 
+            // groupBoxPen
+            // 
+            this.groupBoxPen.Controls.Add(this.panelColor);
+            this.groupBoxPen.Controls.Add(this.btnColor);
+            this.groupBoxPen.Controls.Add(this.cboPenStyle);
+            this.groupBoxPen.Controls.Add(this.lblPenStyle);
+            this.groupBoxPen.Controls.Add(this.lblPenWidth);
+            this.groupBoxPen.Controls.Add(this.txtPenWidth);
+            this.groupBoxPen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxPen.Location = new System.Drawing.Point(16, 418);
+            this.groupBoxPen.Name = "groupBoxPen";
+            this.groupBoxPen.Size = new System.Drawing.Size(202, 133);
+            this.groupBoxPen.TabIndex = 38;
+            this.groupBoxPen.TabStop = false;
+            this.groupBoxPen.Text = "Pen";
+            // 
+            // panelColor
+            // 
+            this.panelColor.Location = new System.Drawing.Point(17, 20);
+            this.panelColor.Name = "panelColor";
+            this.panelColor.Size = new System.Drawing.Size(77, 42);
+            this.panelColor.TabIndex = 37;
+            this.panelColor.Click += new System.EventHandler(this.btnColor_Click);
+            // 
+            // btnColor
+            // 
+            this.btnColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnColor.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnColor.Location = new System.Drawing.Point(104, 25);
+            this.btnColor.Name = "btnColor";
+            this.btnColor.Size = new System.Drawing.Size(92, 30);
+            this.btnColor.TabIndex = 4;
+            this.btnColor.Text = "Pen Color";
+            this.toolTip1.SetToolTip(this.btnColor, "Pen Color");
+            this.btnColor.UseVisualStyleBackColor = true;
+            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
+            // 
+            // cboPenStyle
+            // 
+            this.cboPenStyle.FormattingEnabled = true;
+            this.cboPenStyle.Items.AddRange(new object[] {
+            "Dash",
+            "Dot",
+            "Solid"});
+            this.cboPenStyle.Location = new System.Drawing.Point(82, 99);
+            this.cboPenStyle.Name = "cboPenStyle";
+            this.cboPenStyle.Size = new System.Drawing.Size(83, 21);
+            this.cboPenStyle.TabIndex = 6;
+            this.cboPenStyle.SelectedIndexChanged += new System.EventHandler(this.cboPenStyle_SelectedIndexChanged);
+            // 
+            // lblPenStyle
+            // 
+            this.lblPenStyle.AutoSize = true;
+            this.lblPenStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPenStyle.Location = new System.Drawing.Point(21, 102);
+            this.lblPenStyle.Name = "lblPenStyle";
+            this.lblPenStyle.Size = new System.Drawing.Size(52, 13);
+            this.lblPenStyle.TabIndex = 12;
+            this.lblPenStyle.Text = "Pen Style";
+            this.lblPenStyle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblPenWidth
+            // 
+            this.lblPenWidth.AutoSize = true;
+            this.lblPenWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPenWidth.Location = new System.Drawing.Point(21, 76);
+            this.lblPenWidth.Name = "lblPenWidth";
+            this.lblPenWidth.Size = new System.Drawing.Size(57, 13);
+            this.lblPenWidth.TabIndex = 10;
+            this.lblPenWidth.Text = "Pen Width";
+            this.lblPenWidth.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // groupBoxRolling
             // 
@@ -197,19 +269,6 @@ namespace SpiroGraph
             this.lblRadiusB.Text = "Rolling Radius";
             this.lblRadiusB.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // btnColor
-            // 
-            this.btnColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnColor.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnColor.Location = new System.Drawing.Point(104, 25);
-            this.btnColor.Name = "btnColor";
-            this.btnColor.Size = new System.Drawing.Size(92, 30);
-            this.btnColor.TabIndex = 4;
-            this.btnColor.Text = "Pen Color";
-            this.toolTip1.SetToolTip(this.btnColor, "Pen Color");
-            this.btnColor.UseVisualStyleBackColor = true;
-            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
-            // 
             // btnRedo
             // 
             this.btnRedo.Enabled = false;
@@ -245,41 +304,6 @@ namespace SpiroGraph
             this.lblDeltaHdg.Text = "Delta for next";
             this.lblDeltaHdg.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.toolTip1.SetToolTip(this.lblDeltaHdg, "+ or - amount to change property after next draw");
-            // 
-            // cboPenStyle
-            // 
-            this.cboPenStyle.FormattingEnabled = true;
-            this.cboPenStyle.Items.AddRange(new object[] {
-            "Dash",
-            "Dot",
-            "Solid"});
-            this.cboPenStyle.Location = new System.Drawing.Point(82, 99);
-            this.cboPenStyle.Name = "cboPenStyle";
-            this.cboPenStyle.Size = new System.Drawing.Size(83, 21);
-            this.cboPenStyle.TabIndex = 6;
-            this.cboPenStyle.SelectedIndexChanged += new System.EventHandler(this.cboPenStyle_SelectedIndexChanged);
-            // 
-            // lblPenStyle
-            // 
-            this.lblPenStyle.AutoSize = true;
-            this.lblPenStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPenStyle.Location = new System.Drawing.Point(21, 102);
-            this.lblPenStyle.Name = "lblPenStyle";
-            this.lblPenStyle.Size = new System.Drawing.Size(52, 13);
-            this.lblPenStyle.TabIndex = 12;
-            this.lblPenStyle.Text = "Pen Style";
-            this.lblPenStyle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblPenWidth
-            // 
-            this.lblPenWidth.AutoSize = true;
-            this.lblPenWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPenWidth.Location = new System.Drawing.Point(21, 76);
-            this.lblPenWidth.Name = "lblPenWidth";
-            this.lblPenWidth.Size = new System.Drawing.Size(57, 13);
-            this.lblPenWidth.TabIndex = 10;
-            this.lblPenWidth.Text = "Pen Width";
-            this.lblPenWidth.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // groupBoxInOut
             // 
@@ -473,6 +497,13 @@ namespace SpiroGraph
             this.saveToolStripMenuItem.Text = "Save Drawing";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
+            // closeProgramToolStripMenuItem
+            // 
+            this.closeProgramToolStripMenuItem.Name = "closeProgramToolStripMenuItem";
+            this.closeProgramToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.closeProgramToolStripMenuItem.Text = "Close Program";
+            this.closeProgramToolStripMenuItem.Click += new System.EventHandler(this.closeProgramToolStripMenuItem_Click);
+            // 
             // drawingToolStripMenuItem
             // 
             this.drawingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -564,6 +595,15 @@ namespace SpiroGraph
             this.lblFileName.TabIndex = 2;
             this.lblFileName.Text = "lblFileName";
             // 
+            // txtPenWidth
+            // 
+            this.txtPenWidth.Location = new System.Drawing.Point(83, 73);
+            this.txtPenWidth.MaxLength = 3;
+            this.txtPenWidth.Name = "txtPenWidth";
+            this.txtPenWidth.Size = new System.Drawing.Size(38, 20);
+            this.txtPenWidth.TabIndex = 5;
+            this.txtPenWidth.Validating += new System.ComponentModel.CancelEventHandler(this.txtPenWidth_Validating);
+            // 
             // txtPenDistanceDelta
             // 
             this.txtPenDistanceDelta.AcceptsReturn = true;
@@ -626,15 +666,6 @@ namespace SpiroGraph
             this.txtRadiusB.TabIndex = 0;
             this.toolTip1.SetToolTip(this.txtRadiusB, "rolling circle radius");
             this.txtRadiusB.Validating += new System.ComponentModel.CancelEventHandler(this.txtRadiusB_Validating);
-            // 
-            // txtPenWidth
-            // 
-            this.txtPenWidth.Location = new System.Drawing.Point(83, 73);
-            this.txtPenWidth.MaxLength = 3;
-            this.txtPenWidth.Name = "txtPenWidth";
-            this.txtPenWidth.Size = new System.Drawing.Size(38, 20);
-            this.txtPenWidth.TabIndex = 5;
-            this.txtPenWidth.Validating += new System.ComponentModel.CancelEventHandler(this.txtPenWidth_Validating);
             // 
             // txtOffsetX
             // 
@@ -713,36 +744,6 @@ namespace SpiroGraph
         " the fixed circle");
             this.txtPointsPerRev.Validating += new System.ComponentModel.CancelEventHandler(this.txtPointsPerCurve_Validating);
             // 
-            // panelColor
-            // 
-            this.panelColor.Location = new System.Drawing.Point(17, 20);
-            this.panelColor.Name = "panelColor";
-            this.panelColor.Size = new System.Drawing.Size(77, 42);
-            this.panelColor.TabIndex = 37;
-            // 
-            // groupBoxPen
-            // 
-            this.groupBoxPen.Controls.Add(this.panelColor);
-            this.groupBoxPen.Controls.Add(this.btnColor);
-            this.groupBoxPen.Controls.Add(this.cboPenStyle);
-            this.groupBoxPen.Controls.Add(this.lblPenStyle);
-            this.groupBoxPen.Controls.Add(this.lblPenWidth);
-            this.groupBoxPen.Controls.Add(this.txtPenWidth);
-            this.groupBoxPen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxPen.Location = new System.Drawing.Point(16, 418);
-            this.groupBoxPen.Name = "groupBoxPen";
-            this.groupBoxPen.Size = new System.Drawing.Size(202, 133);
-            this.groupBoxPen.TabIndex = 38;
-            this.groupBoxPen.TabStop = false;
-            this.groupBoxPen.Text = "Pen";
-            // 
-            // closeProgramToolStripMenuItem
-            // 
-            this.closeProgramToolStripMenuItem.Name = "closeProgramToolStripMenuItem";
-            this.closeProgramToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.closeProgramToolStripMenuItem.Text = "Close Program";
-            this.closeProgramToolStripMenuItem.Click += new System.EventHandler(this.closeProgramToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -755,11 +756,13 @@ namespace SpiroGraph
             this.MinimumSize = new System.Drawing.Size(678, 526);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SpiroGraph (version 2.5)";
+            this.Text = "SpiroGraph (version 2.6)";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.pnlControl.ResumeLayout(false);
             this.pnlControl.PerformLayout();
+            this.groupBoxPen.ResumeLayout(false);
+            this.groupBoxPen.PerformLayout();
             this.groupBoxRolling.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
@@ -771,8 +774,6 @@ namespace SpiroGraph
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.groupBoxPen.ResumeLayout(false);
-            this.groupBoxPen.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

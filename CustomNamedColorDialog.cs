@@ -129,5 +129,18 @@ namespace SpiroGraph
             }
             //AutoSizeForm(cols, swatchSize, margin);
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // CustomNamedColorDialog
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ControlBox = false;
+            this.Name = "CustomNamedColorDialog";
+            this.ResumeLayout(false);
+
+        }
     }
 }

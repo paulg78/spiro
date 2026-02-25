@@ -224,10 +224,24 @@ namespace SpiroGraph
             Graphics g = Graphics.FromImage(drawing);
             Spiro.DrawCurve(g, di, PointF.Add(drawingSpec.Center, di.offset));
             g.Dispose();
-            di.aRadius += delta.aRadius;
-            txtRadiusA.Text = di.aRadius.ToString();
-            di.bRadius += delta.bRadius;
-            txtRadiusB.Text = di.bRadius.ToString();
+            if (di.aRadius + delta.aRadius <= 0)
+            {
+                MessageBox.Show("Fixed circle radius must be greater than 0. Can't use Fixed circle Delta for next.");
+            }
+            else
+            {
+                di.aRadius += delta.aRadius;
+                txtRadiusA.Text = di.aRadius.ToString();
+            }
+            if (di.bRadius + delta.bRadius <= 0)
+            {
+                MessageBox.Show("Rolling circle radius must be greater than 0. Can't use Rolling circle Delta for next.");
+            }
+            else
+            {
+                di.bRadius += delta.bRadius;
+                txtRadiusB.Text = di.bRadius.ToString();
+            }
             di.distance += delta.penDistance;
             txtPenDistance.Text = di.distance.ToString();
             di.startAngle += delta.startAngle;
