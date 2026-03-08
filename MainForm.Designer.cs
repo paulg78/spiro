@@ -756,7 +756,7 @@ namespace SpiroGraph
             this.MinimumSize = new System.Drawing.Size(678, 526);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SpiroGraph (version 2.6)";
+            this.Text = "SpiroGraph (version 2.7)";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.pnlControl.ResumeLayout(false);
